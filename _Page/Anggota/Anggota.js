@@ -22,23 +22,12 @@ function ShowDetailInline(id_anggota) {
             if(response.status=="Success"){
                 var tanggal_masuk=response.dataset.tanggal_masuk;
                 var tanggal_keluar=response.dataset.tanggal_keluar;
-                var nip=response.dataset.nip;
                 var nama=response.dataset.nama;
                 var email=response.dataset.email;
-                var password=response.dataset.password;
                 var kontak=response.dataset.kontak;
-                var lembaga=response.dataset.lembaga;
-                var ranking=response.dataset.ranking;
                 var foto=response.dataset.foto;
-                var base_url=response.dataset.base_url;
-                var akses_anggota=response.dataset.akses_anggota;
                 var status=response.dataset.status;
                 var alasan_keluar=response.dataset.alasan_keluar;
-                if(akses_anggota==1){
-                    var label_akses_anggota='<span class="badge badge-success">Tersedia</span>';
-                }else{
-                    var label_akses_anggota='<span class="badge badge-danger">Tidak Ada</span>';
-                }
                 if(status=="Aktif"){
                     var label_status='<span class="badge badge-success">Aktif</span>';
                 }else{
@@ -48,7 +37,7 @@ function ShowDetailInline(id_anggota) {
                 //Tampilkan Data
                 $('#put_detail_anggota').html(`
                     <div class="row mb-2">
-                        <div class="col-md-5 mb-3">
+                        <div class="col-md-6 mb-3">
                             <div class="row mb-2">
                                 <div class="col-12"><b># Informasi Identitas Anggota</b></div>
                             </div>
@@ -56,11 +45,6 @@ function ShowDetailInline(id_anggota) {
                                 <div class="col-4"><small>Nama Anggota</small></div>
                                 <div class="col-1"><small>:</small></div>
                                 <div class="col-7"><small class="text-muted">${nama}</small></div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-4"><small>Nomor Induk</small></div>
-                                <div class="col-1"><small>:</small></div>
-                                <div class="col-7"><small class="text-muted">${nip}</small></div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col-4"><small>Email</small></div>
@@ -72,18 +56,8 @@ function ShowDetailInline(id_anggota) {
                                 <div class="col-1"><small>:</small></div>
                                 <div class="col-7"><small class="text-muted">${kontak}</small></div>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col-4"><small>Divisi/Unit</small></div>
-                                <div class="col-1"><small>:</small></div>
-                                <div class="col-7"><small class="text-muted">${lembaga}</small></div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-4"><small>Group/Ranking</small></div>
-                                <div class="col-1"><small>:</small></div>
-                                <div class="col-7"><small class="text-muted">${ranking}</small></div>
-                            </div>
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                             <div class="row mb-2">
                                 <div class="col-12"><b># Informasi Status Anggota</b></div>
                             </div>
@@ -98,11 +72,6 @@ function ShowDetailInline(id_anggota) {
                                 <div class="col-7"><small class="text-muted">${tanggal_keluar}</small></div>
                             </div>
                             <div class="row mb-2">
-                                <div class="col-4"><small>Akses Anggota</small></div>
-                                <div class="col-1"><small>:</small></div>
-                                <div class="col-7"><small class="text-muted">${label_akses_anggota}</small></div>
-                            </div>
-                            <div class="row mb-2">
                                 <div class="col-4"><small>Status Anggota</small></div>
                                 <div class="col-1"><small>:</small></div>
                                 <div class="col-7"><small class="text-muted">${label_status}</small></div>
@@ -111,16 +80,6 @@ function ShowDetailInline(id_anggota) {
                                 <div class="col-4"><small>Alasan Keluar</small></div>
                                 <div class="col-1"><small>:</small></div>
                                 <div class="col-7"><small class="text-muted">${alasan_keluar}</small></div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <div class="row mb-2">
-                                <div class="col-12"><b># Foto Profil Anggota</b></div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-12">
-                                    <img src="${base_url}/assets/img/Anggota/${foto}" alt="" width="60%" class="rounded-circle">
-                                </div>
                             </div>
                         </div>
                     </div>

@@ -24,9 +24,7 @@
         $akses=GetDetailData($Conn,'akses','id_akses',$id_akses,'akses');
         $datetime_daftar=GetDetailData($Conn,'akses','id_akses',$id_akses,'datetime_daftar');
         $datetime_update=GetDetailData($Conn,'akses','id_akses',$id_akses,'datetime_update');
-        //Jumlah
-        $JumlahAktivitas =mysqli_num_rows(mysqli_query($Conn, "SELECT id_akses FROM log WHERE id_akses='$id_akses'"));
-        $JumlahRole =mysqli_num_rows(mysqli_query($Conn, "SELECT * FROM akses_ijin WHERE id_akses='$id_akses'"));
+        
         //Format Tanggal
         $strtotime1=strtotime($datetime_daftar);
         $strtotime2=strtotime($datetime_update);

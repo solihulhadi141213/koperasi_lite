@@ -130,13 +130,6 @@
                     $JumlahAngsuran = "Rp " . number_format($JumlahAngsuran,0,',','.');
                     $JumlahSisaPinjaman = "Rp " . number_format($sis_pinjaman,0,',','.');
 
-                    //Cek Data Jurnal
-                    $jumlah_jurnal = mysqli_num_rows(mysqli_query($Conn, "SELECT id_simpanan FROM jurnal WHERE id_pinjaman='$id_pinjaman'"));
-                    if(empty($jumlah_jurnal)){
-                        $label_jurnal='<span class="badge badge-danger">None</span>';
-                    }else{
-                        $label_jurnal='<span class="badge badge-success">Tersedia</span>';
-                    }
                     if($status=="Lunas"){
                         $label_status='<span class="badge badge-success">Lunas</span>';
                     }else{
@@ -155,7 +148,6 @@
                             <td><small>'.$JumlahAngsuranBerjalan.' / '.$periode_angsuran.'</small></td>
                             <td><small>'.$JumlahAngsuran.'</small></td>
                             <td><small>'.$JumlahSisaPinjaman.'</small></td>
-                            <td><small>'.$label_jurnal.'</small></td>
                             <td><small>'.$label_status.'</small></td>
                         </tr>
                     ';

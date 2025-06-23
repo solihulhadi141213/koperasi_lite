@@ -115,13 +115,13 @@
 </script>
 <div class="row mb-3">
     <div class="table table-responsive">
-        <table class="table table-bordered table-hover">
+        <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <td align="center"><b>No</b></td>
-                    <td align="center"><b>Nama</b></td>
-                    <td align="center"><b>Kontak & Email</b></td>
-                    <td align="center"><b>Akses</b></td>
+                    <td align="left"><b>Nama</b></td>
+                    <td align="left"><b>Kontak</b></td>
+                    <td align="left"><b>Email</b></td>
                     <td align="center"><b>Option</b></td>
                 </tr>
             </thead>
@@ -129,9 +129,9 @@
                 <?php
                     if(empty($jml_data)){
                         echo '<tr>';
-                        echo '  <td colspan="6" class="text-center">';
+                        echo '  <td colspan="5" class="text-center">';
                         echo '      <code class="text-danger">';
-                        echo '          Tidak Ada Data Entitias Yang Dapat Ditampilkan';
+                        echo '          Tidak Ada Data Akses Yang Dapat Ditampilkan';
                         echo '      </code>';
                         echo '  </td>';
                         echo '</tr>';
@@ -169,28 +169,25 @@
                             <tr>
                                 <td align="center"><?php echo $no; ?></td>
                                 <td align="left">
-                                    <small class="credit">
-                                        <?php
-                                            echo '<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalDetailAkses" data-id="'.$id_akses.'" class="text text-decoration-underline">';
-                                            echo '  '.$nama_akses.'';
-                                            echo '</a>';
-                                            echo "<br>";
-                                            echo '<code class="text text-grayish">Creat : '.$DateDaftar.'</code>';
-                                        ?>
-                                    </small>
+                                    <?php
+                                        echo '
+                                            <small class="credit">
+                                                <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalDetailAkses" data-id="'.$id_akses.'" class="text text-decoration-underline">
+                                                    '.$nama_akses.'
+                                                </a>
+                                            </small>
+                                        ';
+                                    ?>
                                 </td>
                                 <td align="left">
-                                    <small class="credit">
-                                        <?php
-                                            echo "$kontak_akses <br>";
-                                            echo '<code class="text text-grayish">Email : '.$email_akses.'</code>';
-                                        ?>
-                                    </small>
+                                    <small class="credit"><?php echo $kontak_akses; ?></small>
                                 </td>
-                                <td align="center"><?php echo "$akses"; ?></td>
+                                <td align="left">
+                                    <small class="credit"><?php echo $email_akses; ?></small>
+                                </td>
                                 <td align="center">
-                                    <a class="btn btn-sm btn-outline-dark btn-rounded" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="bi bi-three-dots"></i>
+                                    <a class="btn btn-sm btn-outline-dark btn-floating" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-three-dots-vertical"></i>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" style="">
                                         <li class="dropdown-header text-start">
@@ -204,11 +201,6 @@
                                         <li>
                                             <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ModalEditAkses" data-id="<?php echo "$id_akses"; ?>">
                                                 <i class="bi bi-pencil"></i> Ubah Info
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ModalEditLevelAkses" data-id="<?php echo "$id_akses"; ?>">
-                                                <i class="bi bi-tag"></i> Ubah Level
                                             </a>
                                         </li>
                                         <li>

@@ -114,14 +114,6 @@
                     $jumlah_rp = "Rp " . number_format($jumlah,0,',','.');
                     $tanggal=date('d F Y', strtotime($tanggal));
 
-                    //Cek Data Jurnal
-                    $jumlah_jurnal = mysqli_num_rows(mysqli_query($Conn, "SELECT id_simpanan FROM jurnal WHERE id_simpanan='$id_simpanan'"));
-                    if(empty($jumlah_jurnal)){
-                        $label_jurnal='<span class="badge badge-danger">None</span>';
-                    }else{
-                        $label_jurnal='<span class="badge badge-success">Tersedia</span>';
-                    }
-
                     //Label Jenis Siimpanan
                     $nama_jenis_simpanan=GetDetailData($Conn, 'simpanan_jenis', 'id_simpanan_jenis', $id_simpanan_jenis, 'nama_simpanan');
                     if($kategori=="Penarikan"){
@@ -135,7 +127,6 @@
                             <td><small>'.$tanggal.'</small></td>
                             <td><small>'.$label_kategori.'</small></td>
                             <td><small>'.$jumlah_rp.'</small></td>
-                            <td><small>'.$label_jurnal.'</small></td>
                         </tr>
                     ';
                     $no++;

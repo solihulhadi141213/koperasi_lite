@@ -107,27 +107,18 @@
         })
     });
 </script>
-<!-- <div class="row">
-    <div class="col-md-4">
-        <small class="credit">
-            Halaman : <code class="text-grayish"><?php echo "$page/$JmlHalaman"; ?></code>
-        </small><br>
-        <small class="credit">
-            Jumlah Data : <code class="text-grayish"><?php echo "$jml_data"; ?></code>
-        </small>
-    </div>
-</div> -->
 <div class="row mb-3">
     <div class="table table-responsive">
-        <table class="table table-bordered table-hover">
+        <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <td align="center"><b>No</b></td>
-                    <td align="center"><b>Anggota</b></td>
-                    <td align="center"><b>Tanggal</b></td>
-                    <td align="center"><b>Email & Kontak</b></td>
-                    <td align="center"><b>Divisi & Ranking</b></td>
-                    <td align="center"><b>Akses & Status</b></td>
+                    <td align="left"><b>Nama</b></td>
+                    <td align="left"><b>No.Induk</b></td>
+                    <td align="left"><b>Email</b></td>
+                    <td align="left"><b>Kontak</b></td>
+                    <td align="left"><b>Tanggal</b></td>
+                    <td align="center"><b>Status</b></td>
                     <td align="center"><b>Opsi</b></td>
                 </tr>
             </thead>
@@ -165,28 +156,19 @@
                             $nama= $data['nama'];
                             $email= $data['email'];
                             $kontak= $data['kontak'];
-                            $lembaga= $data['lembaga'];
-                            $ranking= $data['ranking'];
                             if(empty($data['foto'])){
                                 $foto="No-Image.PNG";
                             }else{
                                 $foto= $data['foto'];
                             }
-                            $akses_anggota= $data['akses_anggota'];
-                            if($akses_anggota==1){
-                                $password= $data['password'];
-                                $password="*****";
-                            }else{
-                                $password="-";
-                            }
                             $status= $data['status'];
                             if($status=="Keluar"){
                                 $strtotime2=strtotime($tanggal_keluar);
                                 $TanggalKeluar=date('d/m/Y', $strtotime2);
-                                $LabelStatus='<span class="text-danger">Keluar</span>';
+                                $LabelStatus='<span class="badge bg-danger">Keluar</span>';
                             }else{
                                 $TanggalKeluar="-";
-                                $LabelStatus='<span class="text-success">Aktif</span>';
+                                $LabelStatus='<span class="badge bg-success">Aktif</span>';
                             }
                             //Format Tanggal
                             $strtotime1=strtotime($tanggal_masuk);
@@ -196,58 +178,24 @@
                             <tr>
                                 <td align="center"><?php echo $no; ?></td>
                                 <td align="left">
-                                    <small class="credit">
-                                        <?php
-                                            echo '<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalDetailAnggota" data-id="'.$id_anggota.'" class="text text-decoration-underline">';
-                                            echo '  '.$nama.'';
-                                            echo '</a>';
-                                            echo "<br>";
-                                            echo '<code class="text text-grayish">NIP : '.$nip.'</code>';
-                                        ?>
-                                    </small>
+                                    <small class="text-muted"><?php echo $nama; ?></small>
                                 </td>
                                 <td align="left">
-                                    <small class="credit">
-                                        <?php
-                                            echo '<code class="text text-dark">Masuk : </code>';
-                                            echo '<code class="text text-grayish">'.$TanggalMasuk.'</code><br>';
-                                            echo '<code class="text text-dark">Keluar : </code>';
-                                            echo '<code class="text text-grayish">'.$TanggalKeluar.'</code><br>';
-                                        ?>
-                                    </small>
+                                    <small class="text-muted"><?php echo $nip; ?></small>
                                 </td>
                                 <td align="left">
-                                    <small class="credit">
-                                        <?php
-                                            echo '<i class="bi bi-envelope"></i> '.$email.'';
-                                            echo "<br>";
-                                            echo '<code class="text text-grayish"><i class="bi bi-phone"></i> '.$kontak.'</code>';
-                                        ?>
-                                    </small>
+                                    <small class="text-muted"><?php echo $email; ?></small>
                                 </td>
                                 <td align="left">
-                                    <small class="credit">
-                                        <?php
-                                            echo '<code class="text text-dark">Divisi : </code>';
-                                            echo '<code class="text text-grayish">'.$lembaga.'</code><br>';
-                                            echo '<code class="text text-dark">Ranking : </code>';
-                                            echo '<code class="text text-grayish">'.$ranking.'</code><br>';
-                                        ?>
-                                    </small>
+                                    <small class="text-muted"><?php echo $kontak; ?></small>
                                 </td>
-                                <td align="left">
-                                    <small class="credit">
-                                        <?php
-                                            echo '<code class="text text-dark">Password : </code>';
-                                            echo '<code class="text text-grayish">'.$password.'</code><br>';
-                                            echo '<code class="text text-dark">Status : </code>';
-                                            echo '<code class="text text-grayish">'.$LabelStatus.'</code><br>';
-                                        ?>
-                                    </small>
+                                 <td align="left">
+                                    <small class="text-muted"><?php echo $TanggalMasuk; ?></small>
                                 </td>
+                                <td align="center"><?php echo $LabelStatus; ?></td>
                                 <td align="center">
-                                    <a class="btn btn-sm btn-outline-dark btn-rounded" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="bi bi-three-dots"></i>
+                                    <a class="btn btn-sm btn-outline-dark btn-floating" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-three-dots-vertical"></i>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" style="">
                                         <li class="dropdown-header text-start">
@@ -261,11 +209,6 @@
                                         <li>
                                             <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ModalEditAnggota" data-id="<?php echo "$id_anggota"; ?>">
                                                 <i class="bi bi-pencil"></i> Ubah Anggota
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ModalUbahFotoAnggota" data-id="<?php echo "$id_anggota"; ?>">
-                                                <i class="bi bi-image"></i> Ubah Foto
                                             </a>
                                         </li>
                                         <li>

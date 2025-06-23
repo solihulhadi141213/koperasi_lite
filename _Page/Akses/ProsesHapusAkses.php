@@ -22,25 +22,19 @@
             //Proses hapus data
             $HapusAkses = mysqli_query($Conn, "DELETE FROM akses WHERE id_akses='$id_akses'") or die(mysqli_error($Conn));
             if ($HapusAkses) {
-                $HhapusIzinAkses = mysqli_query($Conn, "DELETE FROM akses_ijin WHERE id_akses='$id_akses'") or die(mysqli_error($Conn));
-                if ($HhapusIzinAkses) {
-                    if(!empty($image_akses)){
-                        $file = '../../assets/img/User/'.$image_akses.'';
-                        if (file_exists($file)) {
-                            if (unlink($file)) {
-                                echo '<span class="text-success" id="NotifikasiHapusAksesBerhasil">Success</span>';
-                            } else {
-                                echo '<span class="text-danger">Terjadi kesalahan pada saat menghapus file</span>';
-                            }
-                        }else{
+                 if(!empty($image_akses)){
+                    $file = '../../assets/img/User/'.$image_akses.'';
+                    if (file_exists($file)) {
+                        if (unlink($file)) {
                             echo '<span class="text-success" id="NotifikasiHapusAksesBerhasil">Success</span>';
+                        } else {
+                            echo '<span class="text-danger">Terjadi kesalahan pada saat menghapus file</span>';
                         }
                     }else{
                         echo '<span class="text-success" id="NotifikasiHapusAksesBerhasil">Success</span>';
                     }
-                    
                 }else{
-                    echo '<span class="text-danger">Hapus Data Gagal</span>';
+                    echo '<span class="text-success" id="NotifikasiHapusAksesBerhasil">Success</span>';
                 }
             }else{
                 echo '<span class="text-danger">Hapus Data Gagal</span>';

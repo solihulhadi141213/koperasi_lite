@@ -5,13 +5,6 @@
     </div>
     <form action="javascript:void(0);" class="row g-3" id="ProsesLogin">
         <div class="col-12">
-            <label for="mode_akses" class="form-label">Mode Akses</label>
-            <select name="mode_akses" id="mode_akses" class="form-control">
-                <option value="Pengurus">Pengurus</option>
-                <option value="Anggota">Anggota</option>
-            </select>
-        </div>
-        <div class="col-12">
             <label for="email" class="form-label">Email</label>
             <div class="input-group has-validation">
                 <span class="input-group-text" id="inputGroupPrepend">@</span>

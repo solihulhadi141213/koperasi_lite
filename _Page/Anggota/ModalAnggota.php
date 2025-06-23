@@ -41,13 +41,10 @@
                             <select name="OrderBy" id="OrderBy" class="form-control">
                                 <option value="">Pilih</option>
                                 <option value="tanggal_masuk">Tanggal Masuk</option>
-                                <option value="tanggal_keluar">Tanggal Keluar</option>
-                                <option value="nip">NIP</option>
-                                <option value="nama">Nama Anggota</option>
+                                <option value="nip">No.Induk</option>
+                                <option value="nama">Nama</option>
                                 <option value="email">Email</option>
                                 <option value="kontak">Kontak</option>
-                                <option value="lembaga">Divisi/Unit</option>
-                                <option value="ranking">Ranking</option>
                                 <option value="status">Status</option>
                             </select>
                         </div>
@@ -81,13 +78,10 @@
                             <select name="keyword_by" id="keyword_by" class="form-control">
                                 <option value="">Pilih</option>
                                 <option value="tanggal_masuk">Tanggal Masuk</option>
-                                <option value="tanggal_keluar">Tanggal Keluar</option>
-                                <option value="nip">NIP</option>
-                                <option value="nama">Nama Anggota</option>
+                                <option value="nip">No.Induk</option>
+                                <option value="nama">Nama</option>
                                 <option value="email">Email</option>
                                 <option value="kontak">Kontak</option>
-                                <option value="lembaga">Divisi/Unit</option>
-                                <option value="ranking">Ranking</option>
                                 <option value="status">Status</option>
                             </select>
                         </div>
@@ -163,7 +157,6 @@
                                 <option value="">Pilih</option>
                                 <option value="tanggal">Tanggal Simpanan</option>
                                 <option value="kategori">Kategori Simpanan</option>
-                                <option value="jumlah">Jumlah Simpanan</option>
                             </select>
                         </div>
                     </div>
@@ -197,7 +190,6 @@
                                 <option value="">Pilih</option>
                                 <option value="tanggal">Tanggal Simpanan</option>
                                 <option value="kategori">Kategori Simpanan</option>
-                                <option value="jumlah">Jumlah Simpanan</option>
                             </select>
                         </div>
                     </div>
@@ -486,31 +478,6 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col col-md-4">
-                            <label for="lembaga">Divisi/Unit Kerja</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input type="text" name="lembaga" id="lembaga" class="form-control" list="list_lembaga">
-                            <datalist id="list_lembaga">
-                                <?php
-                                    $QryLembaga = mysqli_query($Conn, "SELECT DISTINCT lembaga FROM anggota ORDER BY lembaga ASC");
-                                    while ($DataLembaga = mysqli_fetch_array($QryLembaga)) {
-                                        $list_lembaga= $DataLembaga['lembaga'];
-                                        echo '<option value="'.$list_lembaga.'">';
-                                    }
-                                ?>
-                            </datalist>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col col-md-4">
-                            <label for="ranking">Ranking/Group</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input type="text" name="ranking" id="ranking" class="form-control" placeholder="[0-9]">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col col-md-4">
                             <label for="kontak">No.Kontak</label>
                         </div>
                         <div class="col-md-8">
@@ -523,30 +490,6 @@
                         </div>
                         <div class="col-md-8">
                             <input type="email" name="email" id="email" class="form-control" placeholder="email@domain.com">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Ya" id="akses_anggota" name="akses_anggota">
-                                <label class="form-check-label" for="akses_anggota">
-                                    <small>
-                                        <code class="text-dark">Sertakan akses untuk anggota tersebut</code>
-                                    </small>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3" id="form_password">
-                        <div class="col col-md-4">
-                            <label for="password">Password</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input type="password" name="password" id="password" class="form-control">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="Ya" id="tampilkan_password_anggota" name="tampilkan_password_anggota">
-                                <label class="form-check-label" for="tampilkan_password_anggota">
-                                    <small>
-                                        <code class="text-dark">Tampilkan Password</code>
-                                    </small>
-                                </label>
-                            </div>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -580,19 +523,6 @@
                         </div>
                         <div class="col-md-8">
                             <textarea name="alasan_keluar" id="alasan_keluar" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col col-md-4">
-                            <label for="foto">Pas Foto</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input type="file" name="foto" id="foto" class="form-control">
-                            <small class="credit">
-                                <code class="text text-grayish">
-                                    File foto maksimal 2 Mb (JPG, JPEG, PNG dan GIF)
-                                </code>
-                            </small>
                         </div>
                     </div>
                     <div class="row mb-3">

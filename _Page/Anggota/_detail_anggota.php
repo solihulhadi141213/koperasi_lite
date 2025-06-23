@@ -61,12 +61,7 @@
             $nip=$Data['nip'];
             $nama=$Data['nama'];
             $email=$Data['email'];
-            $password=$Data['password'];
             $kontak=$Data['kontak'];
-            $lembaga=$Data['lembaga'];
-            $ranking=$Data['ranking'];
-            $foto=$Data['foto'];
-            $akses_anggota=$Data['akses_anggota'];
             $status=$Data['status'];
             $alasan_keluar=$Data['alasan_keluar'];
             //Routing Foto
@@ -80,13 +75,7 @@
                 "nip" => $nip,
                 "nama" => $nama,
                 "email" => $email,
-                "password" => $password,
                 "kontak" => $kontak,
-                "lembaga" => $lembaga,
-                "ranking" => $ranking,
-                "foto" => $foto,
-                "base_url" => $base_url,
-                "akses_anggota" => $akses_anggota,
                 "status" => $status,
                 "alasan_keluar" => $alasan_keluar
             ];

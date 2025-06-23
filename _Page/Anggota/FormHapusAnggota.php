@@ -28,23 +28,8 @@
             $email=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'email');
             $nip=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'nip');
             $nama=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'nama');
-            $password=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'password');
             $kontak=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'kontak');
-            $lembaga=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'lembaga');
-            $ranking=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'ranking');
-            $foto=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'foto');
-            $akses_anggota=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'akses_anggota');
             $status=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'status');
-            if(empty($foto)){
-                $foto="No-Image.PNG";
-            }else{
-                $foto=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'foto');
-            }
-            if($akses_anggota==1){
-                $password=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'password');
-            }else{
-                $password="-";
-            }
             if($status=="Keluar"){
                 $strtotime2=strtotime($tanggal_keluar);
                 $TanggalKeluar=date('d/m/Y', $strtotime2);
@@ -70,18 +55,6 @@
         </div>
     </div>
     <div class="row mb-3">
-        <div class="col col-md-4">Lembaga</div>
-        <div class="col col-md-8">
-            <code class="text text-grayish"><?php echo $lembaga; ?></code>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col col-md-4">Ranking</div>
-        <div class="col col-md-8">
-            <code class="text text-grayish"><?php echo $ranking; ?></code>
-        </div>
-    </div>
-    <div class="row mb-3">
         <div class="col col-md-4">Kontak</div>
         <div class="col col-md-8">
             <code class="text text-grayish"><?php echo $kontak; ?></code>
@@ -91,12 +64,6 @@
         <div class="col col-md-4">Email</div>
         <div class="col col-md-8">
             <code class="text text-grayish"><?php echo $email; ?></code>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col col-md-4">Password</div>
-        <div class="col col-md-8">
-            <code class="text text-grayish"><?php echo $password; ?></code>
         </div>
     </div>
     <div class="row mb-3">
@@ -115,18 +82,6 @@
         <div class="col col-md-4">Tanggal Keluar</div>
         <div class="col col-md-8">
             <code class="text text-grayish"><?php echo $TanggalKeluar; ?></code>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col col-md-12 text-primary">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Ya" id="hapus_relasi_anggota" name="hapus_relasi_anggota">
-                <label class="form-check-label" for="hapus_relasi_anggota">
-                    <small>
-                        <code class="text-dark">Hapus juga data transaksi anggota bersangkutan</code>
-                    </small>
-                </label>
-            </div>
         </div>
     </div>
     <div class="row mb-3">

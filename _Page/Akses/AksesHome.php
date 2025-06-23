@@ -18,7 +18,7 @@
                 echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">';
                 echo '  <small>';
                 echo '      Berikut ini adalah halaman pengelolaan data akses pengurus koperasi. Anda bisa menambahkan data akses baru, melihat detail informasi user akses, ';
-                echo '      Dan melihat riwayat aktivitas user tersebut. Ijin akses sesuai dengan entitas pada saat pertama kali dibuat, namun anda masih bisa melakukan perubahan ijin fitur pada masing-masing data akses tersebut.';
+                echo '      Dan melihat riwayat aktivitas user tersebut.';
                 echo '      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
                 echo '  </small>';
                 echo '</div>';
@@ -31,14 +31,12 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-8 mb-3"></div>
-                        <div class="col-md-2 mb-3">
-                            <button type="button" class="btn btn-md btn-outline-dark btn-block btn-rounded" data-bs-toggle="modal" data-bs-target="#ModalFilterAkses" title="Filter Data Akses">
-                                <i class="bi bi-funnel"></i> Filter
+                        <div class="col-md-4 mb-3 text-end">
+                            <button type="button" class="btn btn-md btn-info btn-floating" data-bs-toggle="modal" data-bs-target="#ModalFilterAkses" title="Filter Data Akses">
+                                <i class="bi bi-funnel"></i>
                             </button>
-                        </div>
-                        <div class="col-md-2 mb-3">
-                            <button type="button" class="btn btn-md btn-primary btn-block btn-rounded" data-bs-toggle="modal" data-bs-target="#ModalTambahAkses" title="Tambah Data Akses Baru">
-                                <i class="bi bi-plus"></i> Tambah
+                            <button type="button" class="btn btn-md btn-primary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalTambahAkses" title="Tambah Data Akses Baru">
+                                <i class="bi bi-plus"></i>
                             </button>
                         </div>
                     </div>

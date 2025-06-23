@@ -13,6 +13,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link <?php if($PageMenu=="Anggota"){echo "";}else{echo "collapsed";} ?>" href="index.php?Page=Anggota">
+                <i class="bi bi-people"></i>
+                <span>Anggota</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link <?php if($PageMenu=="Anggota"||$PageMenu=="AnggotaKeluarMasuk"||$PageMenu=="RekapAnggota"){echo "";}else{echo "collapsed";} ?>" data-bs-target="#anggota-nav" data-bs-toggle="collapse" href="javascript:void(0);">
                 <i class="bi bi-people"></i>
                 <span>Anggota</span>
@@ -234,28 +240,10 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a class="nav-link <?php if($PageMenu=="SettingGeneral"||$PageMenu=="SettingEmail"||$PageMenu=="AutoJurnal"){echo "";}else{echo "collapsed";} ?>" data-bs-target="#components-nav" data-bs-toggle="collapse" href="javascript:void(0);">
+            <a class="nav-link <?php if($PageMenu=="SettingGeneral"){echo "";}else{echo "collapsed";} ?>" href="index.php?Page=SettingGeneral">
                 <i class="bi bi-gear"></i>
-                    <span>Pengaturan</span><i class="bi bi-chevron-down ms-auto">
-                </i>
+                <span>Pengaturan</span>
             </a>
-            <ul id="components-nav" class="nav-content collapse <?php if($PageMenu=="SettingGeneral"||$PageMenu=="SettingEmail"||$PageMenu=="AutoJurnal"){echo "show";} ?>" data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="index.php?Page=SettingGeneral" class="<?php if($PageMenu=="SettingGeneral"){echo "active";} ?>">
-                        <i class="bi bi-circle"></i><span>Pengaturan Umum</span>
-                    </a>
-                </li> 
-                <li>
-                    <a href="index.php?Page=AutoJurnal" class="<?php if($PageMenu=="AutoJurnal"){echo "active";} ?>">
-                        <i class="bi bi-circle"></i><span>Auto Jurnal</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="index.php?Page=SettingEmail" class="<?php if($PageMenu=="SettingEmail"){echo "active";} ?>">
-                        <i class="bi bi-circle"></i><span>Email Gateway</span>
-                    </a>
-                </li> 
-            </ul>
         </li>
         <li class="nav-heading">Fitur Lainnya</li>
         <li class="nav-item">

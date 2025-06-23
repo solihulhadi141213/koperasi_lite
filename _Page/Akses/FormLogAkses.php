@@ -32,9 +32,6 @@
             $akses=GetDetailData($Conn,'akses','id_akses',$id_akses,'akses');
             $datetime_daftar=GetDetailData($Conn,'akses','id_akses',$id_akses,'datetime_daftar');
             $datetime_update=GetDetailData($Conn,'akses','id_akses',$id_akses,'datetime_update');
-            //Jumlah
-            $JumlahAktivitas =mysqli_num_rows(mysqli_query($Conn, "SELECT id_akses FROM log WHERE id_akses='$id_akses'"));
-            $JumlahRole =mysqli_num_rows(mysqli_query($Conn, "SELECT * FROM akses_ijin WHERE id_akses='$id_akses'"));
             //Format Tanggal
             $strtotime1=strtotime($datetime_daftar);
             $strtotime2=strtotime($datetime_update);
@@ -130,13 +127,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="row">
-                <div class="col-md-12 mb-3 text-center">
-                    <a href="index.php?Page=Akses&Sub=LogAkses&id=<?php echo $id_akses; ?>" class="btn btn-md btn-outline-primary">
-                        Lihat Selengkapnya
-                    </a>
-                </div>
-            </div> -->
 <?php 
         } 
     } 

@@ -32,9 +32,6 @@
             $akses=GetDetailData($Conn,'akses','id_akses',$id_akses,'akses');
             $datetime_daftar=GetDetailData($Conn,'akses','id_akses',$id_akses,'datetime_daftar');
             $datetime_update=GetDetailData($Conn,'akses','id_akses',$id_akses,'datetime_update');
-            //Jumlah
-            $JumlahAktivitas =mysqli_num_rows(mysqli_query($Conn, "SELECT id_akses FROM log WHERE id_akses='$id_akses'"));
-            $JumlahRole =mysqli_num_rows(mysqli_query($Conn, "SELECT * FROM akses_ijin WHERE id_akses='$id_akses'"));
             //Format Tanggal
             $strtotime1=strtotime($datetime_daftar);
             $strtotime2=strtotime($datetime_update);
@@ -49,10 +46,10 @@
 ?>
             <div class="row mb-3 border-1 border-bottom">
                 <div class="col-md-12 text-center mb-4">
-                    <img src="<?php echo $base_url; ?>/assets/img/User/<?php echo $image_akses; ?>" alt="" width="50%" class="rounded-circle">
+                    <img src="assets/img/User/<?php echo $image_akses; ?>" alt="" width="50%" class="rounded-circle">
                 </div>
             </div>
-            <div class="row mb-3 border-1 border-bottom">
+            <div class="row mb-3">
                 <div class="col-md-12 mb-4">
                     <div class="row mb-3">
                         <div class="col col-md-4">Nama Lengkap</div>
@@ -92,35 +89,6 @@
                     </div>
                 </div>
             </div>
-            <?php
-                $no=1;
-                echo '<div class="row mb-3">';
-                $QryKategori = mysqli_query($Conn, "SELECT DISTINCT kategori FROM akses_fitur ORDER BY kategori ASC");
-                while ($DataKategori = mysqli_fetch_array($QryKategori)) {
-                    $KategoriList= $DataKategori['kategori'];
-                    echo '  <div class="col-md-12">';
-                    echo '     <small class="credit">'.$no.'. '.$KategoriList.'</small><br>';
-                    echo '      <ul>';
-                    $QryFitur = mysqli_query($Conn, "SELECT * FROM akses_fitur WHERE kategori='$KategoriList' ORDER BY nama ASC");
-                    while ($DataFitur = mysqli_fetch_array($QryFitur)) {
-                        $id_akses_fitur= $DataFitur['id_akses_fitur'];
-                        $KodeFitur= $DataFitur['kode'];
-                        $NamaFitur= $DataFitur['nama'];
-                        $KeteranganFitur= $DataFitur['keterangan'];
-                        //Validasi Apakah Bersangkutan Punya Akses Ini
-                        $Validasi=IjinAksesSaya($Conn,$id_akses,$KodeFitur);
-                        if($Validasi=="Ada"){
-                            echo '<li><code class="text text-grayish">'.$NamaFitur.' <i class="bi bi-check text-success"></i></code></li>';
-                        }else{
-                            echo '<li><code class="text text-grayish">'.$NamaFitur.'</code></li>';
-                        }
-                    }
-                    echo '      </ul>';
-                    echo '  </div>';
-                    $no++;
-                }
-                echo '</div>';
-            ?>
 <?php 
         } 
     } 

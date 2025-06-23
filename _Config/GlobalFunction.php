@@ -1602,4 +1602,32 @@
         
         return $success ? "Success" : "Gagal menyimpan jurnal: $error";
     }
+
+    function TanggalIndo($tanggal) {
+        if (empty($tanggal) || $tanggal == "0000-00-00") {
+            return "-";
+        }
+        
+        $bulan = array(
+            1 => 'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember'
+        );
+        
+        $pecah = explode('-', $tanggal);
+        $tgl = (int)$pecah[2];
+        $bln = $bulan[(int)$pecah[1]];
+        $thn = $pecah[0];
+        
+        return $tgl . ' ' . $bln . ' ' . $thn;
+    }
 ?>

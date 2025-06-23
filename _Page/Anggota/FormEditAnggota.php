@@ -30,10 +30,6 @@
             $nama=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'nama');
             $password=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'password');
             $kontak=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'kontak');
-            $lembaga=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'lembaga');
-            $ranking=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'ranking');
-            $foto=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'foto');
-            $akses_anggota=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'akses_anggota');
             $status=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'status');
             $alasan_keluar=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'alasan_keluar');
 ?>
@@ -69,31 +65,6 @@
     </div>
     <div class="row mb-3">
         <div class="col col-md-4">
-            <label for="lembaga_edit">Divisi/Unit Kerja</label>
-        </div>
-        <div class="col-md-8">
-            <input type="text" name="lembaga" id="lembaga_edit" class="form-control" list="list_lembaga_edit" value="<?php echo "$lembaga"; ?>">
-            <datalist id="list_lembaga_edit">
-                <?php
-                    $QryLembaga = mysqli_query($Conn, "SELECT DISTINCT lembaga FROM anggota ORDER BY lembaga ASC");
-                    while ($DataLembaga = mysqli_fetch_array($QryLembaga)) {
-                        $list_lembaga= $DataLembaga['lembaga'];
-                        echo '<option value="'.$list_lembaga.'">';
-                    }
-                ?>
-            </datalist>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col col-md-4">
-            <label for="ranking_edit">Ranking/Group</label>
-        </div>
-        <div class="col-md-8">
-            <input type="text" name="ranking" id="ranking_edit" class="form-control" placeholder="[0-9]" value="<?php echo "$ranking"; ?>">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col col-md-4">
             <label for="kontak_edit">No.Kontak</label>
         </div>
         <div class="col-md-8">
@@ -106,30 +77,6 @@
         </div>
         <div class="col-md-8">
             <input type="email" name="email" id="email_edit" class="form-control" placeholder="email@domain.com" value="<?php echo "$email"; ?>">
-            <div class="form-check">
-                <input class="form-check-input" <?php if($akses_anggota==1){echo "checked";} ?> type="checkbox" value="Ya" id="akses_anggota_edit" name="akses_anggota">
-                <label class="form-check-label" for="akses_anggota_edit">
-                    <small>
-                        <code class="text-dark">Sertakan akses untuk anggota tersebut</code>
-                    </small>
-                </label>
-            </div>
-        </div>
-    </div>
-    <div class="row mb-3" id="form_password_edit">
-        <div class="col col-md-4">
-            <label for="password_edit">Password</label>
-        </div>
-        <div class="col-md-8">
-            <input type="password" name="password" id="password_edit" class="form-control" value="<?php echo "$password"; ?>">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Ya" id="tampilkan_password_anggota_edit" name="tampilkan_password_anggota">
-                <label class="form-check-label" for="tampilkan_password_anggota_edit">
-                    <small>
-                        <code class="text-dark">Tampilkan Password</code>
-                    </small>
-                </label>
-            </div>
         </div>
     </div>
     <div class="row mb-3">

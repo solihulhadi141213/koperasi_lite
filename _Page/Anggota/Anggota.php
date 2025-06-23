@@ -9,11 +9,7 @@
             if($Sub=="Import"){
                 include "_Page/Anggota/ImportAnggota.php";
             }else{
-                if($Sub=="AksesAnggota"){
-                    include "_Page/Anggota/AksesAnggota.php";
-                }else{
-                    include "_Page/Anggota/AnggotaHome.php";
-                }
+                include "_Page/Anggota/AnggotaHome.php";
             }
         }
     }

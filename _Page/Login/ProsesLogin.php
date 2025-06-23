@@ -21,22 +21,14 @@
         echo '<code>Email tidak boleh kosong</code>';
     } elseif (empty($_POST["password"])) {
         echo '<code>Password tidak boleh kosong</code>';
-    } elseif (empty($_POST["mode_akses"])) {
-        echo '<code>Mode akses tidak boleh kosong</code>';
     } else {
         $email = validateAndSanitizeInput($_POST["email"]);
         $password = validateAndSanitizeInput($_POST["password"]);
-        $mode_akses = validateAndSanitizeInput($_POST["mode_akses"]);
         $passwordMd5 = md5($password);
 
         // Use prepared statements to prevent SQL injection
-        if ($mode_akses == "Pengurus") {
-            $stmt = $Conn->prepare("SELECT * FROM akses WHERE email_akses = ? AND password = ?");
-            $stmt->bind_param("ss", $email, $passwordMd5);
-        } else {
-            $stmt = $Conn->prepare("SELECT * FROM anggota WHERE email = ? AND password = ?");
-            $stmt->bind_param("ss", $email, $password);
-        }
+        $stmt = $Conn->prepare("SELECT * FROM akses WHERE email_akses = ? AND password = ?");
+        $stmt->bind_param("ss", $email, $passwordMd5);
 
         if ($stmt === false) {
             die('Prepare failed: ' . htmlspecialchars($Conn->error));
@@ -47,16 +39,19 @@
         $DataAkses = $result->fetch_assoc();
 
         if ($DataAkses) {
-            $id_akses = $mode_akses == "Pengurus" ? $DataAkses["id_akses"] : $DataAkses["id_anggota"];
+            $id_akses = $DataAkses["id_akses"];
 
             // Delete old login tokens
-            $deleteTokenStmt = $Conn->prepare("DELETE FROM akses_login WHERE id_akses = ? AND kategori = ?");
+            $deleteTokenStmt = $Conn->prepare("DELETE FROM akses_login WHERE id_akses = ?");
             if ($deleteTokenStmt === false) {
                 die('Prepare failed: ' . htmlspecialchars($Conn->error));
             }
-            $deleteTokenStmt->bind_param("is", $id_akses, $mode_akses);
+            $deleteTokenStmt->bind_param("i", $id_akses);
             $deleteTokenStmt->execute();
 
+            //Mode Akses
+            $mode_akses="Pengurus";
+            
             // Create new login token
             $token = generateToken();
             $insertTokenStmt = $Conn->prepare("INSERT INTO akses_login (id_akses, kategori, token, date_creat, date_expired) VALUES (?, ?, ?, ?, ?)");
@@ -68,15 +63,14 @@
 
             if ($InputAksesLogin) {
                 echo '<span id="NotifikasiProsesLoginBerhasil">Success</span>';
-                $_SESSION["mode_akses"] = $mode_akses;
                 $_SESSION["id_akses"] = $id_akses;
                 $_SESSION["login_token"] = $token;
                 $_SESSION["NotifikasiSwal"] = "Login Berhasil";
             } else {
-                echo '<code>Terjadi kesalahan pada saat membuat sesi login '.$mode_akses.'</code>';
+                echo '<code>Terjadi kesalahan pada saat membuat sesi login</code>';
             }
         } else {
-            echo '<code>Kombinasi password dan email yang Anda gunakan tidak valid mode: '.$mode_akses.' '.$passwordMd5.'</code>';
+            echo '<code>Kombinasi password dan email yang Anda gunakan tidak valid</code>';
         }
     }
 ?>
