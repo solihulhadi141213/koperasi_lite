@@ -180,6 +180,13 @@ $('#ProsesTambahPinjaman').submit(function(){
             $('#NotifikasiTambahPinjaman').html(data);
             var NotifikasiTambahPinjamanBerhasil=$('#NotifikasiTambahPinjamanBerhasil').html();
             if(NotifikasiTambahPinjamanBerhasil=="Success"){
+
+                //Reset Form
+                $('#ProsesFilter')[0].reset();
+
+                //Menampilkan Data
+                filterAndLoadTable();
+
                 $('#NotifikasiTambahPinjaman').html('');
                 $('#ModalTambahPinjaman').modal('hide');
                 $('#page').val("1");
@@ -188,8 +195,7 @@ $('#ProsesTambahPinjaman').submit(function(){
                     'Tambah Pinjaman Berhasil!',
                     'success'
                 )
-                //Menampilkan Data
-                filterAndLoadTable();
+               
             }
         }
     });
@@ -209,15 +215,27 @@ $('#ModalDetailPinjaman').on('show.bs.modal', function (e) {
 });
 //Edit Pinjaman
 $('#ModalEditPinjamanAnggota').on('show.bs.modal', function (e) {
-    var id_pinjaman= $(e.relatedTarget).data('id');
+    var id_pinjaman = $(e.relatedTarget).data('id');
     $('#FormEditPinjaman').html("Loading...");
     $.ajax({
-        type 	    : 'POST',
-        url 	    : '_Page/Pinjaman/FormEditPinjaman.php',
-        data        : {id_pinjaman: id_pinjaman},
-        success     : function(data){
+        type: 'POST',
+        url: '_Page/Pinjaman/FormEditPinjaman.php',
+        data: {id_pinjaman: id_pinjaman},
+        success: function(data) {
             $('#FormEditPinjaman').html(data);
             $('#NotifikasiEditPinjaman').html("");
+
+            // Cek apakah elemen get_id_pinjaman_anggota ada
+            if ($('#get_id_pinjaman_anggota').length === 0 || !$('#get_id_pinjaman_anggota').val()) {
+                $('#ButtonEditPinjaman').hide(); // Sembunyikan tombol jika tidak ada
+            } else {
+                $('#ButtonEditPinjaman').show(); // Tampilkan tombol jika ada
+                var get_id_pinjaman_anggota = $('#get_id_pinjaman_anggota').val();
+                // Lakukan sesuatu dengan get_id_pinjaman_anggota jika perlu
+            }
+        },
+        error: function() {
+            $('#ButtonEditPinjaman').hide(); // Sembunyikan tombol jika terjadi error
         }
     });
 });

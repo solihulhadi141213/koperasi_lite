@@ -39,7 +39,7 @@
         if(!empty($_POST['OrderBy'])){
             $OrderBy=$_POST['OrderBy'];
         }else{
-            $OrderBy="id_pinjaman";
+            $OrderBy="id_pinjaman_angsuran";
         }
         //Atur Page
         if(!empty($_POST['page'])){
@@ -49,17 +49,50 @@
             $page="1";
             $posisi = 0;
         }
-        if(empty($keyword_by)){
-            if(empty($keyword)){
-                $jml_data = mysqli_num_rows(mysqli_query($Conn, "SELECT*FROM pinjaman WHERE status='Berjalan'"));
-            }else{
-                $jml_data = mysqli_num_rows(mysqli_query($Conn, "SELECT*FROM pinjaman WHERE (status='Berjalan') AND (nama like '%$keyword%' OR nip like '%$keyword%' OR lembaga like '%$keyword%' OR ranking like '%$keyword%' OR tanggal like '%$keyword%' OR jumlah_pinjaman like '%$keyword%' OR status like '%$keyword%')"));
+        // Query untuk menghitung jumlah data
+        if(empty($keyword_by)) {
+            if(empty($keyword)) {
+                $jml_data = mysqli_num_rows(mysqli_query($Conn, "
+                    SELECT pa.* 
+                    FROM pinjaman_angsuran pa
+                    JOIN anggota a ON pa.id_anggota = a.id_anggota
+                "));
+            } else {
+                $jml_data = mysqli_num_rows(mysqli_query($Conn, "
+                    SELECT pa.* 
+                    FROM pinjaman_angsuran pa
+                    JOIN anggota a ON pa.id_anggota = a.id_anggota
+                    WHERE pa.id_anggota LIKE '%$keyword%' 
+                    OR a.nama LIKE '%$keyword%' 
+                    OR a.nip LIKE '%$keyword%'
+                    OR pa.tanggal_angsuran LIKE '%$keyword%'
+                    OR pa.tanggal_bayar LIKE '%$keyword%'
+                "));
             }
-        }else{
-            if(empty($keyword)){
-                $jml_data = mysqli_num_rows(mysqli_query($Conn, "SELECT*FROM pinjaman WHERE status='Berjalan'"));
-            }else{
-                $jml_data = mysqli_num_rows(mysqli_query($Conn, "SELECT*FROM pinjaman WHERE (status='Berjalan') AND ($keyword_by like '%$keyword%')"));
+        } else {
+            if(empty($keyword)) {
+                $jml_data = mysqli_num_rows(mysqli_query($Conn, "
+                    SELECT pa.* 
+                    FROM pinjaman_angsuran pa
+                    JOIN anggota a ON pa.id_anggota = a.id_anggota
+                "));
+            } else {
+                // Jika pencarian berdasarkan field tertentu
+                if($keyword_by == "nama" || $keyword_by == "nip") {
+                    $jml_data = mysqli_num_rows(mysqli_query($Conn, "
+                        SELECT pa.* 
+                        FROM pinjaman_angsuran pa
+                        JOIN anggota a ON pa.id_anggota = a.id_anggota
+                        WHERE a.$keyword_by LIKE '%$keyword%'
+                    "));
+                } else {
+                    $jml_data = mysqli_num_rows(mysqli_query($Conn, "
+                        SELECT pa.* 
+                        FROM pinjaman_angsuran pa
+                        JOIN anggota a ON pa.id_anggota = a.id_anggota
+                        WHERE pa.$keyword_by LIKE '%$keyword%'
+                    "));
+                }
             }
         }
         //Mengatur Halaman
@@ -107,35 +140,27 @@
                 });
             });
         </script>
-        <!-- <div class="row">
-            <div class="col-md-3">
-                <small class="credit">
-                    Halaman : <code class="text-grayish"><?php echo "$page/$JmlHalaman"; ?></code>
-                </small><br>
-                <small class="credit">
-                    Jumlah Data : <code class="text-grayish"><?php echo "$jml_data"; ?></code>
-                </small>
-            </div>
-        </div> -->
         <div class="row mb-3">
             <div class="table table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <td align="center"><b>No</b></td>
-                            <td align="center"><b>Tanggal Pinjaman</b></td>
-                            <td align="center"><b>Nama & NIP</b></td>
-                            <td align="center"><b>Divisi/Unit & Ranking</b></td>
-                            <td align="center"><b>Rp Pinjaman</b></td>
-                            <td align="center"><b>Tunggakan</b></td>
-                            <td align="center"><b>Opsi</b></td>
+                            <td align="center"><b>Tgl Angsuran</b></td>
+                            <td align="center"><b>Tgl Bayar</b></td>
+                            <td align="center"><b>Nama Anggota</b></td>
+                            <td align="center"><b>No. Induk</b></td>
+                            <td align="center"><b>Pokok</b></td>
+                            <td align="center"><b>Jasa</b></td>
+                            <td align="center"><b>Denda</b></td>
+                            <td align="center"><b>Jumlah</b></td>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                             if(empty($jml_data)){
                                 echo '<tr>';
-                                echo '  <td colspan="7" class="text-center">';
+                                echo '  <td colspan="9" class="text-center">';
                                 echo '      <code class="text-danger">';
                                 echo '          Tidak Ada Data Pinjaman Yang Dapat Ditampilkan';
                                 echo '      </code>';
@@ -144,138 +169,113 @@
                             }else{
                                 $no = 1+$posisi;
                                 //KONDISI PENGATURAN MASING FILTER
-                                if(empty($keyword_by)){
-                                    if(empty($keyword)){
-                                        $query = mysqli_query($Conn, "SELECT*FROM pinjaman WHERE status='Berjalan' ORDER BY $OrderBy $ShortBy LIMIT $posisi, $batas");
-                                    }else{
-                                        $query = mysqli_query($Conn, "SELECT*FROM pinjaman WHERE (status='Berjalan') AND (nama like '%$keyword%' OR nip like '%$keyword%' OR lembaga like '%$keyword%' OR ranking like '%$keyword%' OR tanggal like '%$keyword%' OR jumlah_pinjaman like '%$keyword%' OR status like '%$keyword%') ORDER BY $OrderBy $ShortBy LIMIT $posisi, $batas");
+                                // Query untuk menampilkan data
+                                if(empty($keyword_by)) {
+                                    if(empty($keyword)) {
+                                        $query = mysqli_query($Conn, "
+                                            SELECT pa.*, a.nama, a.nip 
+                                            FROM pinjaman_angsuran pa
+                                            JOIN anggota a ON pa.id_anggota = a.id_anggota
+                                            ORDER BY $OrderBy $ShortBy 
+                                            LIMIT $posisi, $batas
+                                        ");
+                                    } else {
+                                        $query = mysqli_query($Conn, "
+                                            SELECT pa.*, a.nama, a.nip 
+                                            FROM pinjaman_angsuran pa
+                                            JOIN anggota a ON pa.id_anggota = a.id_anggota
+                                            WHERE pa.id_anggota LIKE '%$keyword%' 
+                                            OR a.nama LIKE '%$keyword%' 
+                                            OR a.nip LIKE '%$keyword%'
+                                            OR pa.tanggal_angsuran LIKE '%$keyword%'
+                                            OR pa.tanggal_bayar LIKE '%$keyword%'
+                                            ORDER BY $OrderBy $ShortBy 
+                                            LIMIT $posisi, $batas
+                                        ");
                                     }
-                                }else{
-                                    if(empty($keyword)){
-                                        $query = mysqli_query($Conn, "SELECT*FROM pinjaman WHERE status='Berjalan' ORDER BY $OrderBy $ShortBy LIMIT $posisi, $batas");
-                                    }else{
-                                        $query = mysqli_query($Conn, "SELECT*FROM pinjaman WHERE (status='Berjalan') AND ($keyword_by like '%$keyword%') ORDER BY $OrderBy $ShortBy LIMIT $posisi, $batas");
+                                } else {
+                                    if(empty($keyword)) {
+                                        $query = mysqli_query($Conn, "
+                                            SELECT pa.*, a.nama, a.nip 
+                                            FROM pinjaman_angsuran pa
+                                            JOIN anggota a ON pa.id_anggota = a.id_anggota
+                                            ORDER BY $OrderBy $ShortBy 
+                                            LIMIT $posisi, $batas
+                                        ");
+                                    } else {
+                                        if($keyword_by == "nama" || $keyword_by == "nip") {
+                                            $query = mysqli_query($Conn, "
+                                                SELECT pa.*, a.nama, a.nip 
+                                                FROM pinjaman_angsuran pa
+                                                JOIN anggota a ON pa.id_anggota = a.id_anggota
+                                                WHERE a.$keyword_by LIKE '%$keyword%'
+                                                ORDER BY $OrderBy $ShortBy 
+                                                LIMIT $posisi, $batas
+                                            ");
+                                        } else {
+                                            $query = mysqli_query($Conn, "
+                                                SELECT pa.*, a.nama, a.nip 
+                                                FROM pinjaman_angsuran pa
+                                                JOIN anggota a ON pa.id_anggota = a.id_anggota
+                                                WHERE pa.$keyword_by LIKE '%$keyword%'
+                                                ORDER BY $OrderBy $ShortBy 
+                                                LIMIT $posisi, $batas
+                                            ");
+                                        }
                                     }
                                 }
                                 while ($data = mysqli_fetch_array($query)) {
-                                    $id_pinjaman= $data['id_pinjaman'];
-                                    $uuid_pinjaman= $data['uuid_pinjaman'];
+                                    $id_pinjaman_angsuran= $data['id_pinjaman_angsuran'];
                                     $id_anggota= $data['id_anggota'];
-                                    $nama= $data['nama'];
-                                    $nip= $data['nip'];
-                                    $lembaga= $data['lembaga'];
-                                    $ranking= $data['ranking'];
-                                    $tanggal= $data['tanggal'];
-                                    $jatuh_tempo= $data['jatuh_tempo'];
-                                    $jumlah_pinjaman= $data['jumlah_pinjaman'];
-                                    $periode_angsuran= $data['periode_angsuran'];
-                                    $angsuran_total= $data['angsuran_total'];
-                                    $status= $data['status'];
-                                    if($status=="Berjalan"){
-                                        $LabelStatus='<span class="badge badge-info">Berjalan</span>';
-                                    }else{
-                                        if($status=="Lunas"){
-                                            $LabelStatus='<span class="badge badge-success">Lunas</span>';
-                                        }else{
-                                            if($status=="Macet"){
-                                                $LabelStatus='<span class="badge badge-danger">Macet</span>';
-                                            }else{
-                                                $LabelStatus='<span class="badge badge-dark">None</span>';
-                                            }
-                                        }
-                                    }
+                                    $tanggal_angsuran= $data['tanggal_angsuran'];
+                                    $tanggal_bayar= $data['tanggal_bayar'];
+                                    $keterlambatan= $data['keterlambatan'];
+                                    $pokok= $data['pokok'];
+                                    $jasa= $data['jasa'];
+                                    $denda= $data['denda'];
+                                    $jumlah= $data['jumlah'];
                                     //Format tanggal
-                                    $strtotime=strtotime($tanggal);
-                                    $TanggalFormat=date('d/m/Y',$strtotime);
+                                    $tanggal_angsuran_format=date('d/m/Y',strtotime($tanggal_angsuran));
+                                    $tanggal_bayar_format=date('d/m/Y',strtotime($tanggal_bayar));
+                                   
                                     //Format Rupiah
-                                    $jumlah_pinjaman_format = "Rp " . number_format($jumlah_pinjaman,0,',','.');
-                                    //Cek Apakah Sudah Sinkron Dengan Jurnal
-                                    $JumlahJurnal = mysqli_num_rows(mysqli_query($Conn, "SELECT*FROM jurnal WHERE kategori='Pinjaman' AND uuid='$uuid_pinjaman'"));
-                                    if(empty($JumlahJurnal)){
-                                        $LabelJurnal='<code class="text text-danger">Jurnal : 0 Rcd</code>';
-                                    }else{
-                                        $LabelJurnal='<code class="text text-grayish">Jurnal : '.$JumlahJurnal.' Rcd</code>';
-                                    }
-                                    //Tanggal Sekarang
-                                    $TanggalSekarang=date('Y-m-d');
-                                    //Simulasi Pinjaman
-                                    $JumlahPeriodeTagihan=0;
-                                    $JumlahTunggakan=0;
-                                    for ( $i=1; $i<=$periode_angsuran; $i++ ){
-                                        $GetPeriodePinjaman=date('d/m/Y', strtotime('+'.$i.' month', strtotime($tanggal))); 
-                                        //Ubah Format Tangga
-                                        $GetPeriodePinjaman2=date('Y-m-d', strtotime('+'.$i.' month', strtotime($tanggal))); 
-                                        if($TanggalSekarang>$GetPeriodePinjaman2){
-                                            //Cek Apakah Sudah Ada Angsuran
-                                            $QryAngsuran = mysqli_query($Conn,"SELECT * FROM pinjaman_angsuran WHERE id_pinjaman='$id_pinjaman' AND tanggal_angsuran='$GetPeriodePinjaman2'")or die(mysqli_error($Conn));
-                                            $DataAngsuran = mysqli_fetch_array($QryAngsuran);
-                                            if(empty($DataAngsuran['id_pinjaman_angsuran'])){
-                                                $JumlahPeriodeTagihan=$JumlahPeriodeTagihan+1;
-                                                $JumlahTunggakan=$JumlahTunggakan+$angsuran_total;
-                                            }else{
-                                                $JumlahPeriodeTagihan=$JumlahPeriodeTagihan+0;
-                                                $JumlahTunggakan=$JumlahTunggakan+0;
-                                            }
-                                        }else{
-                                            $JumlahPeriodeTagihan=$JumlahPeriodeTagihan+0;
-                                            $JumlahTunggakan=$JumlahTunggakan+0;
-                                        }
-                                    }
-                                    $JumlahTunggakanFormat = "Rp " . number_format($JumlahTunggakan,0,',','.');
+                                    $keterlambatan_format = "Rp " . number_format($keterlambatan,0,',','.');
+                                    $pokok_format = "Rp " . number_format($pokok,0,',','.');
+                                    $jasa_format = "Rp " . number_format($jasa,0,',','.');
+                                    $denda_format = "Rp " . number_format($denda,0,',','.');
+                                    $jumlah_format = "Rp " . number_format($jumlah,0,',','.');
+
+                                    //Buka Data Anggota
+                                    $nip=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'nip');
+                                    $nama=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'nama');
                         ?>
                                     <tr>
                                         <td align="center">
                                             <small class="credit"><?php echo $no; ?></small>
                                         </td>
                                         <td align="left">
-                                            <small class="credit">
-                                                <?php echo $TanggalFormat; ?>
-                                            </small>
+                                            <small class="credit"><?php echo $tanggal_angsuran_format; ?></small>
                                         </td>
                                         <td align="left">
-                                            <?php 
-                                                echo "$nama <br>"; 
-                                                echo '<code class="text-dark">NIP: </code> <code class="text text-grayish">'.$nip.'</code>';
-                                            ?>
+                                            <small class="credit"><?php echo $tanggal_bayar_format; ?></small>
                                         </td>
                                         <td align="left">
-                                            <small class="credit">
-                                                <?php 
-                                                    echo "$lembaga<br>"; 
-                                                    echo '<code class="text-dark">Ranking : </code> <code class="text text-grayish">'.$ranking.'</code>';
-                                                ?>
-                                            </small>
+                                            <small class="credit"><?php echo $nama; ?></small>
                                         </td>
-                                        <td align="right">
-                                            <small class="credit">
-                                                <?php 
-                                                    echo "$jumlah_pinjaman_format <br>"; 
-                                                    echo "$LabelJurnal"; 
-                                                ?>
-                                            </small>
+                                        <td align="left">
+                                            <small class="credit"><?php echo $nip; ?></small>
                                         </td>
-                                        <td align="right">
-                                            <small class="credit">
-                                                <?php 
-                                                    echo "$JumlahTunggakanFormat<br>"; 
-                                                    echo '<code class="text-dark"></code> <code class="text text-grayish">'.$JumlahPeriodeTagihan.' Bulan</code>';
-                                                ?>
-                                            </small>
+                                        <td align="left">
+                                            <small class="credit"><?php echo $pokok_format; ?></small>
                                         </td>
-                                        <td align="center">
-                                            <a class="btn btn-sm btn-outline-dark btn-rounded" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="bi bi-three-dots"></i>
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" style="">
-                                                <li class="dropdown-header text-start">
-                                                    <h6>Option</h6>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ModalDetailPinjaman" data-id="<?php echo "$id_pinjaman"; ?>">
-                                                        <i class="bi bi-info-circle"></i> Detail
-                                                    </a>
-                                                </li>
-                                            </ul>
+                                        <td align="left">
+                                            <small class="credit"><?php echo $jasa_format; ?></small>
+                                        </td>
+                                        <td align="left">
+                                            <small class="credit"><?php echo $denda_format; ?></small>
+                                        </td>
+                                        <td align="left">
+                                            <small class="credit"><?php echo $jumlah_format; ?></small>
                                         </td>
                                     </tr>
                         <?php
@@ -285,10 +285,6 @@
                         ?>
                     </tbody>
                 </table>
-                <small class="credit">
-                    <b>Keterangan :</b>
-                    Jumlah tunggakan belum termasuk denda keterlambatan.
-                </small>
             </div>
         </div>
         <div class="row mb-3">

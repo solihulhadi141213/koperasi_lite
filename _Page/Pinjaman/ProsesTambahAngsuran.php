@@ -98,202 +98,55 @@
                                                                 if(!empty($ValidasiDataDuplikat)){
                                                                     echo '<code class="text-danger">Data Angsuran Untuk Periode Tersebut Saudah Ada</code>';
                                                                 }else{
-                                                                    //Buka Auto Jurnal
-                                                                    $id_auto_jurnal=GetDetailData($Conn,'auto_jurnal','kategori_transaksi','Angsuran','id_auto_jurnal');
-                                                                    if(empty($id_auto_jurnal)){
-                                                                        echo '<code class="text-danger">Auto Jurnal Belum Diatur! Silahkkan Isi Auto Jurnal Terlebih Dulu</code>';
-                                                                    }else{ 
-                                                                        $debet_id=GetDetailData($Conn,'auto_jurnal','id_auto_jurnal',$id_auto_jurnal,'debet_id');
-                                                                        $debet_name=GetDetailData($Conn,'auto_jurnal','id_auto_jurnal',$id_auto_jurnal,'debet_name');
-                                                                        $kredit_id=GetDetailData($Conn,'auto_jurnal','id_auto_jurnal',$id_auto_jurnal,'kredit_id');
-                                                                        $kredit_name=GetDetailData($Conn,'auto_jurnal','id_auto_jurnal',$id_auto_jurnal,'kredit_name');
-                                                                        //Buka Akun Debet
-                                                                        $KodeDebet =GetDetailData($Conn,'akun_perkiraan','id_perkiraan',$debet_id,'kode');
-                                                                        //Buka Akun Kredit
-                                                                        $KodeKredit =GetDetailData($Conn,'akun_perkiraan','id_perkiraan',$kredit_id,'kode');
-                                                                        if(empty($KodeDebet)){
-                                                                            echo '<code class="text-danger">Pengaturan Auto Jurnal Debet Tidak Valid, Silahkan Atur Auto Jurnal Dengan Benar</code>';
-                                                                        }else{
-                                                                            if(empty($KodeKredit)){
-                                                                                echo '<code class="text-danger">Pengaturan Auto Jurnal Kredit Tidak Valid, Silahkan Atur Auto Jurnal Dengan Benar</code>';
+
+                                                                    //Buat UUID
+                                                                    $uuid_angsuran=generateUuidV1();
+                                                                    //Melakukan input data
+                                                                    $EntryAngsuran="INSERT INTO pinjaman_angsuran (
+                                                                        uuid_angsuran,
+                                                                        id_pinjaman,
+                                                                        id_anggota,
+                                                                        tanggal_angsuran,
+                                                                        tanggal_bayar,
+                                                                        keterlambatan,
+                                                                        pokok,
+                                                                        jasa,
+                                                                        denda,
+                                                                        jumlah
+                                                                    ) VALUES (
+                                                                        '$uuid_angsuran',
+                                                                        '$id_pinjaman',
+                                                                        '$id_anggota',
+                                                                        '$tanggal_angsuran',
+                                                                        '$tanggal_bayar',
+                                                                        '$keterlambatan',
+                                                                        '$pokok',
+                                                                        '$jasa',
+                                                                        '$denda',
+                                                                        '$jumlah'
+                                                                    )";
+                                                                    $InputAngsuran=mysqli_query($Conn, $EntryAngsuran);
+                                                                    if($InputAngsuran){
+                                                                       //Hitung Jumlah Periode Angsuran
+                                                                        $periode_angsuran=GetDetailData($Conn,'pinjaman','id_pinjaman',$id_pinjaman,'periode_angsuran');
+                                                                        //Hitung Angsuran Yang Sudah Masuk
+                                                                        $JumlahAngsuranMasuk = mysqli_num_rows(mysqli_query($Conn, "SELECT * FROM pinjaman_angsuran WHERE id_pinjaman='$id_pinjaman'"));
+                                                                        //Apabila periode_angsuran sama dengan jumlah angsuran masuk maka update pinjaman menjadi Lunas
+                                                                        if($periode_angsuran==$JumlahAngsuranMasuk){
+                                                                            //Update Pinjaman
+                                                                            $UpdatePinjaman = mysqli_query($Conn,"UPDATE pinjaman SET 
+                                                                                status='Lunas'
+                                                                            WHERE id_pinjaman='$id_pinjaman'") or die(mysqli_error($Conn)); 
+                                                                            if($UpdatePinjaman){
+                                                                                echo '<div class="text-success" id="NotifikasiTambahAngsuranBerhasil">Success</div>';
                                                                             }else{
-                                                                                //Buka Auto Jurnal Angsuran
-                                                                                $id_perkiraan_jasa=GetDetailData($Conn,'auto_jurnal_angsuran','komponen','Jasa','id_perkiraan');
-                                                                                $kode_jasa=GetDetailData($Conn,'auto_jurnal_angsuran','komponen','Jasa','kode');
-                                                                                $nama_jasa=GetDetailData($Conn,'auto_jurnal_angsuran','komponen','Jasa','nama');
-                                                                                $id_perkiraan_denda=GetDetailData($Conn,'auto_jurnal_angsuran','komponen','Denda','id_perkiraan');
-                                                                                $kode_denda=GetDetailData($Conn,'auto_jurnal_angsuran','komponen','Denda','kode');
-                                                                                $nama_denda=GetDetailData($Conn,'auto_jurnal_angsuran','komponen','Denda','nama');
-                                                                                if(empty($id_perkiraan_jasa)||empty($id_perkiraan_denda)){
-                                                                                    echo '<code class="text-danger">Tidak Ada Auto Jurnal Angsuran, Silahkan Atur Auto Jurnal Angsuran Dengan Benar</code>';
-                                                                                }else{
-                                                                                    //Buat UUID
-                                                                                    $uuid_angsuran=generateUuidV1();
-                                                                                    //Melakukan input data
-                                                                                    $EntryAngsuran="INSERT INTO pinjaman_angsuran (
-                                                                                        uuid_angsuran,
-                                                                                        id_pinjaman,
-                                                                                        id_anggota,
-                                                                                        tanggal_angsuran,
-                                                                                        tanggal_bayar,
-                                                                                        keterlambatan,
-                                                                                        pokok,
-                                                                                        jasa,
-                                                                                        denda,
-                                                                                        jumlah
-                                                                                    ) VALUES (
-                                                                                        '$uuid_angsuran',
-                                                                                        '$id_pinjaman',
-                                                                                        '$id_anggota',
-                                                                                        '$tanggal_angsuran',
-                                                                                        '$tanggal_bayar',
-                                                                                        '$keterlambatan',
-                                                                                        '$pokok',
-                                                                                        '$jasa',
-                                                                                        '$denda',
-                                                                                        '$jumlah'
-                                                                                    )";
-                                                                                    $InputAngsuran=mysqli_query($Conn, $EntryAngsuran);
-                                                                                    if($InputAngsuran){
-                                                                                        //Cari id_pinjaman_anmgsuran
-                                                                                        $id_pinjaman_angsuran=GetDetailData($Conn,'pinjaman_angsuran','uuid_angsuran',$uuid_angsuran,'id_pinjaman_angsuran');
-                                                                                        //Perlu Diketahui Bahwa ini terbalik dengan pinjaman
-                                                                                        //Simpan Ke Jurnal Kredit
-                                                                                        $EntryDataKredit="INSERT INTO jurnal (
-                                                                                            kategori,
-                                                                                            uuid,
-                                                                                            id_pinjaman_angsuran,
-                                                                                            tanggal,
-                                                                                            kode_perkiraan,
-                                                                                            nama_perkiraan,
-                                                                                            d_k,
-                                                                                            nilai
-                                                                                        ) VALUES (
-                                                                                            'Angsuran',
-                                                                                            '$uuid_angsuran',
-                                                                                            '$id_pinjaman_angsuran',
-                                                                                            '$tanggal_bayar',
-                                                                                            '$KodeKredit',
-                                                                                            '$kredit_name',
-                                                                                            'K',
-                                                                                            '$pokok'
-                                                                                        )";
-                                                                                        $InputDataKredit=mysqli_query($Conn, $EntryDataKredit);
-                                                                                        if($InputDataKredit){
-                                                                                            //Simpan Ke Jurnal Debet
-                                                                                            $EntryDataDebet="INSERT INTO jurnal (
-                                                                                                kategori,
-                                                                                                uuid,
-                                                                                                id_pinjaman_angsuran,
-                                                                                                tanggal,
-                                                                                                kode_perkiraan,
-                                                                                                nama_perkiraan,
-                                                                                                d_k,
-                                                                                                nilai
-                                                                                            ) VALUES (
-                                                                                                'Angsuran',
-                                                                                                '$uuid_angsuran',
-                                                                                                '$id_pinjaman_angsuran',
-                                                                                                '$tanggal_bayar',
-                                                                                                '$KodeDebet',
-                                                                                                '$debet_name',
-                                                                                                'D',
-                                                                                                '$jumlah'
-                                                                                            )";
-                                                                                            $InputDataDebet=mysqli_query($Conn, $EntryDataDebet);
-                                                                                            if($InputDataDebet){
-                                                                                                //Simpan Data denda dan jasa Jika Ada
-                                                                                                if(!empty($denda)){
-                                                                                                    //Insert Jurnal Denda
-                                                                                                    $EntryJurnalDenda="INSERT INTO jurnal (
-                                                                                                        kategori,
-                                                                                                        uuid,
-                                                                                                        id_pinjaman_angsuran,
-                                                                                                        tanggal,
-                                                                                                        kode_perkiraan,
-                                                                                                        nama_perkiraan,
-                                                                                                        d_k,
-                                                                                                        nilai
-                                                                                                    ) VALUES (
-                                                                                                        'Angsuran',
-                                                                                                        '$uuid_angsuran',
-                                                                                                        '$id_pinjaman_angsuran',
-                                                                                                        '$tanggal_bayar',
-                                                                                                        '$kode_denda',
-                                                                                                        '$nama_denda',
-                                                                                                        'K',
-                                                                                                        '$denda'
-                                                                                                    )";
-                                                                                                    $InputJurnalDenda=mysqli_query($Conn, $EntryJurnalDenda);
-                                                                                                }
-                                                                                                if(!empty($jasa)){
-                                                                                                    //Insert Jurnal jasa
-                                                                                                    $EntryJurnalJasa="INSERT INTO jurnal (
-                                                                                                        kategori,
-                                                                                                        uuid,
-                                                                                                        id_pinjaman_angsuran,
-                                                                                                        tanggal,
-                                                                                                        kode_perkiraan,
-                                                                                                        nama_perkiraan,
-                                                                                                        d_k,
-                                                                                                        nilai
-                                                                                                    ) VALUES (
-                                                                                                        'Angsuran',
-                                                                                                        '$uuid_angsuran',
-                                                                                                        '$id_pinjaman_angsuran',
-                                                                                                        '$tanggal_bayar',
-                                                                                                        '$kode_jasa',
-                                                                                                        '$nama_jasa',
-                                                                                                        'K',
-                                                                                                        '$jasa'
-                                                                                                    )";
-                                                                                                    $InputJurnalJasa=mysqli_query($Conn, $EntryJurnalJasa);
-                                                                                                }
-                                                                                                //Hitung Jumlah Periode Angsuran
-                                                                                                $periode_angsuran=GetDetailData($Conn,'pinjaman','id_pinjaman',$id_pinjaman,'periode_angsuran');
-                                                                                                //Hitung Angsuran Yang Sudah Masuk
-                                                                                                $JumlahAngsuranMasuk = mysqli_num_rows(mysqli_query($Conn, "SELECT * FROM pinjaman_angsuran WHERE id_pinjaman='$id_pinjaman'"));
-                                                                                                //Apabila periode_angsuran sama dengan jumlah angsuran masuk maka update pinjaman menjadi Lunas
-                                                                                                if($periode_angsuran==$JumlahAngsuranMasuk){
-                                                                                                    //Update Pinjaman
-                                                                                                    $UpdatePinjaman = mysqli_query($Conn,"UPDATE pinjaman SET 
-                                                                                                        status='Lunas'
-                                                                                                    WHERE id_pinjaman='$id_pinjaman'") or die(mysqli_error($Conn)); 
-                                                                                                    if($UpdatePinjaman){
-                                                                                                        $KategoriLog="Angsuran";
-                                                                                                        $KeteranganLog="Tambah Angsuran Berhasil    ";
-                                                                                                        include "../../_Config/InputLog.php";
-                                                                                                        echo '<div class="text-success" id="NotifikasiTambahAngsuranBerhasil">Success</div>';
-                                                                                                    }else{
-                                                                                                        echo '<div class="text-danger">Terjadi kesalahan pada saat menyimpan data angsuran!!</div>';
-                                                                                                    }
-                                                                                                }else{
-                                                                                                    $KategoriLog="Angsuran";
-                                                                                                    $KeteranganLog="Tambah Angsuran Berhasil    ";
-                                                                                                    include "../../_Config/InputLog.php";
-                                                                                                    echo '<div class="text-success" id="NotifikasiTambahAngsuranBerhasil">Success</div>';
-                                                                                                }
-                                                                                            }else{
-                                                                                                echo '
-                                                                                                <div class="text-danger">
-                                                                                                Terjadi kesalahan pada saat menyimpan data jurnal Debet!! <br> 
-                                                                                                uid: '.$uuid_angsuran.' <br> 
-                                                                                                Jumlah : '.$jumlah.'<br> 
-                                                                                                id_pinjaman_angsuran : '.$id_pinjaman_angsuran.'<br> 
-                                                                                                tanggal_bayar : '.$tanggal_bayar.'<br> 
-                                                                                                KodeDebet : '.$KodeDebet.'<br> 
-                                                                                                debet_name : '.$debet_name.'<br> 
-                                                                                                </div>';
-                                                                                            }
-                                                                                        }else{
-                                                                                            echo '<div class="text-danger">Terjadi kesalahan pada saat menyimpan data jurnal Kredit!!</div>';
-                                                                                        }
-                                                                                    }else{
-                                                                                        echo '<div class="text-danger">Terjadi kesalahan pada saat menyimpan data angsuran!!</div>';
-                                                                                    }
-                                                                                }
+                                                                                echo '<div class="text-danger">Terjadi kesalahan pada saat menyimpan data angsuran!!</div>';
                                                                             }
+                                                                        }else{
+                                                                            echo '<div class="text-success" id="NotifikasiTambahAngsuranBerhasil">Success</div>';
                                                                         }
+                                                                    }else{
+                                                                        echo '<div class="text-danger">Terjadi kesalahan pada saat menyimpan data angsuran!!</div>';
                                                                     }
                                                                 }
                                                             }

@@ -31,8 +31,6 @@
             }else{
                 $nama=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'nama');
                 $nip=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'nip');
-                $lembaga=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'lembaga');
-                $ranking=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'ranking');
 ?>
         <input type="hidden" name="id_anggota" class="form-control" value="<?php echo $id_anggota; ?>">
         <input type="hidden" name="persen_jasa_pinjaman_jenis" id="persen_jasa_pinjaman_jenis" class="form-control" value="">
@@ -43,21 +41,9 @@
             </div>
         </div>
         <div class="row mb-3">
-            <div class="col-md-4">NIP</div>
+            <div class="col-md-4">No.Induk</div>
             <div class="col-md-8">
                 <code class="text text-grayish"><?php echo "$nip"; ?></code>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-4">Divisi/Unit</div>
-            <div class="col-md-8">
-                <code class="text text-grayish"><?php echo "$lembaga"; ?></code>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-4">Ranking</div>
-            <div class="col-md-8">
-                <code class="text text-grayish"><?php echo "$ranking"; ?></code>
             </div>
         </div>
         <div class="row mb-3">

@@ -47,7 +47,8 @@
             "LabaRugi"              => "_Page/LabaRugi/ModalLabaRugi.php",
             "RiwayatSimpanPinjam"   => "_Page/RiwayatSimpanPinjam/ModalRiwayatSimpanPinjam.php",
             "RekapitulasiTransaksi" => "_Page/RekapitulasiTransaksi/ModalRekapitulasiTransaksi.php",
-            "BagiHasil"             => "_Page/BagiHasil/ModalBagiHasil.php"
+            "BagiHasil"             => "_Page/BagiHasil/ModalBagiHasil.php",
+            "Laporan"               => "_Page/Laporan/ModalLaporan.php"
         ];
 
         // Cek apakah halaman memiliki modal terkait dan sertakan file modalnya

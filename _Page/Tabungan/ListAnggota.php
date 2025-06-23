@@ -88,7 +88,7 @@
                             <b>Anggota</b>
                         </th>
                         <th class="text-center">
-                            <b>NIP</b>
+                            <b>No.Induk</b>
                         </th>
                         <th class="text-center">
                             <b>Status</b>

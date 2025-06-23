@@ -39,8 +39,6 @@
             $uuid_pinjaman = $DataPinjaman['uuid_pinjaman'] ?? null;
             $nip = $DataPinjaman['nip'] ?? null;
             $nama = $DataPinjaman['nama'] ?? null;
-            $lembaga = $DataPinjaman['lembaga'] ?? null;
-            $ranking = $DataPinjaman['ranking'] ?? 0;
             $tanggal = $DataPinjaman['tanggal'] ?? null;
             $jatuh_tempo = $DataPinjaman['jatuh_tempo'] ?? null;
             $denda = $DataPinjaman['denda'] ?? 0;
@@ -75,7 +73,7 @@
                 echo '</div>';
             }else{
 ?>
-            <input type="hidden" name="id_pinjaman" class="form-control" value="<?php echo $id_pinjaman; ?>">
+            <input type="hidden" name="id_pinjaman" id="get_id_pinjaman_anggota" class="form-control" value="<?php echo $id_pinjaman; ?>">
             <div class="row mb-3">
                 <div class="col-md-4">Nama Anggota</div>
                 <div class="col-md-8">
@@ -86,18 +84,6 @@
                 <div class="col-md-4">NIP</div>
                 <div class="col-md-8">
                     <code class="text text-grayish"><?php echo "$nip"; ?></code>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-4">Divisi/Unit</div>
-                <div class="col-md-8">
-                    <code class="text text-grayish"><?php echo "$lembaga"; ?></code>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-4">Ranking</div>
-                <div class="col-md-8">
-                    <code class="text text-grayish"><?php echo "$ranking"; ?></code>
                 </div>
             </div>
             <div class="row mb-3">

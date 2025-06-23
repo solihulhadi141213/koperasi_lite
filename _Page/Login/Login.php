@@ -29,11 +29,11 @@
             Pastikan email dan password sudah benar.
         </div>
         <div class="col-12" id="NotifikasiLogin"></div>
-        <div class="col-12">
+        <div class="col-12 mb-3">
             <button class="btn btn-primary w-100" type="submit">Login</button>
         </div>
-        <div class="col-12">
+        <!-- <div class="col-12">
             <p class="small mb-0">Anda Lupa Password? <a href="Login.php?Page=LupaPassword">Reset password</a></p>
-        </div>
+        </div> -->
     </form>
 </div>

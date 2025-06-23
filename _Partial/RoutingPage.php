@@ -47,7 +47,7 @@
             "LabaRugi"          =>  "_Page/LabaRugi/LabaRugi.php",
             "RiwayatSimpanPinjam"=>  "_Page/RiwayatSimpanPinjam/RiwayatSimpanPinjam.php",
             "RekapitulasiTransaksi"=>  "_Page/RekapitulasiTransaksi/RekapitulasiTransaksi.php",
-            "BagiHasil"         =>  "_Page/BagiHasil/BagiHasil.php",
+            "Laporan"           =>  "_Page/Laporan/Laporan.php",
             "CetakInvoice"      =>  "_Page/CetakInvoice/CetakInvoice.php",
             "Error"             =>  "_Page/Error/Error.php"
         ];

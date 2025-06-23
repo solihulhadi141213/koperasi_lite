@@ -83,12 +83,10 @@
                 }
                 $nip=GetDetailData($Conn,'pinjaman','id_pinjaman',$id_pinjaman,'nip');
                 $nama=GetDetailData($Conn,'pinjaman','id_pinjaman',$id_pinjaman,'nama');
-                $lembaga=GetDetailData($Conn,'pinjaman','id_pinjaman',$id_pinjaman,'lembaga');
-                $ranking=GetDetailData($Conn,'pinjaman','id_pinjaman',$id_pinjaman,'ranking');
                 if($format=="PDF"){
                     $mpdf = new \Mpdf\Mpdf();
                     $nama_dokumen= "Bukti-Angsuran-$id_pinjaman_angsuran";
-                    $mpdf = new \Mpdf\Mpdf(['format' => [80, 200]]);
+                    $mpdf = new \Mpdf\Mpdf(['format' => [100, 100]]);
                     $mpdf->SetMargins(2, 2, 2, 2);
                     $html='<style>@page *{margin-top: 0px;}</style>'; 
                     //Beginning Buffer to save PHP variables and HTML tags
@@ -141,7 +139,7 @@
             <table class="kostum">
                 <tr>
                     <td align="left">
-                        <img src="<?php echo "$base_url/assets/img/$logo"; ?>" width="40px">
+                        <img src="<?php echo "../../assets/img/$logo"; ?>" width="40px">
                     </td>
                     <td align="left">
                         <?php 
@@ -176,7 +174,7 @@
                     <td><small><?php echo "$tanggal_bayar_format"; ?></small></td>
                 </tr>
                 <tr>
-                    <td><small><b>NIP</b></small></td>
+                    <td><small><b>No.Induk</b></small></td>
                     <td><small><b>:</b></small></td>
                     <td><small><?php echo "$nip"; ?></small></td>
                 </tr>
@@ -185,11 +183,7 @@
                     <td><small><b>:</b></small></td>
                     <td><small><?php echo "$nama"; ?></small></td>
                 </tr>
-                <tr>
-                    <td><small><b>Divisi/Unit</b></small></td>
-                    <td><small><b>:</b></small></td>
-                    <td><small><?php echo "$lembaga"; ?></small></td>
-                </tr>
+                
                 <tr>
                     <td><small><b>Angsuran Pokok</b></small></td>
                     <td><small><b>:</b></small></td>

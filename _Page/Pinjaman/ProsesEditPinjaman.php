@@ -110,18 +110,10 @@
                                                             periode_angsuran='$periode_angsuran'
                                                         WHERE id_pinjaman='$id_pinjaman'") or die(mysqli_error($Conn)); 
                                                         if($UpdatePinjaman){
-                                                            $UpdateJurnal = mysqli_query($Conn,"UPDATE jurnal SET 
-                                                                tanggal='$tanggal',
-                                                                nilai='$jumlah_pinjaman'
-                                                            WHERE uuid='$uuid_pinjaman' AND kategori='Pinjaman'") or die(mysqli_error($Conn)); 
-                                                            if($UpdateJurnal){
-                                                                $KategoriLog="Pinjaman";
-                                                                $KeteranganLog="Edit Pinjaman Berhasil    ";
-                                                                include "../../_Config/InputLog.php";
-                                                                echo '<div class="text-success" id="NotifikasiEditPinjamanBerhasil">Success</div>';
-                                                            }else{
-                                                                echo '<div class="text-danger">Terjadi kesalahan pada saat update data jurnal.</div>';
-                                                            }
+                                                            $KategoriLog="Pinjaman";
+                                                            $KeteranganLog="Edit Pinjaman Berhasil    ";
+                                                            include "../../_Config/InputLog.php";
+                                                            echo '<div class="text-success" id="NotifikasiEditPinjamanBerhasil">Success</div>';
                                                         }else{
                                                             echo '<code class="text-danger">Terjadi kesalahan pada saat update simpanan.</code>';
                                                         }

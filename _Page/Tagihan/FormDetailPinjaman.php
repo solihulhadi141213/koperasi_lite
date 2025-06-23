@@ -40,8 +40,6 @@
             $uuid_pinjaman = $DataPinjaman['uuid_pinjaman'] ?? null;
             $nip = $DataPinjaman['nip'] ?? null;
             $nama = $DataPinjaman['nama'] ?? null;
-            $lembaga = $DataPinjaman['lembaga'] ?? null;
-            $ranking = $DataPinjaman['ranking'] ?? 0;
             $tanggal = $DataPinjaman['tanggal'] ?? null;
             $jatuh_tempo = $DataPinjaman['jatuh_tempo'] ?? null;
             $denda = $DataPinjaman['denda'] ?? 0;
@@ -67,13 +65,7 @@
             $rp_jasa_format = "Rp " . number_format($rp_jasa,0,',','.');
             $angsuran_pokok_format = "Rp " . number_format($angsuran_pokok,0,',','.');
             $angsuran_total_format = "Rp " . number_format($angsuran_total,0,',','.');
-            //Cek Apakah Sudah Sinkron Dengan Jurnal
-            $JumlahJurnal = mysqli_num_rows(mysqli_query($Conn, "SELECT*FROM jurnal WHERE kategori='Pinjaman' AND uuid='$uuid_pinjaman'"));
-            if(empty($JumlahJurnal)){
-                $LabelJurnal='<code class="text text-danger">Jurnal : 0 Rcd</code>';
-            }else{
-                $LabelJurnal='<code class="text text-grayish">Jurnal : '.$JumlahJurnal.' Rcd</code>';
-            }
+            
             if($status=="Berjalan"){
                 $LabelStatus='<span class="badge badge-info">Berjalan</span>';
             }else{
@@ -104,18 +96,6 @@
                 <div class="col col-md-4">Nama</div>
                 <div class="col col-md-8">
                     <code class="text text-grayish"><?php echo $nama; ?></code>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Divisi/Unit</div>
-                <div class="col col-md-8">
-                    <code class="text text-grayish"><?php echo $lembaga; ?></code>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Ranking</div>
-                <div class="col col-md-8">
-                    <code class="text text-grayish"><?php echo $ranking; ?></code>
                 </div>
             </div>
             <div class="row mb-3">
@@ -250,13 +230,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row mb-3">
+            <!-- <div class="row mb-3">
                 <div class="col col-md-12 mb-3 text-center">
                     <a href="_Page/Tagihan/ProsesCetakTagihan.php?id=<?php echo $id_pinjaman; ?>" target="_blank" class="btn btn-md btn-primary btn-rounded">
                         <i class="bi bi-printer"></i> Cetak
                     </a>
                 </div>
-            </div>
+            </div> -->
 <?php
         }
     }

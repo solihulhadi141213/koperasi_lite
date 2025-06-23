@@ -5,6 +5,7 @@
     include "../../_Config/GlobalFunction.php";
     include "../../_Config/SettingGeneral.php";
     include "../../_Config/Session.php";
+
     if(empty($SessionIdAkses)){
         echo '<div class="row">';
         echo '  <div class="col-md-12 mb-3 text-center">';
@@ -20,6 +21,7 @@
             echo '</div>';
         }else{
             $id_pinjaman=$_POST['id_pinjaman'];
+
             //Buka Detail Pinjaman
             $Qry = $Conn->prepare("SELECT * FROM pinjaman WHERE id_pinjaman = ?");
             $Qry->bind_param("s", $id_pinjaman);
@@ -44,8 +46,6 @@
                 $uuid_pinjaman=$Data['uuid_pinjaman'];
                 $nip=$Data['nip'];
                 $nama=$Data['nama'];
-                $lembaga=$Data['lembaga'];
-                $ranking=$Data['ranking'];
                 $tanggal=$Data['tanggal'];
                 $jatuh_tempo=$Data['jatuh_tempo'];
                 $denda=$Data['denda'];
@@ -68,7 +68,7 @@
                     <div class="col col-md-12">
                         <div class="alert alert-info alert-dismissible fade show" role="alert">
                             <b>Keterangan</b><br>
-                            Nilai denda akan muncul apabila terdapat keterlambatan bayar. Nilai tersebut ditentukan sistem denda yang berlaku.<br>
+                            Nilai denda akan muncul apabila terdapat keterlambatan bayar. Nilai tersebut ditentukan sistem denda yang berlaku.
                             Sistem akan melakukan update status pinjaman secara otomatis apabila angsuran terdeteksi sudah lunas.
                         </div>
                     </div>
@@ -251,13 +251,13 @@
                         </table>
                     </div>
                 </div>
-                <div class="row mb-3">
+                <!-- <div class="row mb-3">
                     <div class="col col-md-12 text-center">
                         <button type="button" class="btn btn-md btn-outline-dark btn-rounded" data-bs-toggle="modal" data-bs-target="#ModalExportAngsuran" data-id="<?php echo $id_pinjaman; ?>">
                             <i class="bi bi-file-excel"></i> Export To Excel
                         </button>
                     </div>
-                </div>
+                </div> -->
 <?php
             }
         }

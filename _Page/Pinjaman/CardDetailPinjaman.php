@@ -45,8 +45,6 @@
                 $uuid_pinjaman=$Data['uuid_pinjaman'];
                 $nip=$Data['nip'];
                 $nama=$Data['nama'];
-                $lembaga=$Data['lembaga'];
-                $ranking=$Data['ranking'];
                 $tanggal=$Data['tanggal'];
                 $jatuh_tempo=$Data['jatuh_tempo'];
                 $denda=$Data['denda'];
@@ -68,13 +66,7 @@
                 $rp_jasa_format = "Rp " . number_format($rp_jasa,0,',','.');
                 $angsuran_pokok_format = "Rp " . number_format($angsuran_pokok,0,',','.');
                 $angsuran_total_format = "Rp " . number_format($angsuran_total,0,',','.');
-                //Cek Apakah Sudah Sinkron Dengan Jurnal
-                $JumlahJurnal = mysqli_num_rows(mysqli_query($Conn, "SELECT*FROM jurnal WHERE kategori='Pinjaman' AND uuid='$uuid_pinjaman'"));
-                if(empty($JumlahJurnal)){
-                    $LabelJurnal='<code class="text text-danger">Jurnal : 0 Rcd</code>';
-                }else{
-                    $LabelJurnal='<code class="text text-grayish">Jurnal : '.$JumlahJurnal.' Rcd</code>';
-                }
+                
                 if($status=="Berjalan"){
                     $LabelStatus='<span class="badge badge-info">Berjalan</span>';
                 }else{
@@ -98,27 +90,15 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col col-md-4">NIP</div>
+                        <div class="col col-md-4">No.Induk</div>
                         <div class="col col-md-8">
                             <code class="text text-grayish"><?php echo $nip; ?></code>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col col-md-4">Nama</div>
+                        <div class="col col-md-4">Nama Anggota</div>
                         <div class="col col-md-8">
                             <code class="text text-grayish"><?php echo $nama; ?></code>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col col-md-4">Lembaga</div>
-                        <div class="col col-md-8">
-                            <code class="text text-grayish"><?php echo $lembaga; ?></code>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col col-md-4">Ranking</div>
-                        <div class="col col-md-8">
-                            <code class="text text-grayish"><?php echo $ranking; ?></code>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -133,14 +113,14 @@
                             <code class="text text-grayish"><?php echo "$denda_format ($sistem_denda)"; ?></code>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
                     <div class="row mb-3">
                         <div class="col col-md-4">Jumlah Pinjaman</div>
                         <div class="col col-md-8">
                             <code class="text text-grayish"><?php echo $jumlah_pinjaman_format; ?></code>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-6">
                     <div class="row mb-3">
                         <div class="col col-md-4">Periode Angsuran</div>
                         <div class="col col-md-8">

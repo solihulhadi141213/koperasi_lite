@@ -51,7 +51,8 @@
             "LabaRugi"                  => "_Page/LabaRugi/LabaRugi.js",
             "RiwayatSimpanPinjam"       => "_Page/RiwayatSimpanPinjam/RiwayatSimpanPinjam.js",
             "RekapitulasiTransaksi"     => "_Page/RekapitulasiTransaksi/RekapitulasiTransaksi.js",
-            "RiwayatAnggota"            => "_Page/RiwayatAnggota/RiwayatAnggota.js"
+            "RiwayatAnggota"            => "_Page/RiwayatAnggota/RiwayatAnggota.js",
+            "Laporan"                   => "_Page/Laporan/Laporan.js"
         ];
 
         // Cek apakah halaman ada dalam daftar dan sertakan file JS yang sesuai

@@ -14,26 +14,10 @@
             $id_pinjaman=$_POST['id_pinjaman'];
             //Bersihkan Variabel
             $id_pinjaman=validateAndSanitizeInput($id_pinjaman);
-            $uuid_pinjaman=GetDetailData($Conn,'pinjaman','id_pinjaman',$id_pinjaman,'uuid_pinjaman');
             //Proses hapus data
             $HapusPinjaman = mysqli_query($Conn, "DELETE FROM pinjaman WHERE id_pinjaman='$id_pinjaman'") or die(mysqli_error($Conn));
             if($HapusPinjaman) {
-                //Proses hapus jurnal
-                $HapusJurnal = mysqli_query($Conn, "DELETE FROM jurnal WHERE kategori='Pinjaman' AND uuid='$uuid_pinjaman'") or die(mysqli_error($Conn));
-                if($HapusJurnal) {
-                    //Proses hapus angsuran
-                    $HapusAngsuran = mysqli_query($Conn, "DELETE FROM pinjaman_angsuran WHERE id_pinjaman='$id_pinjaman'") or die(mysqli_error($Conn));
-                    if($HapusAngsuran) {
-                        echo '<span class="text-success" id="NotifikasiHapusPinjamanBerhasil">Success</span>';
-                        $KategoriLog="Pinjaman";
-                        $KeteranganLog="Hapus Data Pinjaman";
-                        include "../../_Config/InputLog.php";
-                    }else{
-                        echo '<span class="text-danger">Terjadi kesalahan pada saat menghapus data angsuran</span>';
-                    }
-                }else{
-                    echo '<span class="text-danger">Terjadi kesalahan pada saat menghapus data jurnal</span>';
-                }
+                echo '<span class="text-success" id="NotifikasiHapusPinjamanBerhasil">Success</span>';
             }else{
                 echo '<span class="text-danger">Terjadi kesalahan pada saat menghapus data pinjaman</span>';
             }

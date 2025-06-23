@@ -62,8 +62,6 @@
                                         $id_anggota= $data['id_anggota'];
                                         $nama= $data['nama'];
                                         $nip= $data['nip'];
-                                        $lembaga= $data['lembaga'];
-                                        $ranking= $data['ranking'];
                                         $tanggal= $data['tanggal'];
                                         $jatuh_tempo= $data['jatuh_tempo'];
                                         $jumlah_pinjaman= $data['jumlah_pinjaman'];

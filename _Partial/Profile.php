@@ -24,12 +24,6 @@
             echo '  <hr class="dropdown-divider">';
             echo '</li>';
             echo '<li>';
-            echo '  <a class="dropdown-item d-flex align-items-center" href="index.php?Page=Help&Sub=HelpHome">';
-            echo '      <i class="bi bi-question-circle"></i>';
-            echo '      <span>Bantuan</span>';
-            echo '  </a>';
-            echo '</li>';
-            echo '<li>';
             echo '  <hr class="dropdown-divider">';
             echo '</li>';
             echo '<li>';

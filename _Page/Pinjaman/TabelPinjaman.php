@@ -53,7 +53,7 @@
             if(empty($keyword)){
                 $jml_data = mysqli_num_rows(mysqli_query($Conn, "SELECT*FROM pinjaman"));
             }else{
-                $jml_data = mysqli_num_rows(mysqli_query($Conn, "SELECT*FROM pinjaman WHERE nama like '%$keyword%' OR nip like '%$keyword%' OR lembaga like '%$keyword%' OR ranking like '%$keyword%' OR tanggal like '%$keyword%' OR jumlah_pinjaman like '%$keyword%' OR status like '%$keyword%'"));
+                $jml_data = mysqli_num_rows(mysqli_query($Conn, "SELECT*FROM pinjaman WHERE nama like '%$keyword%' OR nip like '%$keyword%' OR tanggal like '%$keyword%' OR jumlah_pinjaman like '%$keyword%' OR status like '%$keyword%'"));
             }
         }else{
             if(empty($keyword)){
@@ -119,16 +119,16 @@
         </div> -->
         <div class="row mb-3">
             <div class="table table-responsive">
-                <table class="table table-bordered table-hover">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <td align="center"><b>No</b></td>
-                            <td align="center"><b>Tanggal</b></td>
-                            <td align="center"><b>Nama & NIP</b></td>
-                            <td align="center"><b>Divisi/Unit & Ranking</b></td>
-                            <td align="center"><b>Jumlah Pinjaman</b></td>
-                            <td align="center"><b>Angsuran Masuk</b></td>
-                            <td align="center"><b>Status</b></td>
+                            <td align="left"><b>Tanggal</b></td>
+                            <td align="left"><b>Nama Anggota</b></td>
+                            <td align="left"><b>No.Induk</b></td>
+                            <td align="left"><b>Jumlah Pinjaman</b></td>
+                            <td align="left"><b>Angsuran Masuk</b></td>
+                            <td align="left"><b>Status</b></td>
                             <td align="center"><b>Opsi</b></td>
                         </tr>
                     </thead>
@@ -149,7 +149,7 @@
                                     if(empty($keyword)){
                                         $query = mysqli_query($Conn, "SELECT*FROM pinjaman ORDER BY $OrderBy $ShortBy LIMIT $posisi, $batas");
                                     }else{
-                                        $query = mysqli_query($Conn, "SELECT*FROM pinjaman WHERE nama like '%$keyword%' OR nip like '%$keyword%' OR lembaga like '%$keyword%' OR ranking like '%$keyword%' OR tanggal like '%$keyword%' OR jumlah_pinjaman like '%$keyword%' OR status like '%$keyword%' ORDER BY $OrderBy $ShortBy LIMIT $posisi, $batas");
+                                        $query = mysqli_query($Conn, "SELECT*FROM pinjaman WHERE nama like '%$keyword%' OR nip like '%$keyword%' OR tanggal like '%$keyword%' OR jumlah_pinjaman like '%$keyword%' OR status like '%$keyword%' ORDER BY $OrderBy $ShortBy LIMIT $posisi, $batas");
                                     }
                                 }else{
                                     if(empty($keyword)){
@@ -165,8 +165,6 @@
                                     $id_pinjaman_jenis= $data['id_pinjaman_jenis'];
                                     $nama= $data['nama'];
                                     $nip= $data['nip'];
-                                    $lembaga= $data['lembaga'];
-                                    $ranking= $data['ranking'];
                                     $tanggal= $data['tanggal'];
                                     $jatuh_tempo= $data['jatuh_tempo'];
                                     $jumlah_pinjaman= $data['jumlah_pinjaman'];
@@ -189,17 +187,12 @@
                                     $TanggalFormat=date('d/m/Y',$strtotime);
                                     //Format Rupiah
                                     $jumlah_pinjaman_format = "Rp " . number_format($jumlah_pinjaman,0,',','.');
-                                    //Cek Apakah Sudah Sinkron Dengan Jurnal
-                                    $JumlahJurnal = mysqli_num_rows(mysqli_query($Conn, "SELECT*FROM jurnal WHERE kategori='Pinjaman' AND uuid='$uuid_pinjaman'"));
-                                    if(empty($JumlahJurnal)){
-                                        $LabelJurnal='<code class="text text-danger">Jurnal : 0 Rcd</code>';
-                                    }else{
-                                        $LabelJurnal='<code class="text text-grayish">Jurnal : '.$JumlahJurnal.' Rcd</code>';
-                                    }
+                                    
                                     //Sum Data Angsuran
                                     $Sum = mysqli_fetch_array(mysqli_query($Conn, "SELECT SUM(jumlah) AS total FROM pinjaman_angsuran WHERE id_pinjaman='$id_pinjaman'"));
                                     $JumlahAngsuran = $Sum['total'];
                                     $JumlahAngsuranFormat = "Rp " . number_format($JumlahAngsuran,0,',','.');
+                                    
                                     //Row Data Angsuran
                                     $JumlahDataAngsuran = mysqli_num_rows(mysqli_query($Conn, "SELECT*FROM pinjaman_angsuran WHERE id_pinjaman='$id_pinjaman'"));
                                     if(empty($JumlahDataAngsuran)){
@@ -218,46 +211,39 @@
                                         <td align="left">
                                             <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalDetailPinjaman" data-id="<?php echo "$id_pinjaman"; ?>">
                                                 <small><?php echo $TanggalFormat; ?></small>
-                                            </a><br>
-                                            <small>
-                                                Tempo Tgl.<?php echo $jatuh_tempo; ?>
-                                            </small>
+                                            </a>
                                         </td>
                                         <td align="left">
                                             <?php 
-                                                echo "$nama <br>"; 
-                                                echo '<code class="text-dark">NIP: </code> <code class="text text-grayish">'.$nip.'</code>';
+                                                echo "$nama"; 
                                             ?>
                                         </td>
                                         <td align="left">
                                             <small class="credit">
                                                 <?php 
-                                                    echo "$lembaga<br>"; 
-                                                    echo '<code class="text-dark">Ranking : </code> <code class="text text-grayish">'.$ranking.'</code>';
+                                                    echo "$nip<br>"; 
                                                 ?>
                                             </small>
                                         </td>
-                                        <td align="right">
+                                        <td align="left">
                                             <small class="credit">
                                                 <?php 
-                                                    echo "$jumlah_pinjaman_format <br>"; 
-                                                    echo '<small class="text-muted">'.$nama_jenis_pinjaman.'</small>'; 
+                                                    echo "$jumlah_pinjaman_format"; 
                                                 ?>
                                             </small>
                                         </td>
-                                        <td align="right">
+                                        <td align="left">
                                             <small class="credit">
                                                 <?php 
-                                                    echo "$JumlahAngsuranFormat <br>"; 
-                                                    echo "$LabelAngsuran"; 
+                                                    echo "$JumlahAngsuranFormat"; 
                                                 ?>
                                             </small>
                                         </td>
-                                        <td align="center">
+                                        <td align="left">
                                             <?php echo $LabelStatus; ?>
                                         </td>
                                         <td align="center">
-                                            <a class="btn btn-sm btn-outline-dark btn-rounded" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <a class="btn btn-sm btn-outline-dark btn-floating" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="bi bi-three-dots"></i>
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" style="">

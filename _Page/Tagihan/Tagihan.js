@@ -16,7 +16,7 @@ $('#keyword_by').change(function(){
     var keyword_by = $('#keyword_by').val();
     $.ajax({
         type 	    : 'POST',
-        url 	    : '_Page/Pinjaman/FormFilter.php',
+        url 	    : '_Page/Tagihan/FormFilter.php',
         data 	    :  {keyword_by: keyword_by},
         success     : function(data){
             $('#FormFilter').html(data);

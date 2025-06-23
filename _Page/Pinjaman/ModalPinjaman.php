@@ -30,10 +30,8 @@
                         <div class="col col-md-8">
                             <select name="OrderBy" id="OrderBy" class="form-control">
                                 <option value="">Pilih</option>
-                                <option value="nip">NIP</option>
+                                <option value="nip">No.Induk</option>
                                 <option value="nama">Nama Anggota</option>
-                                <option value="lembaga">Divisi/Unit</option>
-                                <option value="ranking">Ranking</option>
                                 <option value="tanggal">Tanggal</option>
                                 <option value="jumlah_pinjaman">Jumlah Pinjaman</option>
                                 <option value="status">Status</option>
@@ -54,10 +52,8 @@
                         <div class="col col-md-8">
                             <select name="keyword_by" id="keyword_by" class="form-control">
                                 <option value="">Pilih</option>
-                                <option value="nip">NIP</option>
+                                <option value="nip">No.Induk</option>
                                 <option value="nama">Nama Anggota</option>
-                                <option value="lembaga">Divisi/Unit</option>
-                                <option value="ranking">Ranking</option>
                                 <option value="tanggal">Tanggal</option>
                                 <option value="jumlah_pinjaman">Jumlah Pinjaman</option>
                                 <option value="status">Status</option>
@@ -136,40 +132,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="ModalAutoJurnal" tabindex="-1">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <form action="javascript:void(0);" id="ProsesSimpanAutoJurnal">
-                <div class="modal-header">
-                    <h5 class="modal-title text-dark">
-                        <i class="bi bi-gear"></i> Auto Jurnal
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row mb-3">
-                        <div class="col col-md-12" id="FormSimpanAutoJurnal">
-                            
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col col-md-12" id="NotifikasiSimpanAutoJurnal">
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-rounded">
-                        <i class="bi bi-save"></i> Simpan
-                    </button>
-                    <button type="button" class="btn btn-dark btn-rounded" data-bs-dismiss="modal">
-                        <i class="bi bi-x-circle"></i> Tutup
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+
 <div class="modal fade" id="ModalPilihAnggota" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -253,22 +216,27 @@
 <div class="modal fade" id="ModalDetailPinjaman" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-dark"><i class="bi bi-info-circle"></i> Detail Pinjaman</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" >
-                <div class="row mb-3">
-                    <div class="col-md-12" id="FormDetailPinjaman">
+            <form action="index.php" methode="GET">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark"><i class="bi bi-info-circle"></i> Detail Pinjaman</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" >
+                    <div class="row mb-3">
+                        <div class="col-md-12" id="FormDetailPinjaman">
 
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-dark btn-rounded" data-bs-toggle="modal" data-bs-target="#ModalPilihAnggota">
-                    <i class="bi bi-chevron-left"></i> Kembali
-                </button>
-            </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-rounded">
+                        <i class="bi bi-three-dots"></i> Selengkapnya
+                    </button>
+                    <button type="button" class="btn btn-dark btn-rounded" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Tutup
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -295,7 +263,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success btn-rounded">
+                    <button type="submit" class="btn btn-success btn-rounded" id="ButtonEditPinjaman">
                         <i class="bi bi-save"></i> Simpan
                     </button>
                     <button type="button" class="btn btn-dark btn-rounded" data-bs-dismiss="modal">
@@ -419,7 +387,7 @@
     </div>
 </div>
 <div class="modal fade" id="ModalDetailPinjamanAngsuran" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-dark"><i class="bi bi-info-circle"></i> Detail Angsuran</h5>

@@ -7,7 +7,8 @@
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                <li class="breadcrumb-item active"> Pinjaman</li>
+                <li class="breadcrumb-item"><a href="index.php?Page=Pinjaman">Pinjaman</a></li>
+                <li class="breadcrumb-item active"> Detail Pinjaman</li>
             </ol>
         </nav>
     </div>
@@ -55,8 +56,8 @@
                 <?php
                     echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">';
                     echo '  <small>';
-                    echo '      Berikut adalah halaman detail pinjaman. Gunakan navigasi pada Tab Card yang ada pada halaman untuk berganti tampilan.';
-                    echo '      Pada halaman ini anda bisa mengelola data angsuran dan pembukuan jurnal transaksi yang terhubung.';
+                    echo '      Berikut adalah halaman detail pinjaman.';
+                    echo '      Pada halaman ini anda bisa mengelola data angsuran pinjaman tersebut.';
                     echo '      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
                     echo '  </small>';
                     echo '</div>';
@@ -98,11 +99,6 @@
                                             Angsuran
                                         </button>
                                     </li>
-                                    <li class="nav-item flex-fill" role="presentation">
-                                        <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile" aria-selected="false" tabindex="-1">
-                                            Jurnal
-                                        </button>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -113,13 +109,6 @@
                                         <div class="row">
                                             <div class="col-md-12" id="MenampilkanAngsuranPinjaman">
                                                 <!-- Menampilkan Angsuran Disini -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
-                                            <div class="col-md-12" id="MenampilkanJurnalPinjaman">
-                                                <!-- Menampilkan Jurnal Disini -->
                                             </div>
                                         </div>
                                     </div>

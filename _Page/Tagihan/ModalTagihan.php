@@ -30,12 +30,10 @@
                         <div class="col col-md-8">
                             <select name="OrderBy" id="OrderBy" class="form-control">
                                 <option value="">Pilih</option>
-                                <option value="nip">NIP</option>
+                                <option value="nip">No.Induk</option>
                                 <option value="nama">Nama Anggota</option>
-                                <option value="lembaga">Divisi/Unit</option>
-                                <option value="ranking">Ranking</option>
-                                <option value="tanggal">Tanggal</option>
-                                <option value="jumlah_pinjaman">Jumlah Pinjaman</option>
+                                <option value="tanggal_angsuran">Tanggal Angsuran</option>
+                                <option value="tanggal_bayar">Tanggal Bayar</option>
                             </select>
                         </div>
                     </div>
@@ -53,12 +51,10 @@
                         <div class="col col-md-8">
                             <select name="keyword_by" id="keyword_by" class="form-control">
                                 <option value="">Pilih</option>
-                                <option value="nip">NIP</option>
+                                <option value="nip">No.Induk</option>
                                 <option value="nama">Nama Anggota</option>
-                                <option value="lembaga">Divisi/Unit</option>
-                                <option value="ranking">Ranking</option>
-                                <option value="tanggal">Tanggal</option>
-                                <option value="jumlah_pinjaman">Jumlah Pinjaman</option>
+                                <option value="tanggal_angsuran">Tanggal Angsuran</option>
+                                <option value="tanggal_bayar">Tanggal Bayar</option>
                             </select>
                         </div>
                     </div>
@@ -194,8 +190,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-dark btn-rounded" data-bs-toggle="modal" data-bs-target="#ModalPilihAnggota">
-                    <i class="bi bi-chevron-left"></i> Kembali
+                <button type="button" class="btn btn-dark btn-rounded" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle"></i> Tutup
                 </button>
             </div>
         </div>

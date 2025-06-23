@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-md-4">NIP</div>
+                <div class="col-md-4">No.Induk</div>
                 <div class="col-md-8">
                     <code class="text text-grayish"><?php echo "$nip"; ?></code>
                 </div>

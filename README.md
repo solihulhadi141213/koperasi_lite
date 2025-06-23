@@ -1,6 +1,6 @@
 # Aplikasi Koperasi Simpan Pinjam Ver si Lite
 Aplikasi Koperasi V 3.0.0 adalah sebuah aplikasi open source yang dirancang untuk membantu pengelolaan koperasi secara digital. Aplikasi ini dibangun menggunakan teknologi modern seperti PHP, MySQL, jQuery, dan Bootstrap 4 untuk memberikan pengalaman pengguna yang responsif dan mudah digunakan. Aplikasi ini cocok digunakan oleh koperasi simpan pinjam, koperasi serba usaha, atau koperasi konsumen yang membutuhkan sistem pengelolaan terintegrasi.
-![Logo](./assets/img/screenshot/dashboard.png)
+<img src="./assets/img/screenshot/dashboard.png" width="100%">
 
 ## Fitur Aplikasi
 1. **Akses**    
