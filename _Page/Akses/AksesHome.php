@@ -33,7 +33,7 @@
                         <div class="col-md-8 mb-3"></div>
                         <div class="col-md-4 mb-3 text-end">
                             <button type="button" class="btn btn-md btn-info btn-floating" data-bs-toggle="modal" data-bs-target="#ModalFilterAkses" title="Filter Data Akses">
-                                <i class="bi bi-funnel"></i>
+                                <i class="bi bi-search"></i>
                             </button>
                             <button type="button" class="btn btn-md btn-primary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalTambahAkses" title="Tambah Data Akses Baru">
                                 <i class="bi bi-plus"></i>

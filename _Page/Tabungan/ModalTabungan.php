@@ -29,10 +29,8 @@
                         <div class="col col-md-8">
                             <select name="OrderBy" id="OrderBy" class="form-control">
                                 <option value="">Pilih</option>
-                                <option value="nip">NIP</option>
+                                <option value="nip">No.Induk</option>
                                 <option value="nama">Nama Anggota</option>
-                                <option value="lembaga">Divisi/Unit</option>
-                                <option value="ranking">Ranking</option>
                                 <option value="tanggal">Tanggal</option>
                                 <option value="kategori">Jenis Simpanan</option>
                             </select>
@@ -52,10 +50,8 @@
                         <div class="col col-md-8">
                             <select name="keyword_by" id="keyword_by" class="form-control">
                                 <option value="">Pilih</option>
-                                <option value="nip">NIP</option>
+                                <option value="nip">No.Induk</option>
                                 <option value="nama">Nama Anggota</option>
-                                <option value="lembaga">Divisi/Unit</option>
-                                <option value="ranking">Ranking</option>
                                 <option value="tanggal">Tanggal</option>
                                 <option value="kategori">Jenis Simpanan</option>
                             </select>
@@ -257,77 +253,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="ModalAutoJurnalTabungan" tabindex="-1">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <div class="modal-header bg-info">
-                <h5 class="modal-title text-light"><i class="bi bi-info-circle"></i> Auto Jurnal</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12 mb-2 table-responsive">
-                        <table class="table">
-                            <?php
-                                //Membuka Auto Jurnal Simpanan
-                                $QryAutoJurnalSimpanan = mysqli_query($Conn,"SELECT * FROM auto_jurnal WHERE kategori_transaksi='Simpanan'")or die(mysqli_error($Conn));
-                                $DataAutoJurnalSimpanan = mysqli_fetch_array($QryAutoJurnalSimpanan);
-                                $DebetNameSimpanan= $DataAutoJurnalSimpanan['debet_name'];
-                                $KreditNameSimpanan= $DataAutoJurnalSimpanan['kredit_name'];
-                                //Membuka Auto Jurnal Penarikan
-                                $QryAutoJurnalPenarikan = mysqli_query($Conn,"SELECT * FROM auto_jurnal WHERE kategori_transaksi='Penarikan'")or die(mysqli_error($Conn));
-                                $DataAutoJurnalPenarikan = mysqli_fetch_array($QryAutoJurnalPenarikan);
-                                $DebetNamePenarikan= $DataAutoJurnalPenarikan['debet_name'];
-                                $KreditNamePenarikan= $DataAutoJurnalPenarikan['kredit_name'];
 
-                            ?>
-                            <tr>
-                                <td><b>Kategori</b></td>
-                                <td><b>D/K</b></td>
-                                <td><b>Akun</b></td>
-                            </tr>
-                            <tr>
-                                <td>Simpanan</td>
-                                <td>D</td>
-                                <td><?php echo "$DebetNameSimpanan"; ?></td>
-                            </tr>
-                            <tr>
-                                <td>Simpanan</td>
-                                <td>K</td>
-                                <td><?php echo "$KreditNameSimpanan"; ?></td>
-                            </tr>
-                            <tr>
-                                <td>Penarikan</td>
-                                <td>D</td>
-                                <td><?php echo "$DebetNamePenarikan"; ?></td>
-                            </tr>
-                            <tr>
-                                <td>Penarikan</td>
-                                <td>K</td>
-                                <td><?php echo "$KreditNamePenarikan"; ?></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 mt-3">
-                        <div class="alert alert-info alert-dismissible fade show" role="alert">
-                            <small>Untu mengubah auto jurnal anda bisa masuk ke halaman pengaturan.</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer bg-info">
-                <a href="index.php?Page=AutoJurnal" target="_blank" class="btn btn-success btn-rounded" title="Ubah Pengaturan Auto Jurnal">
-                    <i class="bi bi-gear-fill"></i> Auto Jurnal
-                </a>
-                <button type="button" class="btn btn-dark btn-rounded" data-bs-dismiss="modal">
-                    <i class="bi bi-x-circle"></i> Tutup
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="ModalEditTabungan" tabindex="-1">
     <div class="modal-dialog modal-md">
         <div class="modal-content">

@@ -26,11 +26,6 @@
             $nama_simpanan=GetDetailData($Conn,'simpanan_jenis','id_simpanan_jenis',$id_simpanan_jenis,'nama_simpanan');
             $keterangan=GetDetailData($Conn,'simpanan_jenis','id_simpanan_jenis',$id_simpanan_jenis,'keterangan');
             $rutin=GetDetailData($Conn,'simpanan_jenis','id_simpanan_jenis',$id_simpanan_jenis,'rutin');
-            $id_perkiraan_debet=GetDetailData($Conn,'simpanan_jenis','id_simpanan_jenis',$id_simpanan_jenis,'id_perkiraan_debet');
-            $id_perkiraan_kredit=GetDetailData($Conn,'simpanan_jenis','id_simpanan_jenis',$id_simpanan_jenis,'id_perkiraan_kredit');
-            //Buka Data Perkiraan
-            $nama_perkiraan_debet=GetDetailData($Conn,'akun_perkiraan','id_perkiraan',$id_perkiraan_debet,'nama');
-            $nama_perkiraan_kredit=GetDetailData($Conn,'akun_perkiraan','id_perkiraan',$id_perkiraan_kredit,'nama');
             //Label Rutin
             if(empty($rutin)){
                 $LabelRutin='<span class="text text-danger">Tidak</span>';
@@ -66,18 +61,6 @@
             <div class="col col-md-4">Simpanan Wajib?</div>
             <div class="col col-md-8">
                 <code class="text text-grayish"><?php echo $LabelRutin; ?></code>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col col-md-4">Akun Debet</div>
-            <div class="col col-md-8">
-                <code class="text text-grayish"><?php echo $nama_perkiraan_debet; ?></code>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col col-md-4">Akun Kredit</div>
-            <div class="col col-md-8">
-                <code class="text text-grayish"><?php echo $nama_perkiraan_kredit; ?></code>
             </div>
         </div>
     </div>

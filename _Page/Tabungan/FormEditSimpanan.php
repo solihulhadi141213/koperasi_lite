@@ -27,16 +27,16 @@
             $rutin=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'rutin');
             $nip=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'nip');
             $nama=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'nama');
-            $lembaga=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'lembaga');
-            $ranking=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'ranking');
             $tanggal=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'tanggal');
             $kategori=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'kategori');
             $keterangan=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'keterangan');
             $jumlah=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'jumlah');
             if($kategori=="Penarikan"){
                 $LabelKategori='<code class="text text-danger">Penarikan dana simpanan</code>';
+                $pilih_kategori="Penarikan";
             }else{
                 $LabelKategori='<code class="text text-success">'.$kategori.'</code>';
+                $pilih_kategori="Penarikan";
             }
             //Format tanggal
             $strtotime=strtotime($tanggal);
@@ -67,6 +67,28 @@
                 </div>
                 <div class="col-md-8">
                     <input type="date" id="tanggal_simpanan_edit" name="tanggal" class="form-control" value="<?php echo $tanggal; ?>">
+                </div>
+            </div>
+             <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="kategori_simpanan_penarikan2">Kategori</label>
+                </div>
+                <div class="col-md-8">
+                    <select name="kategori_simpanan_penarikan" id="kategori_simpanan_penarikan2" class="form-control">
+                        <?php
+                            if($kategori=="Penarikan"){
+                                echo '
+                                    <option value="Simpanan">Simpanan</option>
+                                    <option selected value="Penarikan">Penarikan</option>
+                                ';
+                            }else{
+                                echo '
+                                    <option selected value="Simpanan">Simpanan</option>
+                                    <option  value="Penarikan">Penarikan</option>
+                                ';
+                            }
+                        ?>
+                    </select>
                 </div>
             </div>
             <div class="row mb-3">

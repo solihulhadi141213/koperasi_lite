@@ -10,14 +10,14 @@
     if(empty($SessionIdAkses)){
         echo '
             <tr>
-                <td colspan="7" class="text-center text-danger">Sesi Akses Sudah Berakhir, Silahkan Login Ulang!</td>
+                <td colspan="5" class="text-center text-danger">Sesi Akses Sudah Berakhir, Silahkan Login Ulang!</td>
             </tr>
         ';
     }else{
         if(empty($jml_data)){
             echo '
                 <tr>
-                    <td colspan="7" class="text-center text-danger">Tidak Ada Data Jenis Simapanan Yang Dapat Ditampilkan. Silahkan tambah jenis simpanan terlebih dulu!</td>
+                    <td colspan="5" class="text-center text-danger">Tidak Ada Data Jenis Simapanan Yang Dapat Ditampilkan. Silahkan tambah jenis simpanan terlebih dulu!</td>
                 </tr>
             ';
         }else{
@@ -28,27 +28,22 @@
                 $nama_simpanan= $data['nama_simpanan'];
                 $rutin= $data['rutin'];
                 $nominal= $data['nominal'];
-                $id_perkiraan_debet= $data['id_perkiraan_debet'];
-                $id_perkiraan_kredit= $data['id_perkiraan_kredit'];
-                //Buka Data Perkiraan
-                $nama_perkiraan_debet=GetDetailData($Conn,'akun_perkiraan','id_perkiraan',$id_perkiraan_debet,'nama');
-                $nama_perkiraan_kredit=GetDetailData($Conn,'akun_perkiraan','id_perkiraan',$id_perkiraan_kredit,'nama');
                 //Label Rutin
                 if(empty($rutin)){
                     $LabelRutin='<div class="badge badge-danger">Sukarela</div>';
+                    $NominalRp = "-";
                 }else{
                     $LabelRutin='<div class="badge badge-success">Rutin/Wajib</div>';
+                    $NominalRp = "Rp " . number_format($nominal,0,',','.');
                 }
-                $NominalRp = "Rp " . number_format($nominal,0,',','.');
+                
                 echo '
                     <tr>
                         <td><small>'.$no.'</small></td>
                         <td><small>'.$nama_simpanan.'</small></td>
                         <td><small>'.$LabelRutin.'</small></td>
-                        <td><small>'.$nama_perkiraan_debet.'</small></td>
-                        <td><small>'.$nama_perkiraan_kredit.'</small></td>
                         <td><small>'.$NominalRp.'</small></td>
-                        <td class="text-center">
+                        <td class="">
                             <button type="button" class="btn btn-sm btn-outline-dark btn-floating" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-three-dots"></i>
                             </button>

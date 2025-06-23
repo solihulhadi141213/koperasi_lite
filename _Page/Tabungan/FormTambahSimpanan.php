@@ -81,13 +81,9 @@
         </script>
         <div class="row mb-3">
             <div class="col-md-12">
-                <?php
-                    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">';
-                    echo '  Berikut ini adalah form untuk menambahkan data simpanan secara parsial.';
-                    echo '  Pastikan anda telah mengisi jumlah simpanan dengan benar.';
-                    echo '  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-                    echo '</div>';
-                ?>
+                <button type="submit" class="btn btn-secondary btn-rounded btn-block" data-bs-toggle="modal" data-bs-target="#ModalPilihAnggota">
+                    <i class="bi bi-arrow-left"></i> Kembali
+                </button>
             </div>
         </div>
         <input type="hidden" name="id_anggota" id="put_id_anggota_for_tambah_simpanan" class="form-control" value="<?php echo $id_anggota; ?>">

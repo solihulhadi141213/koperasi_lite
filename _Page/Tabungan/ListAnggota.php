@@ -88,7 +88,7 @@
                             <b>Anggota</b>
                         </th>
                         <th class="text-center">
-                            <b>Lembaga</b>
+                            <b>NIP</b>
                         </th>
                         <th class="text-center">
                             <b>Status</b>
@@ -117,8 +117,6 @@
                             while ($data = mysqli_fetch_array($query)) {
                                 $id_anggota= $data['id_anggota'];
                                 $tanggal_masuk= $data['tanggal_masuk'];
-                                $lembaga= $data['lembaga'];
-                                $ranking= $data['ranking'];
                                 if(empty($data['nip'])){
                                     $nip='<span class="text-danger">-</span>';
                                 }else{
@@ -138,14 +136,12 @@
                             </td>
                             <td class="text-left" align="left">
                                 <?php 
-                                    echo "$nama <br>";
-                                    echo '<small class="text text-grayish">'.$nip.'</small>';
+                                    echo "$nama";
                                 ?>
                             </td>
                             <td class="text-left" align="left">
                                 <?php 
-                                    echo "$lembaga <br>";
-                                    echo '<small class="text text-grayish">Ranking '.$ranking.'</small>';
+                                    echo '<small class="text text-grayish">Ranking '.$nip.'</small>';
                                 ?>
                             </td>
                             <td class="text-center">

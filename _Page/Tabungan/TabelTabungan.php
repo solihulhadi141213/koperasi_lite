@@ -119,15 +119,16 @@
         </div> -->
         <div class="row mb-3">
             <div class="table table-responsive">
-                <table class="table table-bordered table-hover">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <td align="center"><b>No</b></td>
-                            <td align="center"><b>Tanggal</b></td>
-                            <td align="center"><b>Nama & NIP</b></td>
-                            <td align="center"><b>Divisi & Ranking</b></td>
-                            <td align="center"><b>Kategori</b></td>
-                            <td align="center"><b>Nominal</b></td>
+                            <td align="left"><b>Tanggal</b></td>
+                            <td align="left"><b>Nama Anggota</b></td>
+                            <td align="left"><b>No.Induk</b></td>
+                            <td align="left"><b>Kategori</b></td>
+                            <td align="left"><b>Jenis Simpanan</b></td>
+                            <td align="left"><b>Nominal</b></td>
                             <td align="center"><b>Opsi</b></td>
                         </tr>
                     </thead>
@@ -166,30 +167,25 @@
                                     $rutin= $data['rutin'];
                                     $nip= $data['nip'];
                                     $nama= $data['nama'];
-                                    $lembaga= $data['lembaga'];
-                                    $ranking= $data['ranking'];
                                     $tanggal= $data['tanggal'];
                                     $kategori= $data['kategori'];
-                                    if($kategori=="Penarikan"){
-                                        //Cek Nama Simpanan Yang ditarik
-                                        $nama_simpanan=GetDetailData($Conn,'simpanan_jenis','id_simpanan_jenis',$id_simpanan_jenis,'nama_simpanan');
-                                        $LabelKategori='<code class="text text-danger">Penarikan ['.$nama_simpanan.']</code>';
-                                    }else{
-                                        $LabelKategori='<code class="text text-success">'.$kategori.'</code>';
-                                    }
                                     $jumlah= $data['jumlah'];
+                                    //Format Rupiah
+                                    $jumlah_format = "" . number_format($jumlah,0,',','.');
+
+                                    //Routing Kategori
+                                    if($kategori=="Penarikan"){
+                                        $LabelKategori='<span class="badge bg-danger">Penarikan</span>';
+                                        $jumlah_format_label='<span class="text-danger">- '.$jumlah_format.'</span>';
+                                    }else{
+                                        $LabelKategori='<span class="badge bg-success">Simpanan</span>';
+                                        $jumlah_format_label='<span class="text-dark">'.$jumlah_format.'</span>';
+                                    }
+                                    $nama_simpanan=GetDetailData($Conn,'simpanan_jenis','id_simpanan_jenis',$id_simpanan_jenis,'nama_simpanan');
+                                    
                                     //Format tanggal
                                     $strtotime=strtotime($tanggal);
                                     $TanggalFormat=date('d/m/Y',$strtotime);
-                                    //Format Rupiah
-                                    $jumlah_format = "Rp " . number_format($jumlah,0,',','.');
-                                    //Cek Apakah Sudah Sinkron Dengan Jurnal
-                                    $JumlahJurnal = mysqli_num_rows(mysqli_query($Conn, "SELECT*FROM jurnal WHERE uuid='$uuid_simpanan'"));
-                                    if(empty($JumlahJurnal)){
-                                        $LabelJurnal='<code class="text text-danger">Jurnal : 0 Rcd</code>';
-                                    }else{
-                                        $LabelJurnal='<code class="text text-grayish">Jurnal : '.$JumlahJurnal.' Rcd</code>';
-                                    }
                         ?>
                                     <tr>
                                         <td align="center"><?php echo $no; ?></td>
@@ -199,46 +195,30 @@
                                             </small>
                                         </td>
                                         <td align="left">
-                                            <?php 
-                                                echo "$nama <br>"; 
-                                                echo '<code class="text-dark">NIP: </code> <code class="text text-grayish">'.$nip.'</code>';
-                                            ?>
-                                        </td>
-                                        <td align="left">
                                             <small class="credit">
-                                                <?php 
-                                                    echo "$lembaga<br>"; 
-                                                    echo '<code class="text-dark">Ranking : </code> <code class="text text-grayish">'.$ranking.'</code>';
-                                                ?>
+                                                <?php echo "$nama"; ?>
                                             </small>
                                         </td>
                                         <td align="left">
                                             <small class="credit">
-                                                <?php 
-                                                    echo "$LabelKategori<br>"; 
-                                                ?>
-                                                <code class="text text-grayish">
-                                                    <?php 
-                                                        if(!empty($data['keterangan'])){
-                                                            $keterangan= $data['keterangan'];
-                                                            echo "Ket: $keterangan"; 
-                                                        }else{
-                                                            echo "Ket: -"; 
-                                                        }
-                                                    ?>
-                                                </code>
+                                                <?php echo "$nip"; ?>
                                             </small>
                                         </td>
-                                        <td align="right">
+                                        <td align="left">
+                                           <?php echo "$LabelKategori"; ?>
+                                        </td>
+                                        <td align="left">
+                                           <small class="text-muted"><?php echo "$nama_simpanan"; ?></small>
+                                        </td>
+                                        <td align="">
                                             <small class="credit">
                                                 <?php 
-                                                    echo "$jumlah_format <br>"; 
-                                                    echo "$LabelJurnal"; 
+                                                    echo "$jumlah_format_label";
                                                 ?>
                                             </small>
                                         </td>
                                         <td align="center">
-                                            <a class="btn btn-sm btn-outline-dark btn-rounded" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <a class="btn btn-sm btn-outline-dark btn-floating" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="bi bi-three-dots"></i>
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" style="">

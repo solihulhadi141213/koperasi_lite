@@ -53,7 +53,7 @@
                                     </li>
                                 </ul>
                                 <button type="button" class="btn btn-md btn-info btn-floating" data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter Data Anggota">
-                                    <i class="bi bi-funnel"></i>
+                                    <i class="bi bi-search"></i>
                                 </button>
                                 <button type="button" class="btn btn-md btn-primary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalTambahAnggota" title="Tambah Data Anggota Baru">
                                     <i class="bi bi-plus-lg"></i>

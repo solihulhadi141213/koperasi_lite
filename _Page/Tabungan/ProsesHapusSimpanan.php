@@ -18,15 +18,10 @@
             //Proses Hapus Simpanan
             $HapusSimpanan = mysqli_query($Conn, "DELETE FROM simpanan WHERE id_simpanan='$id_simpanan'") or die(mysqli_error($Conn));
             if ($HapusSimpanan) {
-                $HapusJurnal = mysqli_query($Conn, "DELETE FROM jurnal WHERE kategori='Simpanan' AND uuid='$uuid_simpanan'") or die(mysqli_error($Conn));
-                if ($HapusJurnal) {
-                    $KategoriLog="Log Simpanan";
-                    $KeteranganLog="Hapus Simpanan";
-                    include "../../_Config/InputLog.php";
-                    echo '<span class="text-success" id="NotifikasiHapusSimpananBerhasil">Success</span>';
-                }else{
-                    echo '<span class="text-danger">Terjadi Kesalahan Pada Saat Menghapus Jurnal</span>';
-                }
+                $KategoriLog="Log Simpanan";
+                $KeteranganLog="Hapus Simpanan";
+                include "../../_Config/InputLog.php";
+                echo '<span class="text-success" id="NotifikasiHapusSimpananBerhasil">Success</span>';
             }else{
                 echo '<span class="text-danger">Hapus Data Gagal</span>';
             }

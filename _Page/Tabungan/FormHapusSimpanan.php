@@ -27,8 +27,6 @@
             $rutin=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'rutin');
             $nip=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'nip');
             $nama=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'nama');
-            $lembaga=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'lembaga');
-            $ranking=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'ranking');
             $tanggal=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'tanggal');
             $kategori=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'kategori');
             $keterangan=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'keterangan');
@@ -36,7 +34,7 @@
             if($kategori=="Penarikan"){
                 $LabelKategori='<code class="text text-danger">Penarikan dana simpanan</code>';
             }else{
-                $LabelKategori='<code class="text text-success">'.$kategori.'</code>';
+                $LabelKategori='<code class="text text-success">Simpanan</code>';
             }
             //Format tanggal
             $strtotime=strtotime($tanggal);
@@ -46,53 +44,56 @@
             if(empty($keterangan)){
                 $keterangan="-";
             }
+
+            $nama_simpanan=GetDetailData($Conn,'simpanan_jenis','id_simpanan_jenis',$id_simpanan_jenis,'nama_simpanan');
 ?>
             <input type="hidden" name="id_simpanan" class="form-control" value="<?php echo $id_simpanan; ?>">
             <div class="row mb-3">
                 <div class="col col-md-4">Tanggal</div>
-                <div class="col col-md-8">
+                <div class="col col-md-1">:</div>
+                <div class="col col-md-7">
                     <code class="text text-grayish"><?php echo $TanggalFormat; ?></code>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col col-md-4">NIP</div>
-                <div class="col col-md-8">
+                <div class="col col-md-1">:</div>
+                <div class="col col-md-7">
                     <code class="text text-grayish"><?php echo $nip; ?></code>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col col-md-4">Nama</div>
-                <div class="col col-md-8">
+                <div class="col col-md-1">:</div>
+                <div class="col col-md-7">
                     <code class="text text-grayish"><?php echo $nama; ?></code>
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col col-md-4">Divisi/Unit</div>
-                <div class="col col-md-8">
-                    <code class="text text-grayish"><?php echo $lembaga; ?></code>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Ranking</div>
-                <div class="col col-md-8">
-                    <code class="text text-grayish"><?php echo $ranking; ?></code>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Jenis Simpanan</div>
-                <div class="col col-md-8">
+                <div class="col col-md-4">Simpan/Penarikan</div>
+                <div class="col col-md-1">:</div>
+                <div class="col col-md-7">
                     <code class="text text-grayish"><?php echo $LabelKategori; ?></code>
                 </div>
             </div>
             <div class="row mb-3">
+                <div class="col col-md-4">Kategori</div>
+                <div class="col col-md-1">:</div>
+                <div class="col col-md-7">
+                    <code class="text text-grayish"><?php echo $nama_simpanan; ?></code>
+                </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col col-md-4">Keterangan</div>
-                <div class="col col-md-8">
+                <div class="col col-md-1">:</div>
+                <div class="col col-md-7">
                     <code class="text text-grayish"><?php echo $keterangan; ?></code>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col col-md-4">Nominal</div>
-                <div class="col col-md-8">
+                <div class="col col-md-1">:</div>
+                <div class="col col-md-7">
                     <code class="text text-grayish"><?php echo $jumlah_format; ?></code>
                 </div>
             </div>
