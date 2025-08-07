@@ -122,6 +122,7 @@
                     <td align="left"><b>Nama</b></td>
                     <td align="left"><b>Kontak</b></td>
                     <td align="left"><b>Email</b></td>
+                    <td align="left"><b>Akses</b></td>
                     <td align="center"><b>Option</b></td>
                 </tr>
             </thead>
@@ -184,6 +185,9 @@
                                 </td>
                                 <td align="left">
                                     <small class="credit"><?php echo $email_akses; ?></small>
+                                </td>
+                                <td align="left">
+                                    <small class="credit"><?php echo $akses; ?></small>
                                 </td>
                                 <td align="center">
                                     <a class="btn btn-sm btn-outline-dark btn-floating" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">

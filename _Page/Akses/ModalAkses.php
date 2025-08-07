@@ -108,8 +108,9 @@
                         </div>
                         <div class="col col-md-8">
                             <select name="akses" id="akses" class="form-control">
-                                <option value="Admin">Pengurus</option>
-                               
+                                <option value="Sekretaris">Sekretaris</option>
+                                <option value="Bendahara">Bendahara</option>
+                                <option value="Ketua">Ketua</option>
                             </select>
                         </div>
                     </div>
