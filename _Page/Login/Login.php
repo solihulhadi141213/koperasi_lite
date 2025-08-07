@@ -5,6 +5,13 @@
     </div>
     <form action="javascript:void(0);" class="row g-3" id="ProsesLogin">
         <div class="col-12">
+            <label for="mode_akses" class="form-label">Mode Akses</label>
+            <select name="mode_akses" id="mode_akses" class="form-control">
+                <option value="Anggota">Anggota</option>
+                <option value="Pengurus">Pengurus</option>
+            </select>
+        </div>
+        <div class="col-12">
             <label for="email" class="form-label">Email</label>
             <div class="input-group has-validation">
                 <span class="input-group-text" id="inputGroupPrepend">@</span>
@@ -29,7 +36,7 @@
             Pastikan email dan password sudah benar.
         </div>
         <div class="col-12" id="NotifikasiLogin"></div>
-        <div class="col-12 mb-3">
+        <div class="col-12 mb-2">
             <button class="btn btn-primary w-100" type="submit">Login</button>
         </div>
         <div class="col-12">

@@ -1,13 +1,28 @@
 <?php
-    $SessionNama=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'nama_akses');
-    $SessionKontakAkses=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'kontak_akses');
-    $SessionEmailAkses=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'email_akses');
-    $SessionGambar=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'image_akses');
-    $SessionLevelAkses=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'akses');
-    $SessionDatetimeDaftar=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'datetime_daftar');
-    $SessionDatetimeUpdate=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'datetime_update');
-    $SessionAkses="";
-    if(empty($SessionGambar)){
-        $SessionGambar="No-Image.png";
+    if($SessionModeAkses=="Pengurus"){
+        $SessionNama=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'nama_akses');
+        $SessionKontakAkses=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'kontak_akses');
+        $SessionEmailAkses=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'email_akses');
+        $SessionGambar=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'image_akses');
+        $SessionLevelAkses=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'akses');
+        $SessionDatetimeDaftar=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'datetime_daftar');
+        $SessionDatetimeUpdate=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'datetime_update');
+        if(empty($SessionGambar)){
+            $SessionGambar="No-Image.png";
+        }
+    }else{
+        $SessionNama=GetDetailData($Conn,'anggota','id_anggota',$SessionIdAkses,'nama');
+        $SessionKontakAkses=GetDetailData($Conn,'anggota','id_anggota',$SessionIdAkses,'kontak');
+        $SessionEmailAkses=GetDetailData($Conn,'anggota','id_anggota',$SessionIdAkses,'email');
+        $SessionGambar=GetDetailData($Conn,'anggota','id_anggota',$SessionIdAkses,'foto');
+        $SessionLevelAkses="Anggota";
+        $SessionStatusAnggota=GetDetailData($Conn,'anggota','id_anggota',$SessionIdAkses,'status');
+        $SessionDatetimeDaftar=GetDetailData($Conn,'anggota','id_anggota',$SessionIdAkses,'tanggal_masuk');
+        $SessionDatetimeUpdate=GetDetailData($Conn,'anggota','id_anggota',$SessionIdAkses,'tanggal_keluar');
+        $SessionAlasanKeluar=GetDetailData($Conn,'anggota','id_anggota',$SessionIdAkses,'alasan_keluar');
+        if(empty($SessionGambar)){
+            $SessionGambar="No-Image.png";
+        }
     }
+    $SessionAkses="";
 ?>

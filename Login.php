@@ -83,7 +83,17 @@
                         $('#NotifikasiLogin').html(data);
                         var NotifikasiProsesLoginBerhasil=$('#NotifikasiProsesLoginBerhasil').html();
                         if(NotifikasiProsesLoginBerhasil=="Success"){
-                            window.location.href = "index.php";
+                            //Tampilkan Swal Bahwa Proses Berhasil
+                            Swal.fire({
+                                title: 'Login Berhasil',
+                                text: 'Anda berhasil melakukan login',
+                                icon: 'success',
+                                confirmButtonText: 'Tutup'
+                            }).then((result) => {
+                                if (result.isConfirmed || result.dismiss === Swal.DismissReason.close) {
+                                    window.location.href = 'index.php';
+                                }
+                            });
                         }
                     }
                 });

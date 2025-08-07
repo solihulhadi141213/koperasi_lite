@@ -12,20 +12,18 @@
             $SessionModeAkses="";
             $SessionLoginToken="";
         }else{
-            $SessionIdAkses=$_SESSION ["id_akses"];
+            $SessionIdAkses=$_SESSION["id_akses"];
             $SessionLoginToken=$_SESSION ["login_token"];
-                
-            //Membersihkan Variabel
-            $SessionIdAkses=validateAndSanitizeInput($SessionIdAkses);
-            $SessionLoginToken=validateAndSanitizeInput($SessionLoginToken);
+            $SessionModeAkses=$_SESSION ["mode_akses"];
 
             //Validasi Token Akses
-            $QryAksesLogin = mysqli_query($Conn,"SELECT * FROM akses_login WHERE id_akses='$SessionIdAkses' AND token='$SessionLoginToken'")or die(mysqli_error($Conn));
+            $QryAksesLogin = mysqli_query($Conn,"SELECT * FROM akses_login WHERE id_akses='$SessionIdAkses' AND token='$SessionLoginToken' AND kategori='$SessionModeAkses'")or die(mysqli_error($Conn));
             $DataAksesLogin = mysqli_fetch_array($QryAksesLogin);
             //Apabila Tidak Ada
             if(empty($DataAksesLogin['id_akses'])){
                 $SessionIdAkses="";
                 $SessionLoginToken="";
+                $SessionModeAkses="";
             }else{
                 //Apabila Ada
                 $SessionDateCreat=$DataAksesLogin['date_creat'];
@@ -35,6 +33,7 @@
                 if($SessionDateExpired<$DateSekarang){
                     $SessionIdAkses="";
                     $SessionLoginToken="";
+                    $SessionModeAkses="";
                 }else{
                     $SessionIdAkses=$DataAksesLogin['id_akses'];
                     $expired_milisecond=1000*60*60;
@@ -44,13 +43,15 @@
                     //Update Token Yang Ada
                     $UpdateToken = mysqli_query($Conn,"UPDATE akses_login SET 
                         date_expired='$date_expired_new'
-                    WHERE id_akses='$SessionIdAkses'") or die(mysqli_error($Conn)); 
+                    WHERE id_akses='$SessionIdAkses' AND kategori='$SessionModeAkses'") or die(mysqli_error($Conn)); 
                     if($UpdateToken){
                         $SessionIdAkses=$DataAksesLogin['id_akses'];
                         $SessionLoginToken=$DataAksesLogin['token'];
+                        $SessionModeAkses=$_SESSION ["mode_akses"];
                     }else{
                         $SessionIdAkses="";
                         $SessionLoginToken="";
+                        $SessionModeAkses="";
                     }
                 }
             }

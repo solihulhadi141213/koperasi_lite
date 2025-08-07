@@ -9,7 +9,7 @@
     }else{
         $SubMenu=$_GET['Sub'];
     }
-    if($SessionAkses=="Anggota"){
+    if($SessionModeAkses=="Anggota"){
         include "_Partial/MenuAnggota.php";
     }else{
         include "_Partial/MenuPengurus.php";

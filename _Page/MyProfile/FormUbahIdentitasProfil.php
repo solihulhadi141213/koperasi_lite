@@ -13,52 +13,40 @@
         echo '  </div>';
         echo '</div>';
     }else{
-        $id_akses=$SessionIdAkses;
-        //Bersihkan Variabel
-        $id_akses=validateAndSanitizeInput($id_akses);
-        //Buka data askes
-        $nama_akses=GetDetailData($Conn,'akses','id_akses',$id_akses,'nama_akses');
-        $kontak_akses=GetDetailData($Conn,'akses','id_akses',$id_akses,'kontak_akses');
-        $email_akses=GetDetailData($Conn,'akses','id_akses',$id_akses,'email_akses');
-        $image_akses=GetDetailData($Conn,'akses','id_akses',$id_akses,'image_akses');
-        $akses=GetDetailData($Conn,'akses','id_akses',$id_akses,'akses');
-        $datetime_daftar=GetDetailData($Conn,'akses','id_akses',$id_akses,'datetime_daftar');
-        $datetime_update=GetDetailData($Conn,'akses','id_akses',$id_akses,'datetime_update');
         
-        //Format Tanggal
-        $strtotime1=strtotime($datetime_daftar);
-        $strtotime2=strtotime($datetime_update);
-        //Menampilkan Tanggal
-        $DateDaftar=date('d/m/Y H:i:s T', $strtotime1);
-        $DateUpdate=date('d/m/Y H:i:s T', $strtotime2);
-        if(!empty($image_akses)){
-            $image_akses=$image_akses;
+        //Buka data askes
+        if($SessionModeAkses=="Anggota"){
+            $nama=GetDetailData($Conn,'anggota','id_anggota',$SessionIdAkses,'nama');
+            $kontak=GetDetailData($Conn,'anggota','id_anggota',$SessionIdAkses,'kontak');
+            $email=GetDetailData($Conn,'anggota','id_anggota',$SessionIdAkses,'email');
         }else{
-            $image_akses="No-Image.png";
+            $nama_akses=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'nama_akses');
+            $kontak_akses=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'kontak_akses');
+            $email_akses=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'email_akses');
         }
 ?>
         <div class="row mb-3">
             <div class="col col-md-4">
-                <label for="nama_akses_profil">Nama Lengkap</label>
+                <label for="nama">Nama Lengkap</label>
             </div>
             <div class="col col-md-8">
-                <input type="text" name="nama_akses" id="nama_akses_profil" class="form-control" value="<?php echo "$nama_akses"; ?>">
+                <input type="text" name="nama" id="nama" class="form-control" value="<?php echo "$nama"; ?>">
             </div>
         </div>
         <div class="row mb-3">
             <div class="col col-md-4">
-                <label for="kontak_akses_profil">Nomor Kontak</label>
+                <label for="kontak">Nomor Kontak</label>
             </div>
             <div class="col col-md-8">
-                <input type="text" name="kontak_akses" id="kontak_akses_profil" class="form-control" value="<?php echo "$kontak_akses"; ?>">
+                <input type="text" name="kontak" id="kontak" class="form-control" value="<?php echo "$kontak"; ?>">
             </div>
         </div>
         <div class="row mb-3">
             <div class="col col-md-4">
-                <label for="email_akses_profil">Alamat Email</label>
+                <label for="email">Alamat Email</label>
             </div>
             <div class="col col-md-8">
-                <input type="email" name="email_akses" id="email_akses_profil" class="form-control" value="<?php echo "$email_akses"; ?>">
+                <input type="email" name="email" id="email" class="form-control" value="<?php echo "$email"; ?>">
             </div>
         </div>
 <?php } ?>
