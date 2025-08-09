@@ -47,19 +47,52 @@
     <div class="row">
         <div class="col-md-12">
             <?php
-                echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">';
-                echo '  <small>';
-                echo '      Selamat Datang Di Halaman Utama <b>'.$title_page.'</b><br> ';
-                echo '      Pada halaman ini anda bisa melihat semua riwayat transaksi anda.';
-                echo '      Hubungi pengurus/admin apabila terdapat kesalahan pada pencatatan transaksi untuk dapat segera diperbaiki.';
-                echo '      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-                echo '  </small>';
-                echo '</div>';
+                if($SessionStatusAnggota=="Pending"){
+                    echo '
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <small>
+                                Akun anda masih dalam proses <b>Verifikasi</b> oleh tim kami. Update perubahan status verifikasi akan diproses paling lama 3 X 24 Jam.
+                                Kami akan mengirimkan perubahan status pada email anda.
+                            </small>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    ';
+                }else{
+                    if($SessionStatusAnggota=="Keluar"){
+                        echo '
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <small>
+                                    Anda telah memutuskan untuk keluar dari keanggotaan. Silahkan ajukan aktivasi akun untuk kembali mendapatkan layanan kami.
+                                </small>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        ';
+                    }else{
+                         echo '
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <small>
+                                    Akun anda sudah <b>Aktif</b>. Anda sekarang bisa menikmati berbagai layanan kami.
+                                </small>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        ';
+                    }
+                }
             ?>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card" id="card_jam_menarik">
+                        <div class="card-body">
+                            <div id="tanggal_menarik">Hari, 01 Januari 1900</div>
+                            <div id="jam_menarik">00:00:00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="card info-card sales-card">
@@ -79,7 +112,9 @@
                         </div>
                         <div class="card-footer">
                             <small>
-                                <a href="index.php?Page=RiwayatAnggota&Sub=Simpanan">Lihat Selengkapnya</a>
+                                <a href="index.php?Page=RiwayatAnggota&Sub=Simpanan" class="btn btn-sm btn-secondary btn-rounded">
+                                    Lihat Selengkapnya
+                                </a>
                             </small>
                         </div>
                     </div>
@@ -102,7 +137,7 @@
                         </div>
                         <div class="card-footer">
                             <small>
-                                <a href="index.php?Page=RiwayatAnggota&Sub=Penarikan">Lihat Selengkapnya</a>
+                                <a href="index.php?Page=RiwayatAnggota&Sub=Penarikan" class="btn btn-sm btn-secondary btn-rounded">Lihat Selengkapnya</a>
                             </small>
                         </div>
                     </div>
@@ -125,7 +160,7 @@
                         </div>
                         <div class="card-footer">
                             <small>
-                                <a href="index.php?Page=RiwayatAnggota&Sub=Pinjaman">Lihat Selengkapnya</a>
+                                <a href="index.php?Page=RiwayatAnggota&Sub=Pinjaman" class="btn btn-sm btn-secondary btn-rounded">Lihat Selengkapnya</a>
                             </small>
                         </div>
                     </div>
@@ -148,7 +183,7 @@
                         </div>
                         <div class="card-footer">
                             <small>
-                                <a href="index.php?Page=RiwayatAnggota&Sub=Angsuran">Lihat Selengkapnya</a>
+                                <a href="index.php?Page=RiwayatAnggota&Sub=Angsuran" class="btn btn-sm btn-secondary btn-rounded">Lihat Selengkapnya</a>
                             </small>
                         </div>
                     </div>

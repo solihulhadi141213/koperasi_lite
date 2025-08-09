@@ -86,6 +86,7 @@
         <div class="col-md-8">
             <select name="status" id="status_edit" class="form-control">
                 <option <?php if($status==""){echo "selected";} ?> value="">Pilih</option>
+                <option <?php if($status=="Pending"){echo "selected";} ?> value="Pending">Pending</option>
                 <option <?php if($status=="Aktif"){echo "selected";} ?> value="Aktif">Aktif</option>
                 <option <?php if($status=="Keluar"){echo "selected";} ?> value="Keluar">Keluar</option>
             </select>

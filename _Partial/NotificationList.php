@@ -6,6 +6,9 @@
     
     //Menghitung Jumlah Pinjaman Yang Menunggak
     $JumlahNotifikasi=0;
+
+    //Jumlah Pinjaman Tunggakan
+    $JumlahPeriodeTagihan=0;
     $query_pinjaman_berjalan = mysqli_query($Conn, "SELECT id_pinjaman, tanggal, periode_angsuran FROM pinjaman WHERE status='Berjalan'");
     while ($data = mysqli_fetch_array($query_pinjaman_berjalan)) {
         $id_pinjaman= $data['id_pinjaman'];
@@ -14,7 +17,6 @@
         
         //Tanggal Sekarang
         $TanggalSekarang=date('Y-m-d');
-        $JumlahPeriodeTagihan=0;
         for ( $i=1; $i<=$periode_angsuran; $i++ ){
             $GetPeriodePinjaman=date('d/m/Y', strtotime('+'.$i.' month', strtotime($tanggal))); 
             //Ubah Format Tangga
@@ -32,10 +34,17 @@
                 $JumlahPeriodeTagihan=$JumlahPeriodeTagihan+0;
             }
         }
-        if(!empty($JumlahPeriodeTagihan)){
-            $JumlahNotifikasi=$JumlahNotifikasi+1;
-        }
     }
+    if(!empty($JumlahPeriodeTagihan)){
+        $JumlahNotifikasi=1;
+    }
+
+    //Hitung Anggota Pending
+    $JumlahAnggotaPendding = mysqli_num_rows(mysqli_query($Conn, "SELECT id_anggota FROM anggota WHERE status='Pending'"));
+    if(!empty($JumlahAnggotaPendding)){
+        $JumlahNotifikasi=$JumlahNotifikasi+1;
+    }
+    
     //Apabila Tidak ada notifgikasi
     if(empty($JumlahNotifikasi)){
         echo '<li class="dropdown-header">';
@@ -46,13 +55,23 @@
         echo '<li class="dropdown-header">';
         echo '  Ada '.$JumlahNotifikasi.' pinjaman yang belum dibayar';
         echo '</li>';
-        if(!empty($JumlahNotifikasi)){
+        if(!empty($JumlahPeriodeTagihan)){
             echo '<li><hr class="dropdown-divider"></li>';
             echo '<li class="notification-item">';
             echo '  <i class="bi bi-exclamation-circle text-danger"></i>';
             echo '  <div>';
             echo '      <h4><a href="index.php?Page=Tagihan">Tagihan Pinjaman Belum Dibayar</a></h4>';
-            echo '      <p>Ada '.$JumlahNotifikasi.' tagihan pinjaman belum dibayar</p>';
+            echo '      <p>Ada '.$JumlahPeriodeTagihan.' tagihan pinjaman belum dibayar</p>';
+            echo '  </div>';
+            echo '</li>';
+        }
+        if(!empty($JumlahAnggotaPendding)){
+            echo '<li><hr class="dropdown-divider"></li>';
+            echo '<li class="notification-item">';
+            echo '  <i class="bi bi-exclamation-circle text-danger"></i>';
+            echo '  <div>';
+            echo '      <h4><a href="index.php?Page=Anggota">Pengajuan Anggota</a></h4>';
+            echo '      <p>Ada '.$JumlahAnggotaPendding.' pengajuan anggota perlu verifikasi</p>';
             echo '  </div>';
             echo '</li>';
         }

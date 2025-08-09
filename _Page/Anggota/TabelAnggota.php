@@ -167,8 +167,13 @@
                                 $TanggalKeluar=date('d/m/Y', $strtotime2);
                                 $LabelStatus='<span class="badge bg-danger">Keluar</span>';
                             }else{
-                                $TanggalKeluar="-";
-                                $LabelStatus='<span class="badge bg-success">Aktif</span>';
+                                if($status=="Pending"){
+                                    $TanggalKeluar="-";
+                                    $LabelStatus='<span class="badge bg-warning">Pending</span>';
+                                }else{
+                                    $TanggalKeluar="-";
+                                    $LabelStatus='<span class="badge bg-success">Aktif</span>';
+                                }
                             }
                             //Format Tanggal
                             $strtotime1=strtotime($tanggal_masuk);

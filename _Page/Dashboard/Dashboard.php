@@ -1,4 +1,9 @@
 <?php
-    //Routing Menampilkan Dashboard
-    include "_Page/Dashboard/DashboardAdmin.php";
+    //Routing Menampilkan Dashboard Berdasarkan Hak Akses
+    if($SessionModeAkses=="Anggota"){
+        include "_Page/Dashboard/DashboardAnggota.php";
+    }else{
+        include "_Page/Dashboard/DashboardAdmin.php";
+    }
+    
 ?>

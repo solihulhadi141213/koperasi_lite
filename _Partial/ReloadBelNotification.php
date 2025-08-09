@@ -5,6 +5,7 @@
     date_default_timezone_set("Asia/Jakarta");
     //Menghitung Jumlah Pinjaman Yang Menunggak
     $JumlahNotifikasi=0;
+    $JumlahPeriodeTagihan=0;
     $query_pinjaman_berjalan = mysqli_query($Conn, "SELECT id_pinjaman, tanggal, periode_angsuran FROM pinjaman WHERE status='Berjalan'");
     while ($data = mysqli_fetch_array($query_pinjaman_berjalan)) {
         $id_pinjaman= $data['id_pinjaman'];
@@ -13,7 +14,6 @@
         
         //Tanggal Sekarang
         $TanggalSekarang=date('Y-m-d');
-        $JumlahPeriodeTagihan=0;
         for ( $i=1; $i<=$periode_angsuran; $i++ ){
             $GetPeriodePinjaman=date('d/m/Y', strtotime('+'.$i.' month', strtotime($tanggal))); 
             //Ubah Format Tangga
@@ -31,9 +31,14 @@
                 $JumlahPeriodeTagihan=$JumlahPeriodeTagihan+0;
             }
         }
-        if(!empty($JumlahPeriodeTagihan)){
-            $JumlahNotifikasi=$JumlahNotifikasi+1;
-        }
+    }
+    if(!empty($JumlahPeriodeTagihan)){
+        $JumlahNotifikasi=1;
+    }
+    //Hitung Anggota Pending
+    $JumlahAnggotaPendding = mysqli_num_rows(mysqli_query($Conn, "SELECT id_anggota FROM anggota WHERE status='Pending'"));
+    if(!empty($JumlahAnggotaPendding)){
+        $JumlahNotifikasi=$JumlahNotifikasi+1;
     }
     //Apabila ada notifgikasi
     if(!empty($JumlahNotifikasi)){
