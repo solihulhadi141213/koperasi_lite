@@ -25,7 +25,7 @@
             //Buka Informasi
             $nama_simpanan=GetDetailData($Conn,'simpanan_jenis','id_simpanan_jenis',$id_simpanan_jenis,'nama_simpanan');
             $keterangan=GetDetailData($Conn,'simpanan_jenis','id_simpanan_jenis',$id_simpanan_jenis,'keterangan');
-            $rutin=GetDetailData($Conn,'simpanan_jenis','id_simpanan_jenis',$id_simpanan_jenis,'rutin');
+            $kategori=GetDetailData($Conn,'simpanan_jenis','id_simpanan_jenis',$id_simpanan_jenis,'kategori');
             $nominal=GetDetailData($Conn,'simpanan_jenis','id_simpanan_jenis',$id_simpanan_jenis,'nominal');
 ?>
     <input type="hidden" name="id_simpanan_jenis" value="<?php echo $id_simpanan_jenis; ?>">
@@ -47,27 +47,26 @@
     </div>
     <div class="row mb-3">
         <div class="col col-md-4">
-            <label for="rutin_edit">Simapanan Wajib</label>
+            <label for="kategori_edit">Kategori Simpanan</label>
         </div>
         <div class="col-md-8">
-            <select name="rutin" id="rutin_edit" class="form-control">
-                <option value="">Pilih</option>
-                <option <?php if($rutin=="1"){echo "selected";} ?> value="1">Ya</option>
-                <option <?php if($rutin==0){echo "selected";} ?> value="0">Tidak</option>
+            <select name="kategori" id="kategori_edit" class="form-control">
+                <option <?php if($kategori==""){echo "selected";} ?> value="">Pilih</option>
+                <option <?php if($kategori=="Simpanan Wajib"){echo "selected";} ?> value="Simpanan Wajib">Simpanan Wajib</option>
+                <option <?php if($kategori=="Simpanan Pokok"){echo "selected";} ?> value="Simpanan Pokok">Simpanan Pokok</option>
+                <option <?php if($kategori=="Simpanan Sukarela"){echo "selected";} ?> value="Simpanan Sukarela">Simpanan Sukarela</option>
             </select>
-            <small class="credit">
-                <code class="text text-dark">
-                    Simpanan wajib diatur agar proses debet dapat dilakukan secara simultan.
-                </code>
-            </small>
         </div>
     </div>
-    <div class="row mb-3" id="form_nominal_edit">
+    <div class="row mb-3">
         <div class="col col-md-4">
             <label for="nominal_edit">Nominal</label>
         </div>
         <div class="col-md-8">
             <input type="text" name="nominal" id="nominal_edit" class="form-control form-money" value="<?php echo $nominal; ?>">
+            <small class="text-muted">
+                Apabila nominal simpanan bersifat relatif (Tidak ditentukan besarnya) maka anda bisa mengosongkan nilai nominal ini
+            </small>
         </div>
     </div>
     <div class="row mb-3">

@@ -9,15 +9,15 @@
                 <div class="modal-body">
                     <div class="row mb-3">
                         <div class="col col-md-4">
-                            <label for="nama_simpanan">Nama Jenis Simpanan</label>
+                            <label for="nama_simpanan">Nama/Kode Simpanan</label>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="nama_simpanan" id="nama_simpanan" class="form-control">
+                            <input type="text" name="nama_simpanan" id="nama_simpanan" class="form-control" placeholder="Contoh : SMW (Untuk Simpanan Wajib Anggota)">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col col-md-4">
-                            <label for="keterangan">Deskripsi</label>
+                            <label for="keterangan">Deskripsi/Keterangan</label>
                         </div>
                         <div class="col-md-8">
                             <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
@@ -25,27 +25,26 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col col-md-4">
-                            <label for="rutin">Simapanan Wajib</label>
+                            <label for="kategori">Kategori Simpanan</label>
                         </div>
                         <div class="col-md-8">
-                            <select name="rutin" id="rutin" class="form-control">
+                            <select name="kategori" id="kategori" class="form-control">
                                 <option value="">Pilih</option>
-                                <option value="1">Ya</option>
-                                <option value="0">Tidak</option>
+                                <option value="Simpanan Wajib">Simpanan Wajib</option>
+                                <option value="Simpanan Pokok">Simpanan Pokok</option>
+                                <option value="Simpanan Sukarela">Simpanan Sukarela</option>
                             </select>
-                            <small class="credit">
-                                <code class="text text-dark">
-                                    Simpanan wajib diatur agar proses debet dapat dilakukan secara simultan.
-                                </code>
-                            </small>
                         </div>
                     </div>
-                    <div class="row mb-3" id="form_nominal">
+                    <div class="row mb-3">
                         <div class="col col-md-4">
                             <label for="nominal">Nominal</label>
                         </div>
                         <div class="col-md-8">
                             <input type="text" name="nominal" id="nominal" class="form-control form-money">
+                            <small class="text-muted">
+                                Apabila nominal simpanan bersifat relatif (Tidak ditentukan besarnya) maka anda bisa mengosongkan nilai nominal ini
+                            </small>
                         </div>
                     </div>
                     <div class="row mb-3">
