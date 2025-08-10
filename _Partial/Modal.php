@@ -46,6 +46,7 @@
             "NeracaSaldo"           => "_Page/NeracaSaldo/ModalNeracaSaldo.php",
             "LabaRugi"              => "_Page/LabaRugi/ModalLabaRugi.php",
             "RiwayatSimpanPinjam"   => "_Page/RiwayatSimpanPinjam/ModalRiwayatSimpanPinjam.php",
+            "SimpananAnggota"       => "_Page/SimpananAnggota/ModalSimpananAnggota.php",
             "RekapitulasiTransaksi" => "_Page/RekapitulasiTransaksi/ModalRekapitulasiTransaksi.php",
             "BagiHasil"             => "_Page/BagiHasil/ModalBagiHasil.php",
             "Laporan"               => "_Page/Laporan/ModalLaporan.php"

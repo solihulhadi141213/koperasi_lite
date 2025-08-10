@@ -52,6 +52,7 @@
             "RiwayatSimpanPinjam"       => "_Page/RiwayatSimpanPinjam/RiwayatSimpanPinjam.js",
             "RekapitulasiTransaksi"     => "_Page/RekapitulasiTransaksi/RekapitulasiTransaksi.js",
             "RiwayatAnggota"            => "_Page/RiwayatAnggota/RiwayatAnggota.js",
+            "SimpananAnggota"           => "_Page/SimpananAnggota/SimpananAnggota.js",
             "Laporan"                   => "_Page/Laporan/Laporan.js"
         ];
 

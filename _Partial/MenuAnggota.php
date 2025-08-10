@@ -1,4 +1,9 @@
 <?php
+    if(empty($_GET['Page'])){
+        $Page="";
+    }else{
+        $Page=$_GET['Page'];
+    }
     if(empty($_GET['Sub'])){
         $Sub="";
     }else{
@@ -14,7 +19,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link <?php if($Sub!=="Simpanan"){echo "collapsed";} ?>" href="index.php?Page=RiwayatAnggota&Sub=Simpanan">
+            <a class="nav-link <?php if($Page!=="SimpananAnggota"){echo "collapsed";} ?>" href="index.php?Page=SimpananAnggota">
                 <i class="bi bi-circle"></i>
                 <span>Simpanan</span>
             </a>

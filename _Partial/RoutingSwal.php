@@ -84,6 +84,15 @@
             )
         </script>
     <?php } ?>
+    <?php if($NotifikasiSwal=="Pembatalan Pembayaran Berhasil"){ ?>
+        <script>
+            Swal.fire(
+                'Berhasil!',
+                'Pembatalan Pembayaran Berhasil!',
+                'success'
+            )
+        </script>
+    <?php } ?>
 <?php 
     unset($_SESSION['NotifikasiSwal']);
     }
