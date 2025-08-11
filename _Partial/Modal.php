@@ -48,6 +48,7 @@
             "RiwayatSimpanPinjam"   => "_Page/RiwayatSimpanPinjam/ModalRiwayatSimpanPinjam.php",
             "SimpananAnggota"       => "_Page/SimpananAnggota/ModalSimpananAnggota.php",
             "PenarikanAnggota"      => "_Page/PenarikanAnggota/ModalPenarikanAnggota.php",
+            "PinjamanAnggota"       => "_Page/PinjamanAnggota/ModalPinjamanAnggota.php",
             "RekapitulasiTransaksi" => "_Page/RekapitulasiTransaksi/ModalRekapitulasiTransaksi.php",
             "BagiHasil"             => "_Page/BagiHasil/ModalBagiHasil.php",
             "Laporan"               => "_Page/Laporan/ModalLaporan.php"

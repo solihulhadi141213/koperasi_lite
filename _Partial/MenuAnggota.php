@@ -31,8 +31,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link <?php if($Sub!=="Pinjaman"){echo "collapsed";} ?>" href="index.php?Page=RiwayatAnggota&Sub=Pinjaman">
-                <i class="bi bi-circle"></i>
+            <a class="nav-link <?php if($Page!=="PinjamanAnggota"){echo "collapsed";} ?>" href="index.php?Page=PinjamanAnggota">
+                <i class="bi bi-send-arrow-down"></i>
                 <span>Pinjaman</span>
             </a>
         </li>
