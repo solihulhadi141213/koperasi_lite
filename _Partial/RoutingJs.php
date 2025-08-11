@@ -53,6 +53,7 @@
             "RekapitulasiTransaksi"     => "_Page/RekapitulasiTransaksi/RekapitulasiTransaksi.js",
             "RiwayatAnggota"            => "_Page/RiwayatAnggota/RiwayatAnggota.js",
             "SimpananAnggota"           => "_Page/SimpananAnggota/SimpananAnggota.js",
+            "PenarikanAnggota"          => "_Page/PenarikanAnggota/PenarikanAnggota.js",
             "Laporan"                   => "_Page/Laporan/Laporan.js"
         ];
 

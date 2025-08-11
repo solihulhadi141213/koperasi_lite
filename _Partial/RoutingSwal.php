@@ -93,6 +93,15 @@
             )
         </script>
     <?php } ?>
+    <?php if($NotifikasiSwal=="Pengajuan Penarikan Dana Berhasil Dikirim"){ ?>
+        <script>
+            Swal.fire(
+                'Berhasil!',
+                'Pengajuan Penarikan Dana Berhasil Dikirim!',
+                'success'
+            )
+        </script>
+    <?php } ?>
 <?php 
     unset($_SESSION['NotifikasiSwal']);
     }

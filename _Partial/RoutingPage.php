@@ -50,6 +50,7 @@
             "Laporan"           =>  "_Page/Laporan/Laporan.php",
             "CetakInvoice"      =>  "_Page/CetakInvoice/CetakInvoice.php",
             "SimpananAnggota"   =>  "_Page/SimpananAnggota/SimpananAnggota.php",
+            "PenarikanAnggota"   =>  "_Page/PenarikanAnggota/PenarikanAnggota.php",
             "Error"             =>  "_Page/Error/Error.php"
         ];
 

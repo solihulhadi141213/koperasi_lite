@@ -13,20 +13,20 @@
 <aside id="sidebar" class="sidebar menu_background">
     <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-            <a class="nav-link <?php if($Sub==""){echo "";}else{echo "collapsed";} ?>" href="index.php">
+            <a class="nav-link <?php if($Page==""){echo "";}else{echo "collapsed";} ?>" href="index.php">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link <?php if($Page!=="SimpananAnggota"){echo "collapsed";} ?>" href="index.php?Page=SimpananAnggota">
-                <i class="bi bi-circle"></i>
+                <i class="bi bi-bank"></i>
                 <span>Simpanan</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link <?php if($Sub!=="Penarikan"){echo "collapsed";} ?>" href="index.php?Page=RiwayatAnggota&Sub=Penarikan">
-                <i class="bi bi-circle"></i>
+            <a class="nav-link <?php if($Page!=="PenarikanAnggota"){echo "collapsed";} ?>" href="index.php?Page=PenarikanAnggota">
+                <i class="bi bi-coin"></i>
                 <span>Penarikan</span>
             </a>
         </li>
