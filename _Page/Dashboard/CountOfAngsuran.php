@@ -16,8 +16,11 @@
     ];
 
     //Jumlah Angsuran
-    $SumAngsuran = mysqli_fetch_array(mysqli_query($Conn, "SELECT SUM(jumlah) AS jumlah FROM pinjaman_angsuran"));
+    $SumAngsuran = mysqli_fetch_array(mysqli_query($Conn, "SELECT SUM(jumlah) AS jumlah FROM pinjaman_angsuran WHERE status='Lunas'"));
     $JumlahAngsuran = $SumAngsuran['jumlah'];
+    if(empty($SumAngsuran['jumlah'])){
+         $JumlahAngsuran =0;
+    }
     $JumlahAngsuran = "" . number_format($JumlahAngsuran,0,',','.');
     
     //Jumlah Record Angsuran

@@ -43,12 +43,10 @@
                                         <!-- Data Info -->
                                         <div>
                                             <div class="d-flex">
-                                                <span class="text-success small pt-2" style="width: 60px;">Aktif</span>
-                                                <span class="text-muted small pt-2" id="put_anggota_aktif">0.000</span>
+                                                <h3 id="put_anggota_aktif"></h3>
                                             </div>
                                             <div class="d-flex">
-                                                <span class="text-danger small pt-2" style="width: 60px;">Keluar</span>
-                                                <span class="text-muted small pt-2" id="put_anggota_keluar">0.000</span>
+                                                <small>Orang</small>
                                             </div>
                                         </div>
                                     </div>
@@ -64,22 +62,10 @@
                                             <i class="bi bi-cash-coin"></i>
                                         </div>
                                         <div class="ps-3">
-                                            <span class="text-info small pt-2 ps-1" 
-                                                data-bs-toggle="tooltip" 
-                                                data-bs-placement="top" 
-                                                data-bs-custom-class="custom-tooltip" 
-                                                data-bs-title="Jumlah Simpanan Anggota Setelah Dikurangi Penarikan" 
-                                                id="put_simpanan_anggota">
+                                            <h3 data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Jumlah Simpanan Anggota Setelah Dikurangi Penarikan" id="put_simpanan_anggota">
                                                 <!-- Menampilkan Simpanan Anggota -->
-                                            </span><br>
-                                            <span class="text-warning small pt-2 ps-1" 
-                                                data-bs-toggle="tooltip" 
-                                                data-bs-placement="top" 
-                                                data-bs-custom-class="custom-tooltip" 
-                                                data-bs-title="Jumlah Total Penarikan Dana Simpanan" 
-                                                id="put_penarikan_dana">
-                                                <!-- Menampilkan Penarikan Dana Anggota -->
-                                            </span>
+                                            </h3>
+                                            <small>(Rp/IDR)</small>
                                         </div>
                                     </div>
                                 </div>
@@ -95,20 +81,10 @@
                                         </div>
 
                                         <div class="ps-3">
-                                            <span class="text-dark small pt-2 ps-1"  
-                                                data-bs-toggle="tooltip" 
-                                                data-bs-placement="top" 
-                                                data-bs-custom-class="custom-tooltip" 
-                                                data-bs-title="Jumlah Total Pinjaman Anggota Yang Belum Lunas"  
-                                                id="put_pinjaman_anggota">
-                                            </span><br>
-                                            <span class="text-muted small pt-2 ps-1" 
-                                                data-bs-toggle="tooltip" 
-                                                data-bs-placement="top" 
-                                                data-bs-custom-class="custom-tooltip" 
-                                                data-bs-title="Jumlah Sesi Pinjaman Belum Lunas" 
-                                                id="put_sesi_pinjaman">
-                                            </span>
+                                            <h3 data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"  data-bs-title="Jumlah Total Pinjaman Anggota Yang Belum Lunas" id="put_pinjaman_anggota">
+                                                <!-- Menampilkan Jumlah Pinjaman -->
+                                            </h3>
+                                            <small>(Rp/IDR)</small>
                                         </div>
                                     </div>
                                 </div>
@@ -123,20 +99,10 @@
                                             <i class="bi bi-bank"></i>
                                         </div>
                                         <div class="ps-3">
-                                            <span class="text-muted small pt-2 ps-1"  
-                                                data-bs-toggle="tooltip" 
-                                                data-bs-placement="top" 
-                                                data-bs-custom-class="custom-tooltip" 
-                                                data-bs-title="Jumlah Nominal Angsuran Masuk" 
-                                                id="put_nominal_angsuran">
-                                            </span><br>
-                                            <span class="text-muted small pt-2 ps-1"  
-                                                data-bs-toggle="tooltip" 
-                                                data-bs-placement="top" 
-                                                data-bs-custom-class="custom-tooltip" 
-                                                data-bs-title="Jumlah Record Angsuran Masuk" 
-                                                id="put_record_angsuran">
-                                            </span><br>
+                                            <h3 data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Jumlah Nominal Angsuran Masuk" id="put_nominal_angsuran">
+                                                <!-- Menampilkan Jumlah Angsuran -->
+                                            </h3>
+                                            <small>(Rp/IDR)</small>
                                         </div>
                                     </div>
                                 </div>

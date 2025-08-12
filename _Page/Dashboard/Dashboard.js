@@ -7,7 +7,6 @@ function CountOfAnggota() {
         success: function(response) {
             if (response.status == "Success") {
                 $('#put_anggota_aktif').hide().html(response.anggota_aktif).fadeIn(500);
-                $('#put_anggota_keluar').hide().html(response.anggota_keluar).fadeIn(500);
                 CountOfSimpanan();
             } else {
                 $('#notifikasi_proses').hide().html('<div class="alert alert-danger"><small>' + response.message + '</small></div>').fadeIn(500);
@@ -27,8 +26,7 @@ function CountOfSimpanan() {
         dataType: "json",
         success: function(response) {
             if (response.status == "Success") {
-                $('#put_simpanan_anggota').hide().html('<i class="bi bi-plus"></i> '+response.put_simpanan_anggota+'').fadeIn(500);
-                $('#put_penarikan_dana').hide().html('- '+response.put_penarikan_dana+'').fadeIn(500);
+                $('#put_simpanan_anggota').hide().html(''+response.put_simpanan_anggota+'').fadeIn(500);
                 CountOfPinjaman();
             } else {
                 $('#notifikasi_proses').hide().html('<div class="alert alert-danger"><small>' + response.message + '</small></div>').fadeIn(500);
@@ -49,7 +47,6 @@ function CountOfPinjaman() {
         success: function(response) {
             if (response.status == "Success") {
                 $('#put_pinjaman_anggota').hide().html('<i class="bi bi-bank"></i> '+response.put_pinjaman_anggota+'').fadeIn(500);
-                $('#put_sesi_pinjaman').hide().html('<i class="bi bi-person-circle"></i> '+response.put_sesi_pinjaman+'').fadeIn(500);
 
                 CountOfAngsuran();
             } else {

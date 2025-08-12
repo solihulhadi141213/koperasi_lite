@@ -24,7 +24,7 @@
 
     //Pinjaman Bersih
     $pinjaman=$JumlahPinjaman-$JumlahAngsuran;
-    $JumlahPinjamanBersihFormat = "" . number_format($pinjaman,0,',','.');
+    $JumlahPinjamanFormat = "" . number_format($JumlahPinjaman,0,',','.');
     
     //Jumlah Sesi Pinjaman
     $JumlahSesiPinjamanBelumLunas = mysqli_num_rows(mysqli_query($Conn, "SELECT*FROM pinjaman WHERE status!='Lunas'"));
@@ -33,7 +33,7 @@
     $response = [
         "status" => "Success",
         "message" => "Data Count Barang Berhasil",
-        "put_pinjaman_anggota" => "$JumlahPinjamanBersihFormat",
+        "put_pinjaman_anggota" => "$JumlahPinjamanFormat",
         "put_sesi_pinjaman" => "($JumlahSesiPinjamanBelumLunasFormat)",
     ];
 

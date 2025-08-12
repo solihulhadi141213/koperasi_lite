@@ -15,12 +15,12 @@
         "message" => "Belum ada proses yang dilakukan pada sistem."
     ];
     //Jumlah Simpanan Bersih
-    $SumSimpananKotor = mysqli_fetch_array(mysqli_query($Conn, "SELECT SUM(jumlah) AS jumlah FROM simpanan WHERE kategori!='Penarikan'"));
+    $SumSimpananKotor = mysqli_fetch_array(mysqli_query($Conn, "SELECT SUM(jumlah) AS jumlah FROM simpanan WHERE status='Lunas'"));
     $JumlahSimpananKotor = $SumSimpananKotor['jumlah'];
     
     //Penarikan Simpanan
-    $SumPenarikan = mysqli_fetch_array(mysqli_query($Conn, "SELECT SUM(jumlah) AS jumlah FROM simpanan WHERE kategori='Penarikan'"));
-    $JumlahPenarikan = $SumPenarikan['jumlah'];
+    $SumPenarikan = mysqli_fetch_array(mysqli_query($Conn, "SELECT SUM(nominal) AS nominal FROM simpanan_penarikan WHERE status='Lunas'"));
+    $JumlahPenarikan = $SumPenarikan['nominal'];
     
     //Jumlah Simpanan Bersih
     $JumlahSimpananBersih=$JumlahSimpananKotor-$JumlahPenarikan;
