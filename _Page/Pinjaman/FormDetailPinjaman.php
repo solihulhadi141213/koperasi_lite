@@ -6,17 +6,17 @@
     include "../../_Config/SettingGeneral.php";
     include "../../_Config/Session.php";
     if(empty($SessionIdAkses)){
-        echo '<div class="row">';
-        echo '  <div class="col-md-12 mb-3 text-center">';
-        echo '      <small class="text-danger">Sesi Akses Sudah Berakhir, Silahkan Login Ulang</small>';
-        echo '  </div>';
+        echo '<div class="alert alert-danger">';
+        echo '  <small>';
+        echo '      Sesi Akses Sudah Berakhir, Silahkan Login Ulang';
+        echo '  </small>';
         echo '</div>';
     }else{
         if(empty($_POST['id_pinjaman'])){
-            echo '<div class="row">';
-            echo '  <div class="col-md-12 mb-3 text-center">';
-            echo '      <small class="text-danger">Tidak ada data yang ditangkap oleh sistem</small>';
-            echo '  </div>';
+            echo '<div class="alert alert-danger">';
+            echo '  <small>';
+            echo '      ID Pinjaman Tidak Boleh Kosong!';
+            echo '  </small>';
             echo '</div>';
         }else{
             $id_pinjaman=$_POST['id_pinjaman'];
@@ -35,18 +35,12 @@
             $DataPinjaman = $result->fetch_assoc();
             
             // Simpan hasil ke variabel
-            $id_anggota = $DataPinjaman['id_setting_general'] ?? 0;
-            $uuid_pinjaman = $DataPinjaman['uuid_pinjaman'] ?? null;
-            $nip = $DataPinjaman['nip'] ?? null;
-            $nama = $DataPinjaman['nama'] ?? null;
-          
+            $id_pinjaman_jenis = $DataPinjaman['id_pinjaman_jenis'] ?? null;
+            $id_anggota = $DataPinjaman['id_anggota'] ?? null;
+            $tanggal_pengajuan = $DataPinjaman['tanggal_pengajuan'] ?? null;
+            $tanggal_pencairan = $DataPinjaman['tanggal_pencairan'] ?? null;
             $tanggal = $DataPinjaman['tanggal'] ?? null;
-            $jatuh_tempo = $DataPinjaman['jatuh_tempo'] ?? null;
-            $denda = $DataPinjaman['denda'] ?? 0;
-            $sistem_denda = $DataPinjaman['sistem_denda'] ?? null;
             $jumlah_pinjaman = $DataPinjaman['jumlah_pinjaman'] ?? 0;
-            $persen_jasa = $DataPinjaman['persen_jasa'] ?? 0;
-            $persen_jasa = $DataPinjaman['persen_jasa'] ?? 0;
             $rp_jasa = $DataPinjaman['rp_jasa'] ?? 0;
             $angsuran_pokok = $DataPinjaman['angsuran_pokok'] ?? 0;
             $angsuran_total = $DataPinjaman['angsuran_total'] ?? 0;
@@ -57,10 +51,9 @@
             $stmt->close();
 
             //Format tanggal
-            $strtotime=strtotime($tanggal);
-            $TanggalFormat=date('d/m/Y',$strtotime);
+            $tanggal_pengajuan_format=date('d/m/Y',strtotime($tanggal_pengajuan));
+
             //Format Rupiah
-            $denda_format = "Rp " . number_format($denda,0,',','.');
             $jumlah_pinjaman_format = "Rp " . number_format($jumlah_pinjaman,0,',','.');
             $rp_jasa_format = "Rp " . number_format($rp_jasa,0,',','.');
             $angsuran_pokok_format = "Rp " . number_format($angsuran_pokok,0,',','.');
@@ -75,99 +68,161 @@
                     if($status=="Macet"){
                         $LabelStatus='<span class="badge badge-danger">Macet</span>';
                     }else{
-                        $LabelStatus='<span class="badge badge-dark">None</span>';
+                        if($status=="Pending"){
+                            $LabelStatus='<span class="badge badge-danger">Pending</span>';
+                        }else{
+                            if($status=="Ditolak"){
+                                $LabelStatus='<span class="badge badge-danger">Ditolak</span>';
+                            }else{
+                                $LabelStatus='<span class="badge badge-dark">None</span>';
+                            }
+                        }
                     }
                 }
             }
-?>
-            <input type="hidden" name="Page" value="Pinjaman">
-            <input type="hidden" name="Sub" value="DetailPinjaman">
-            <input type="hidden" name="id" value="<?php echo $id_pinjaman; ?>">
-            <div class="row mb-3">
-                <div class="col col-md-4">Tanggal Pinjaman</div>
-                <div class="col col-md-1">:</div>
-                <div class="col col-md-7">
-                    <code class="text text-grayish"><?php echo $TanggalFormat; ?></code>
+            //Nama Jenis Pinjaman
+            $NamaPinjaman=GetDetailData($Conn, 'pinjaman_jenis', 'id_pinjaman_jenis', $id_pinjaman_jenis, 'nama_pinjaman');
+
+            //Nama Anggota
+            $NamaAnggota=GetDetailData($Conn, 'anggota', 'id_anggota', $id_anggota, 'nama');
+
+            //Tampilkan Data
+            echo '
+                <div class="row mb-2">
+                    <div class="col-12"><b># Informasi Pinjaman</b></div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">No.Induk</div>
-                <div class="col col-md-1">:</div>
-                <div class="col col-md-7">
-                    <code class="text text-grayish"><?php echo $nip; ?></code>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Nama Pinjaman</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$NamaPinjaman.'</code></small></div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Nama Anggota</div>
-                <div class="col col-md-1">:</div>
-                <div class="col col-md-7">
-                    <code class="text text-grayish"><?php echo $nama; ?></code>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Tanggal Pengajuan</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$tanggal_pengajuan_format.'</code></small></div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Jatuh Tempo</div>
-                <div class="col col-md-1">:</div>
-                <div class="col col-md-7">
-                    <code class="text text-grayish"><?php echo "Tanggal $jatuh_tempo"; ?></code>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Nama Anggota</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$NamaAnggota.'</code></small></div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Denda</div>
-                <div class="col col-md-1">:</div>
-                <div class="col col-md-7">
-                    <code class="text text-grayish"><?php echo "$denda_format ($sistem_denda)"; ?></code>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Jumlah Pinjaman</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$jumlah_pinjaman_format.'</code></small></div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Jumlah Pinjaman</div>
-                <div class="col col-md-1">:</div>
-                <div class="col col-md-7">
-                    <code class="text text-grayish"><?php echo $jumlah_pinjaman_format; ?></code>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Periode Angsuran</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$periode_angsuran.' Bulan</code></small></div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Periode Angsuran</div>
-                <div class="col col-md-1">:</div>
-                <div class="col col-md-7">
-                    <code class="text text-grayish"><?php echo "$periode_angsuran Kali"; ?></code>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Angsuran Pokok</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$angsuran_pokok_format.'</code></small></div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">% Jasa</div>
-                <div class="col col-md-1">:</div>
-                <div class="col col-md-7">
-                    <code class="text text-grayish"><?php echo "$persen_jasa %"; ?></code>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Jasa Angsuran</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$rp_jasa_format.'</code></small></div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Rp Jasa</div>
-                <div class="col col-md-1">:</div>
-                <div class="col col-md-7">
-                    <code class="text text-grayish"><?php echo "$rp_jasa_format"; ?></code>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Angsuran Total</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$angsuran_total_format.'</code></small></div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Angsuran Pokok</div>
-                <div class="col col-md-1">:</div>
-                <div class="col col-md-7">
-                    <code class="text text-grayish"><?php echo "$angsuran_pokok_format"; ?></code>
+                <div class="row mb-3">
+                    <div class="col-5"><small>Status Pinjaman</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6">'.$LabelStatus.'</div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Angsuran + Jasa</div>
-                <div class="col col-md-1">:</div>
-                <div class="col col-md-7">
-                    <code class="text text-grayish"><?php echo "$angsuran_total_format"; ?></code>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Status</div>
-                <div class="col col-md-1">:</div>
-                <div class="col col-md-7">
-                    <code class="text text-grayish"><?php echo "$LabelStatus"; ?></code>
-                </div>
-            </div>
-<?php
+            ';
+            //Routing Berdasdarkan Status
+            if($status=="Pending"){
+                echo '
+                    <div class="row mb-2 mt-3">
+                        <div class="col-12">
+                            <div class="alert alert-warning">
+                                Pengajuan pinjaman tersebut memerlukan verifikasi anda. 
+                                Silahkan lakukan verifikasi pengajuan pinjaman dengan memilih update pinjaman pada tombol opsi.
+                            </div>
+                        </div>
+                    </div>
+                ';
+            }
+            if($status=="Berjalan"||$status=="Lunas"){
+                echo '
+                    <div class="row mb-2 mt-3">
+                        <div class="col-12">
+                            <b># Angsuran Pinjaman</b>
+                        </div>
+                    </div>
+                ';
+                echo '<div class="row mb-2 mt-3">';
+                echo '  <div class="col-12">';
+                echo '      <div class="table table-responsive">';
+                echo '          <table class="table table-striped table-hover">';
+                echo '
+                                    <thead>
+                                        <tr>
+                                            <th><b>No</b></th>
+                                            <th><b>Periode</b></th>
+                                            <th><b>Pokok</b></th>
+                                            <th><b>Jasa</b></th>
+                                            <th><b>Jumlah</b></th>
+                                            <th><b>Status</b></th>
+                                        </tr>
+                                    </thead>
+                ';
+                echo '              <tbody>';
+                //Buka Data Angsuran
+                $no=1;
+                $query = mysqli_query($Conn, "SELECT*FROM pinjaman_angsuran WHERE id_pinjaman='$id_pinjaman' ORDER BY id_pinjaman_angsuran ASC");
+                while ($data = mysqli_fetch_array($query)) {
+                    $id_pinjaman_angsuran= $data['id_pinjaman_angsuran'];
+                    $tanggal_angsuran= $data['tanggal_angsuran'];
+                    $pokok= $data['pokok'];
+                    $jasa= $data['jasa'];
+                    $jumlah= $data['jumlah'];
+                    $status_angsuran= $data['status'];
+
+                    //Format RP
+                    $pokok_format = "Rp " . number_format($pokok,0,',','.');
+                    $jasa_format = "Rp " . number_format($jasa,0,',','.');
+                    $jumlah_format = "Rp " . number_format($jumlah,0,',','.');
+
+                    //Format status
+                    if($status_angsuran=="None"){
+                        $label_status_angsuran='<span class="badge badge-dark">None</span>';
+                    }else{
+                        if($status_angsuran=="Pending"){
+                            $label_status_angsuran='<span class="badge badge-warning">Pending</span>';
+                        }else{
+                            if($status_angsuran=="Lunas"){
+                                $label_status_angsuran='<span class="badge badge-success">Lunas</span>';
+                            }else{
+                                $label_status_angsuran='<span class="badge badge-danger">Null</span>';
+                            }
+                        }
+                    }
+                    echo '
+                                        <tr>
+                                            <td class="text-center"><small>'.$no.'</b></td>
+                                            <td class="text-center"><small>'.$tanggal_angsuran.'</b></td>
+                                            <td class="text-center"><small>'.$pokok_format.'</b></td>
+                                            <td class="text-center"><small>'.$jasa_format.'</b></td>
+                                            <td class="text-center"><small>'.$jumlah_format.'</b></td>
+                                            <td class="text-center"><small>'.$label_status_angsuran.'</b></td>
+                                        </tr>
+                    ';
+                    $no++;
+                }
+                echo '              </tbody>';
+                echo '          </table>';
+                echo '      </div>';
+                echo '  </div>';
+                echo '</div>';
+            }
         }
     }
 ?>

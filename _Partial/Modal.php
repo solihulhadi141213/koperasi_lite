@@ -49,6 +49,7 @@
             "SimpananAnggota"       => "_Page/SimpananAnggota/ModalSimpananAnggota.php",
             "PenarikanAnggota"      => "_Page/PenarikanAnggota/ModalPenarikanAnggota.php",
             "PinjamanAnggota"       => "_Page/PinjamanAnggota/ModalPinjamanAnggota.php",
+            "AngsuranAnggota"       => "_Page/AngsuranAnggota/ModalAngsuranAnggota.php",
             "RekapitulasiTransaksi" => "_Page/RekapitulasiTransaksi/ModalRekapitulasiTransaksi.php",
             "BagiHasil"             => "_Page/BagiHasil/ModalBagiHasil.php",
             "Laporan"               => "_Page/Laporan/ModalLaporan.php"

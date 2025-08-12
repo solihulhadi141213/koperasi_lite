@@ -52,6 +52,7 @@
             "SimpananAnggota"   =>  "_Page/SimpananAnggota/SimpananAnggota.php",
             "PenarikanAnggota"  =>  "_Page/PenarikanAnggota/PenarikanAnggota.php",
             "PinjamanAnggota"   =>  "_Page/PinjamanAnggota/PinjamanAnggota.php",
+            "AngsuranAnggota"   =>  "_Page/AngsuranAnggota/AngsuranAnggota.php",
             "Error"             =>  "_Page/Error/Error.php"
         ];
 

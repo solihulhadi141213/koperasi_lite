@@ -55,6 +55,7 @@
             "SimpananAnggota"           => "_Page/SimpananAnggota/SimpananAnggota.js",
             "PenarikanAnggota"          => "_Page/PenarikanAnggota/PenarikanAnggota.js",
             "PinjamanAnggota"           => "_Page/PinjamanAnggota/PinjamanAnggota.js",
+            "AngsuranAnggota"           => "_Page/AngsuranAnggota/AngsuranAnggota.js",
             "Laporan"                   => "_Page/Laporan/Laporan.js"
         ];
 

@@ -85,19 +85,18 @@
 
             //Nama Anggota
             $NamaAnggota=GetDetailData($Conn, 'anggota', 'id_anggota', $id_anggota, 'nama');
+            $nip=GetDetailData($Conn, 'anggota', 'id_anggota', $id_anggota, 'nip');
 
             //Tampilkan Data
             echo '
                 <input type="hidden" name="id_pinjaman" value="'.$id_pinjaman.'">
                 <div class="row mb-2">
-                    <div class="col-5"><small>Nama Pinjaman</small></div>
-                    <div class="col-1"><small>:</small></div>
-                    <div class="col-6"><small><code class="text text-grayish">'.$NamaPinjaman.'</code></small></div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-5"><small>Tanggal Pengajuan</small></div>
-                    <div class="col-1"><small>:</small></div>
-                    <div class="col-6"><small><code class="text text-grayish">'.$tanggal_pengajuan_format.'</code></small></div>
+                    <div class="col-12">
+                        <b># Informasi Anggota</b><br>
+                        <small>
+                            Dengan ini kami sampaikan pengajuan pinjaman dari anggota sebagaimana uraian berikut :
+                        </small>
+                    </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col-5"><small>Nama Anggota</small></div>
@@ -105,17 +104,58 @@
                     <div class="col-6"><small><code class="text text-grayish">'.$NamaAnggota.'</code></small></div>
                 </div>
                 <div class="row mb-3">
+                    <div class="col-5"><small>Nomor Identitas</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$nip.'</code></small></div>
+                </div>
+            ';
+            echo '
+                <div class="row mb-2 mt-3">
+                    <div class="col-12">
+                        <b># Informasi Pinjaman</b><br>
+                        <small>
+                            Mengajukan pinjaman sesuai pengajuan yang telah dikirmkan sebagai berikut :
+                        </small>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Tanggal Pengajuan</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$tanggal_pengajuan_format.'</code></small></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Nama Pinjaman</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$NamaPinjaman.'</code></small></div>
+                </div>
+                <div class="row mb-2">
                     <div class="col-5"><small>Jumlah Pinjaman</small></div>
                     <div class="col-1"><small>:</small></div>
                     <div class="col-6"><small><code class="text text-grayish">'.$jumlah_pinjaman_format.'</code></small></div>
                 </div>
-                 <div class="row mb-2 mt-3">
-                    <div class="col-12 text-center">
-                        <div class="alert alert-danger">
-                            <small>
-                                Dengan menghapus data pinjaman tersebut, anda selanjutnya tidak akan bisa melakukan proses verifikasi untuk pengajuan ini.<br><br>
-                                <b>Apakah Anda Yakin Akan Tetap Menghapus Pengajuan Pinjaman Ini?</b>
-                            </small>
+            ';
+             echo '
+                <div class="row mb-2 mt-3">
+                    <div class="col-12">
+                        <b># Informasi Verifikasi</b><br>
+                        <small>
+                            Telah dilakukan verifikasi data pengajuan dengan hasil sebagai berikut :
+                        </small>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" id="status_diterima" value="Diterima">
+                            <label class="form-check-label" for="status_diterima">
+                                Pengajuan Pinjaman Diterima
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" id="status_ditolak" value="Ditolak">
+                            <label class="form-check-label" for="status_ditolak">
+                                Pengajuan Pinjaman Ditolak
+                            </label>
                         </div>
                     </div>
                 </div>

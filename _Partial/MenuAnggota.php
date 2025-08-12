@@ -37,8 +37,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link <?php if($Sub!=="Angsuran"){echo "collapsed";} ?>" href="index.php?Page=RiwayatAnggota&Sub=Angsuran">
-                <i class="bi bi-circle"></i>
+            <a class="nav-link <?php if($Page!=="AngsuranAnggota"){echo "collapsed";} ?>" href="index.php?Page=AngsuranAnggota">
+                <i class="bi bi-cash-coin"></i>
                 <span>Angsuran</span>
             </a>
         </li>
