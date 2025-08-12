@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <form action="javascript:void(0);" id="ProsesFilter">
-                <input type="hidden" name="page" id="page">
+                <input type="hidden" name="page" id="page" value="1">
                 <div class="modal-header">
                     <h5 class="modal-title text-dark"><i class="bi bi-funnel"></i> Filter Pinjaman</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -26,40 +26,13 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col col-md-4"><label for="OrderBy">Mode Urutan</label></div>
+                        <div class="col col-md-4"><label for="periode_tahun">Periode Tahun</label></div>
                         <div class="col col-md-8">
-                            <select name="OrderBy" id="OrderBy" class="form-control">
-                                <option value="">Pilih</option>
-                                <option value="nip">No.Induk</option>
-                                <option value="nama">Nama Anggota</option>
-                                <option value="tanggal_angsuran">Tanggal Angsuran</option>
-                                <option value="tanggal_bayar">Tanggal Bayar</option>
-                            </select>
+                            <input type="number" name="periode_tahun" id="periode_tahun" class="form-control" value="<?php echo date('Y'); ?>">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col col-md-4"><label for="ShortBy">Tipe urutan</label></div>
-                        <div class="col col-md-8">
-                            <select name="ShortBy" id="ShortBy" class="form-control">
-                                <option value="DESC">Z To A</option>
-                                <option value="ASC">A To Z</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col col-md-4"><label for="keyword_by">Pencarian</label></div>
-                        <div class="col col-md-8">
-                            <select name="keyword_by" id="keyword_by" class="form-control">
-                                <option value="">Pilih</option>
-                                <option value="nip">No.Induk</option>
-                                <option value="nama">Nama Anggota</option>
-                                <option value="tanggal_angsuran">Tanggal Angsuran</option>
-                                <option value="tanggal_bayar">Tanggal Bayar</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col col-md-4"><label for="keyword">Kata Kunci</label></div>
+                        <div class="col col-md-4"><label for="keyword">Pencarian</label></div>
                         <div class="col col-md-8" id="FormFilter">
                             <input type="text" name="keyword" id="keyword" class="form-control">
                         </div>
@@ -77,115 +50,19 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="ModalExportTagihan" tabindex="-1">
+<div class="modal fade" id="ModalDetailAngsuran" tabindex="-1">
     <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <form action="_Page/Tagihan/ProsesExportTagihan.php" method="POST" target="_blank">
-                <div class="modal-header">
-                    <h5 class="modal-title text-dark">
-                        <i class="bi bi-download"></i> Export Tagihan
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row mb-3">
-                        <div class="col col-md-12" id="FormExportTagihan">
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-rounded">
-                        <i class="bi bi-download"></i> Export
-                    </button>
-                    <button type="button" class="btn btn-dark btn-rounded" data-bs-dismiss="modal">
-                        <i class="bi bi-x-circle"></i> Tutup
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="ModalBayarTagihanAngsuran" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <form action="javascript:void(0);" id="ProssesBayarTagihanAngsuran">
-                <div class="modal-header">
-                    <h5 class="modal-title text-dark">
-                        <i class="bi bi-coin"></i> Bayar Tagihan Angsuran
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row mb-2">
-                        <div class="col col-md-12">
-                            <div class="alert alert-info">
-                                <small>
-                                    <b>Perhatian :</b><br>
-                                    Proses pembayaran pada fitur ini memungkinkan anda mencatat beberapa pembayaran angsuran pinjaman sekaligus (Multiple). 
-                                    Gunakan fitur ini jika proses pencatatan pembayaran dilakukan secara merata (Flat).
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col col-md-12" id="FormBayarTagihanAngsuran">
-                            <!-- Menampilkan List Tagihan Angsuran -->
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col col-md-12" id="NotifikasiBayarTagihanAngsuran">
-                            <!-- Notifikasi Proses Bayar Tagihan Angsuran -->
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-rounded" id="ButtonBayarTagihanAngsuran">
-                        <i class="bi bi-save"></i> Simpan Pembayaran
-                    </button>
-                    <button type="button" class="btn btn-dark btn-rounded" data-bs-dismiss="modal">
-                        <i class="bi bi-x-circle"></i> Tutup
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="ModalRekapBayarTagihanAngsuran" tabindex="-1">
-    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-dark">
-                    <i class="bi bi-download"></i> Rekap Proses Bayar Tagihan Angsuran
+                    <i class="bi bi-info-circle"></i> Detail Angsuran
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="row mb-2">
-                    <div class="col col-md-12" id="FormRekapBayarTagihanAngsuran">
-                        <!-- Menampilkan Form Rekap Bayar Tagihan Angsuran -->
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-dark btn-rounded" data-bs-dismiss="modal">
-                    <i class="bi bi-x-circle"></i> Tutup
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="ModalDetailPinjaman" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-dark"><i class="bi bi-info-circle"></i> Detail Tagihan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" >
-                <div class="row mb-3">
-                    <div class="col-md-12" id="FormDetailPinjaman">
-
+                <div class="row">
+                    <div class="col col-md-12" id="FormDetailAngsuran">
+                        
                     </div>
                 </div>
             </div>

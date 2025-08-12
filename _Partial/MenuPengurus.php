@@ -38,12 +38,12 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a class="nav-link <?php if($PageMenu=="JenisPinjaman"||$PageMenu=="Pinjaman"){echo "";}else{echo "collapsed";} ?>" data-bs-target="#pinjaman-nav" data-bs-toggle="collapse" href="javascript:void(0);">
+            <a class="nav-link <?php if($PageMenu=="JenisPinjaman"||$PageMenu=="Pinjaman"||$PageMenu=="Tagihan"){echo "";}else{echo "collapsed";} ?>" data-bs-target="#pinjaman-nav" data-bs-toggle="collapse" href="javascript:void(0);">
                 <i class="bi bi-bank"></i>
                 <span>Pinjaman</span>
                 <i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="pinjaman-nav" class="nav-content collapse <?php if($PageMenu=="JenisPinjaman"||$PageMenu=="Pinjaman"){echo "show";} ?>" data-bs-parent="#sidebar-nav">
+            <ul id="pinjaman-nav" class="nav-content collapse <?php if($PageMenu=="JenisPinjaman"||$PageMenu=="Pinjaman"||$PageMenu=="Tagihan"){echo "show";} ?>" data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="index.php?Page=JenisPinjaman" class="<?php if($PageMenu=="JenisPinjaman"){echo "active";} ?>">
                         <i class="bi bi-circle"></i><span>Jenis Pinjaman</span>
@@ -51,16 +51,15 @@
                 </li>
                 <li>
                     <a href="index.php?Page=Pinjaman" class="<?php if($PageMenu=="Pinjaman"){echo "active";} ?>">
-                        <i class="bi bi-circle"></i><span>Pinjaman</span>
+                        <i class="bi bi-circle"></i><span>Pinjaman Anggota</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?Page=Tagihan" class="<?php if($PageMenu=="Tagihan"){echo "active";} ?>">
+                        <i class="bi bi-circle"></i><span>Angsuran</span>
                     </a>
                 </li>
             </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link <?php if($PageMenu=="Tagihan"){echo "";}else{echo "collapsed";} ?>" href="index.php?Page=Tagihan">
-                <i class="bi bi-cash"></i>
-                <span>Angsuran</span>
-            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link <?php if($PageMenu=="Laporan"){echo "";}else{echo "collapsed";} ?>" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="javascript:void(0);">

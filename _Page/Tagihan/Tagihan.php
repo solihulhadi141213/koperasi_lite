@@ -14,41 +14,74 @@
 <section class="section dashboard">
     <div class="row">
         <div class="col-md-12">
-            <?php
-                echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">';
-                echo '  <small>';
-                echo '      Berikut ini halaman data tagihan pinjaman anggota.';
-                echo '      Data yang ditampilkan adalah data pinjaman yang masih berjalan.';
-                echo '      Sistem akan melakukan filter dan perhitungan jumlah angsuran yang belum dibayar.';
-                echo '      Lihat masing-masing detail data untukk mengetahui rincian tunggakan.';
-                echo '      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-                echo '  </small>';
-                echo '</div>';
-            ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <small>
+                    Berikut ini adalah halaman yang menampilkan data rekapitulasi angsuran berdasarkan anggota. 
+                    Pada halaman ini anda bisa memantau pembayaran angsuran pinjaman anggota.
+                </small>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <form action="javascript:void(0);" id="ProsesBatas">
-                        <div class="row">
-                            <div class="col-md-12 mb-3 text-end">
-                                <a class="btn btn-md btn-secondary btn-floating" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalFilter">
-                                    <i class="bi bi-search"></i>
-                                </a>
-                                <!-- <a class="btn btn-md btn-info btn-floating" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalExportTagihan">
-                                    <i class="bi bi-cloud-arrow-down"></i> 
-                                </a> -->
-                                <a class="btn btn-md btn-primary btn-floating" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ModalBayarTagihanAngsuran">
-                                    <i class="bi bi-plus"></i>
-                                </a>
-                            </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <b class="card-title">
+                                # Rekapitulasi Angsuran Anggota</b>
+                            </b>
                         </div>
-                    </form>
+                        <div class="col-4 text-end">
+                            <button type="button" class="btn btn-md btn-secondary btn-floating" data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter/Pencarian">
+                                <i class="bi bi-filter"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body" id="MenampilkanTabelTagihan">
-
+                <div class="card-body">
+                    <div class="table table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" valign="middle"><b>No</b></th>
+                                    <th rowspan="2" valign="middle"><b>Anggota</b></th>
+                                    <th colspan="12" class="text-center"><b>Periode Tahun <b id="year_info"><?php echo date('Y'); ?></b></th>
+                                </tr>
+                                <tr>
+                                    <?php
+                                        // Array nama bulan singkatan
+                                        $bulan_singkat = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
+                                        
+                                        // Loop untuk menampilkan header bulan
+                                        foreach ($bulan_singkat as $bulan) {
+                                            echo '<th><b>'.$bulan.'</b></th>';
+                                        }
+                                    ?>
+                                </tr>
+                            </thead>
+                            <tbody id="TabelTagihan">
+                                <!-- Menampilkan Data Angsuran Per Periode Disini -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-6">
+                            <small id="page_info">
+                                Page 1 Of 100
+                            </small>
+                        </div>
+                        <div class="col-6 text-end">
+                            <button type="button" class="btn btn-md btn-outline-info btn-floating" id="prev_button">
+                                <i class="bi bi-chevron-left"></i>
+                            </button>
+                            <button type="button" class="btn btn-md btn-outline-info btn-floating" id="next_button">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
