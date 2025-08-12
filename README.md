@@ -1,15 +1,19 @@
-# Aplikasi Koperasi Simpan Pinjam Ver si Lite
-Aplikasi Koperasi V 3.0.0 adalah sebuah aplikasi open source yang dirancang untuk membantu pengelolaan koperasi secara digital. Aplikasi ini dibangun menggunakan teknologi modern seperti PHP, MySQL, jQuery, dan Bootstrap 4 untuk memberikan pengalaman pengguna yang responsif dan mudah digunakan. Aplikasi ini cocok digunakan oleh koperasi simpan pinjam, koperasi serba usaha, atau koperasi konsumen yang membutuhkan sistem pengelolaan terintegrasi.
-<img src="./assets/img/screenshot/dashboard.png" width="100%">
+# Aplikasi (Lite)
+Aplikasi Koperasi (Versi Lita) adalah aplikasi koperasi simpan pinjam yang dikembangkan berdasarkan versi 3.0.0 yang sebelumnya memiliki fitur pengelolaan transaksi lengkap. 
+Aplikasi koperasi pada versi ini sengaja dikembangkan lebih sederhana dan hanya menyediakan fitur khusus untuk koperasi simpan pinjam saja. 
+Hal tersebut bertujuan agar proses pengelolaan simpan pinjam dapat dilakukan lebih mudah dan efektif. 
+Dengan fitur yang lebih ringkas, diharapkan mempermudah pengurus koperasi mengelola data menjadi lebih cepat dan akurat. 
+Pada versi ini, entitas pengguna dirancang lebih interaktif dan terhubung dengan alur bisnis secara langsung seperti pengajuan anggota, pembayaran simpanan secara mandiri dan memungkinkan anggota koperasi mengajukan pinjaman.
+
+## Gambaran Umum
+Secara umum, aplikasi Koperasi (Versi Lita) ini memiliki 4 (empat) entitas akses dengan tugas dan hak yang berbeda-beda. 
+Entitas akses tersebut terdiri dari anggota, sekretaris, bendahara dan ketua. Khusus untuk anggota, entitas tersebut memiliki kelompok data yang berbeda dengan entitas lainnya. 
+
+<img src="./assets/img/screenshot/dashboard-2.png" width="100%">
 
 ## Fitur Aplikasi
-1. **Akses**    
-    - Fitur Aplikasi <br>
-    Berfungsi mengelola kode otentifikasi pada masing-masing halaman.
-    - Entitas Akses <br>
-    Berfungsi untuk mengelola entitas/level akses (pengurus) sehingga memungkinkan masing-masing mempunyai hak akses yang berbeda sesuai tugasnya.
-    - Akses/Pengguna <br>
-    Berfungsi mengelola semua data akses pengguna pada level (Pengurus)
+1. Akses  
+    Berfungsi mengelola data akses pengguna pada level pengurus.
 2. Anggota
    - Anggota<br> 
      Berfungsi untuk mengelola semua data anggota, input data anggota, ubah dan hapus. Terdapat filter untuk pencarian, import untuk memasukan data dari excel dan export ke data excel.
@@ -35,26 +39,7 @@ Aplikasi Koperasi V 3.0.0 adalah sebuah aplikasi open source yang dirancang untu
      Untuk mengetahui siapa saja anggota koperasi yang menunggak atas pinjaman yang dilakukan, maka diperlukan halaman yang melakukan rekapitulasi data tunggakan ini. Indikator tunggakan ditunjukan apabila anggota bersangkutan belum membayar angsuran sesuai tanggal jatuh tempo. Pada modul ini juga anda bisa melakukan input angsuran secara multiple, jika pembayaran angsuran serentak.
    - Rekap Pinjaman<br>
      Halaman rekap pinjaman berfungsi untuk menampilkan data rekapitulasi pinjaman anggota berdasarkan periode waktu tertentu. Pada halaman inii terdapat 3 fitur data yang ditampilkan, yang diantaranya adalah : Rekap jumlah data pinjaman secara keseluruhan, rekap data pinjaman berdasarkan unit kerja/ divisi, rekap data pinjaman berdasarkan anggota.
-5. Barang/Inventory
-   - Master Barang<br>
-      Halaman master barang berfungsi untuk mencatat semua item barang jualan yang ada. Informasi yang dicatat terdiri dari kode, nama, kategori, stok, satuan, harga beli dan modul tambahan seperti multi harga dan multi satuan. Pada halaman ini anda juga dapat mengatur jenis-jenis harga yang berlaku.
-   - Batch & Expired<br>
-    Halaman Batch & Expired berfungsi untuk mengelola daftar batch barang serta informasi expire date sehingga jumlah barang yang expire dapat dimonitoring dengan mudah.
-   - Stock Opename<br>
-   Menambahkan fitur stock opename pada data barang
-   - Supplier
-6. Transaksi Operasional
-   - Kategori Operasional
-   - Transaksi Operasional
-   - Rekap Transaksi
-7. Transaksi Jual/Beli
-   - Transaksi Penjualan
-   - Transaksi Pembelian
-   - Rekap Transaksi
-8. Pembukuan Keuangan
-   - Bagi Hasil (SHU)
-   - Akun Perkiraan
-   - Jurnal Keuangan
+
 9. Laporan
    - Simpan Pinjam
    - Buku Bessar
@@ -69,21 +54,32 @@ Aplikasi Koperasi V 3.0.0 adalah sebuah aplikasi open source yang dirancang untu
 12. Konten Bantuan
 13. Profil Pengguna
 
-## Instalasi
-### Persyaratan Sistem
+### Perangkat Lunak
 - PHP 7.4 atau lebih baru
 - MySQL 5.7 / MariaDB 10.3 atau lebih baru
 - Web Server : Wampserver, Xampp
+- Browser : Mozila firefox / Google Chrome
+- OS : Win 10 64 Bit
+
+### Perangkat Keras
+- CPU : 1,5 GHz
+- RAM : 2 GB
+- Storage : SSD 256 GB
+- Internet : 1 Mbps
+
 ### Tahapan Instalasi
 - Instal webserver (Xampp, Wamp) terlebih dulu kemudian jalankan.
 - Simpan folder aplikasi pada directory htdoc (untuk pengguna xampp) atau www (untuk pengguna wamp).
 - Masuk ke database mnggunakan phpmyadmin dengan cara ketik localhost/phpmyadmin
-- Buat database baru dengan nama apapun (Misalnya : koperasi_v3)
+- Buat database baru dengan nama apapun (Misalnya : koperasi_lite)
 - Import database aplikasi (database standar aplikasi ini disimpan pada folder db).
 - Atur variabel koneksi database aplikasi pada file _Config/Connection.php
-- Ubah nama database sesuai nama database yang tadi di buat (Misalnya : koperasi_v3).
+- Ubah nama database sesuai nama database yang tadi di buat (Misalnya : koperasi_lite).
 - Buka aplikasi dengan cara ketik localhost/{nama_folder_aplikasi}
 - Lakukan login untuk pertama kali dengan memasukan email : dhiforester@gmail.com dan password : dhiforester
+### Referensi Komponen
+- Template : NiceAdmin (https://bootstrapmade.com/demo/NiceAdmin/)
+- CSS Library : Bootstrap v5.3.3 (https://getbootstrap.com/)
 
 
 
