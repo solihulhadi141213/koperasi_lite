@@ -1,0 +1,174 @@
+<?php
+    //Koneksi
+    date_default_timezone_set('Asia/Jakarta');
+    include "../../_Config/Connection.php";
+    include "../../_Config/GlobalFunction.php";
+    include "../../_Config/SettingGeneral.php";
+    include "../../_Config/Session.php";
+    if(empty($SessionIdAkses)){
+        echo '<div class="alert alert-danger">';
+        echo '  <small>';
+        echo '      Sesi Akses Sudah Berakhir, Silahkan Login Ulang';
+        echo '  </small>';
+        echo '</div>';
+    }else{
+        if(empty($_POST['id_simpanan_penarikan'])){
+            echo '<div class="alert alert-danger">';
+            echo '  <small>';
+            echo '      ID Pengajuan Penarikan Tidak Boleh Kosong!';
+            echo '  </small>';
+            echo '</div>';
+        }else{
+            $id_simpanan_penarikan=$_POST['id_simpanan_penarikan'];
+            
+            //Buka Detail Pinjaman
+            $sql = "SELECT * FROM simpanan_penarikan WHERE id_simpanan_penarikan = ?";
+            $stmt = $Conn->prepare($sql);
+            $id = 1;
+            $stmt->bind_param("i", $id_simpanan_penarikan);
+            
+            // Eksekusi statement
+            $stmt->execute();
+            
+            // Ambil hasil query
+            $result = $stmt->get_result();
+            $DataPenarikan = $result->fetch_assoc();
+            
+            // Simpan hasil ke variabel
+            $id_simpanan_jenis = $DataPenarikan['id_simpanan_jenis'] ?? null;
+            $id_anggota = $DataPenarikan['id_anggota'] ?? null;
+            $tanggal = $DataPenarikan['tanggal'] ?? null;
+            $bank = $DataPenarikan['bank'] ?? null;
+            $rekening = $DataPenarikan['rekening'] ?? null;
+            $nominal = $DataPenarikan['nominal'] ?? null;
+            $status = $DataPenarikan['status'] ?? null;
+
+            // Tutup statement
+            $stmt->close();
+
+            //Routing Status
+            if($status=="Pending"){
+                $LabelStatus='<span class="badge badge-warning">Pending</span>';
+            }else{
+                if($status=="Lunas"){
+                    $LabelStatus='<span class="badge badge-success">Lunas</span>';
+                }else{
+                   $LabelStatus='<span class="badge badge-danger">None</span>';
+                }
+            }
+            //Buka Data Anggota
+            $tanggal_masuk=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'tanggal_masuk');
+            $tanggal_keluar=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'tanggal_keluar');
+            $email=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'email');
+            $nip=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'nip');
+            $NamaAnggota=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'nama');
+            $kontak=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'kontak');
+
+            //BUka Data Simpanan
+            $nama_simpanan=GetDetailData($Conn,'simpanan_jenis','id_simpanan_jenis',$id_simpanan_jenis,'nama_simpanan');
+            $kategori_simpanan=GetDetailData($Conn,'simpanan_jenis','id_simpanan_jenis',$id_simpanan_jenis,'kategori');
+            
+            //Format tanggal
+            $tanggal_format=date('d/m/Y',strtotime($tanggal));
+
+            //Format Rupiah
+            $nominal_format = "Rp " . number_format($nominal,0,',','.');
+
+            //Tampilkan Data
+            echo '
+                <input type="hidden" name="id_simpanan_penarikan" value="'.$id_simpanan_penarikan.'">
+                <div class="row mb-2">
+                    <div class="col-5"><small>Nama Anggota</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$NamaAnggota.'</code></small></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5"><small>No.Identitas</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$nip.'</code></small></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Kategori</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$kategori_simpanan.' Bulan</code></small></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Tanggal Pengajuan</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$tanggal_format.'</code></small></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Bank</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$bank.'</code></small></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5"><small>No.Rekening</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$rekening.'</code></small></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Nominal Penarikan</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$nominal_format.'</code></small></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-5 mb-3"><small>Status</small></div>
+                    <div class="col-1 mb-3"><small>:</small></div>
+                    <div class="col-6 mb-3">'.$LabelStatus.'</div>
+                </div>
+            ';
+            if($status=="Pending"){
+                echo '
+                    <div class="row">
+                        <div class="col-12">
+                            <small>Dengan ini menyatakan bahwa pengajuan penarian dana telah melalui verifikasi</small>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="status_diterima" value="Lunas" checked="">
+                                <label class="form-check-label" for="status_diterima">Pengajuan Diterima</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" id="status_ditolak" value="Ditolak">
+                                <label class="form-check-label" for="status_ditolak">Pengajuan Ditolak</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-primary btn-rounded btn-block">
+                                <i class="bi bi-save"></i> Update
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-dark btn-rounded btn-block" data-bs-dismiss="modal">
+                                <i class="bi bi-x-circle"></i> Tutup
+                            </button>
+                        </div>
+                    </div>
+                ';
+            }else{
+                echo '
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-warning">
+                                <small>Pengajuan penarikan dana simpanan yang sudah <b>Lunas / Ditolak</b> tidak bisa diubah.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-8"></div>
+                        <div class="col-4">
+                            <button type="button" class="btn btn-dark btn-rounded btn-block" data-bs-dismiss="modal">
+                                <i class="bi bi-x-circle"></i> Tutup
+                            </button>
+                        </div>
+                    </div>
+                ';
+            }
+        }
+    }
+?>

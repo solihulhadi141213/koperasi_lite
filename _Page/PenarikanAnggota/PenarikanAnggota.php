@@ -97,8 +97,18 @@
                                             $jumlah_penarikan=$jumlah_penarikan+$nominal;
                                             $LabelStatus='<span class="badge badge-success">Lunas</span>';
                                         }else{
-                                            $jumlah_penarikan=$jumlah_penarikan+0;
-                                            $LabelStatus='<span class="badge badge-warning">Pending</span>';
+                                            if($status=="Ditolak"){
+                                                $jumlah_penarikan=$jumlah_penarikan+0;
+                                                $LabelStatus='<span class="badge badge-danger">Ditolak</span>';
+                                            }else{
+                                                if($status=="Pending"){
+                                                    $jumlah_penarikan=$jumlah_penarikan+0;
+                                                    $LabelStatus='<span class="badge badge-warning">Pending</span>';
+                                                }else{
+                                                    $jumlah_penarikan=$jumlah_penarikan+0;
+                                                    $LabelStatus='<span class="badge badge-dark">None</span>';
+                                                }
+                                            }
                                         }
                                         $NominalPenarikanFormat = "" . number_format($nominal,0,',','.');
                                         echo '
