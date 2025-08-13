@@ -19,12 +19,12 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link <?php if($PageMenu=="JenisSimpanan"||$PageMenu=="SimpananWajib"||$PageMenu=="Tabungan"||$PageMenu=="RekapSimpanan"){echo "";}else{echo "collapsed";} ?>" data-bs-target="#simpanan-nav" data-bs-toggle="collapse" href="javascript:void(0);">
+            <a class="nav-link <?php if($PageMenu=="JenisSimpanan"||$PageMenu=="SimpananWajib"||$PageMenu=="Tabungan"||$PageMenu=="Penarikan"){echo "";}else{echo "collapsed";} ?>" data-bs-target="#simpanan-nav" data-bs-toggle="collapse" href="javascript:void(0);">
                 <i class="bi bi-wallet"></i>
                 <span>Simpanan</span>
                 <i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="simpanan-nav" class="nav-content collapse <?php if($PageMenu=="JenisSimpanan"||$PageMenu=="SimpananWajib"||$PageMenu=="Tabungan"||$PageMenu=="RekapSimpanan"){echo "show";} ?>" data-bs-parent="#sidebar-nav">
+            <ul id="simpanan-nav" class="nav-content collapse <?php if($PageMenu=="JenisSimpanan"||$PageMenu=="SimpananWajib"||$PageMenu=="Tabungan"||$PageMenu=="Penarikan"){echo "show";} ?>" data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="index.php?Page=JenisSimpanan" class="<?php if($PageMenu=="JenisSimpanan"){echo "active";} ?>">
                         <i class="bi bi-circle"></i><span>Jenis Simpanan</span>
@@ -32,7 +32,10 @@
                 </li>
                 <li>
                     <a href="index.php?Page=Tabungan" class="<?php if($PageMenu=="Tabungan"){echo "active";} ?>">
-                        <i class="bi bi-circle"></i><span>Simpanan & Penarikan</span>
+                        <i class="bi bi-circle"></i><span>Simpanan Anggota</span>
+                    </a>
+                    <a href="index.php?Page=Tabungan" class="<?php if($PageMenu=="Penarikan"){echo "active";} ?>">
+                        <i class="bi bi-circle"></i><span>Penarikan Dana</span>
                     </a>
                 </li>
             </ul>

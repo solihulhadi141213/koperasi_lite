@@ -18,9 +18,6 @@
             //Proses Hapus Simpanan
             $HapusSimpanan = mysqli_query($Conn, "DELETE FROM simpanan WHERE id_simpanan='$id_simpanan'") or die(mysqli_error($Conn));
             if ($HapusSimpanan) {
-                $KategoriLog="Log Simpanan";
-                $KeteranganLog="Hapus Simpanan";
-                include "../../_Config/InputLog.php";
                 echo '<span class="text-success" id="NotifikasiHapusSimpananBerhasil">Success</span>';
             }else{
                 echo '<span class="text-danger">Hapus Data Gagal</span>';

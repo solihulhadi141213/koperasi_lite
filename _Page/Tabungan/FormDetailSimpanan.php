@@ -6,83 +6,111 @@
     include "../../_Config/SettingGeneral.php";
     include "../../_Config/Session.php";
     if(empty($SessionIdAkses)){
-        echo '<div class="row">';
-        echo '  <div class="col-md-12 mb-3 text-center">';
-        echo '      <small class="text-danger">Sesi Akses Sudah Berakhir, Silahkan Login Ulang</small>';
-        echo '  </div>';
+        echo '<div class="alert alert-danger">';
+        echo '  <small>';
+        echo '      Sesi Akses Sudah Berakhir, Silahkan Login Ulang';
+        echo '  </small>';
         echo '</div>';
     }else{
         if(empty($_POST['id_simpanan'])){
-            echo '<div class="row">';
-            echo '  <div class="col-md-12 mb-3 text-center">';
-            echo '      <small class="text-danger">Tidak ada data yang ditangkap oleh sistem</small>';
-            echo '  </div>';
+            echo '<div class="alert alert-danger">';
+            echo '  <small>';
+            echo '      ID Pinjaman Tidak Boleh Kosong!';
+            echo '  </small>';
             echo '</div>';
         }else{
             $id_simpanan=$_POST['id_simpanan'];
-            //Buka Detail Simpanan
-            $id_anggota=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'id_anggota');
-            $uuid_simpanan=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'uuid_simpanan');
-            $id_akses=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'id_akses');
-            $id_simpanan_jenis=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'id_simpanan_jenis');
-            $rutin=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'rutin');
-            $nip=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'nip');
-            $nama=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'nama');
-            $tanggal=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'tanggal');
-            $kategori=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'kategori');
-            $keterangan=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'keterangan');
-            $jumlah=GetDetailData($Conn,'simpanan','id_simpanan',$id_simpanan,'jumlah');
-            if($kategori=="Penarikan"){
-                $LabelKategori='<code class="text text-danger">Penarikan dana simpanan</code>';
-            }else{
-                $LabelKategori='<code class="text text-success">'.$kategori.'</code>';
-            }
+            
+            //Buka Detail Pinjaman
+            $sql = "SELECT * FROM simpanan WHERE id_simpanan = ?";
+            $stmt = $Conn->prepare($sql);
+            $id = 1;
+            $stmt->bind_param("i", $id_simpanan);
+            
+            // Eksekusi statement
+            $stmt->execute();
+            
+            // Ambil hasil query
+            $result = $stmt->get_result();
+            $DataPinjaman = $result->fetch_assoc();
+            
+            // Simpan hasil ke variabel
+            $id_pinjaman_jenis = $DataPinjaman['id_pinjaman_jenis'] ?? null;
+            $id_anggota = $DataPinjaman['id_anggota'] ?? null;
+            $id_simpanan_jenis = $DataPinjaman['id_simpanan_jenis'] ?? null;
+            $nip = $DataPinjaman['nip'] ?? null;
+            $nama = $DataPinjaman['nama'] ?? null;
+            $tanggal_simpanan = $DataPinjaman['tanggal_simpanan'] ?? null;
+            $tanggal_bayar = $DataPinjaman['tanggal_bayar'] ?? null;
+            $kategori = $DataPinjaman['kategori'] ?? null;
+            $jumlah = $DataPinjaman['jumlah'] ?? 0;
+            $metode_pembayaran = $DataPinjaman['metode_pembayaran'] ?? null;
+            $status = $DataPinjaman['status'] ?? null;
+
+            // Tutup statement
+            $stmt->close();
+
             //Format tanggal
-            $strtotime=strtotime($tanggal);
-            $TanggalFormat=date('d/m/Y',$strtotime);
+            $tanggal_simpanan_format=date('d/m/Y',strtotime($tanggal_simpanan));
+            $tanggal_bayar_format=date('d/m/Y',strtotime($tanggal_bayar));
+
             //Format Rupiah
             $jumlah_format = "Rp " . number_format($jumlah,0,',','.');
-            if(empty($keterangan)){
-                $keterangan="-";
+
+            //Routing Status
+            if($status=="Pending"){
+                $LabelStatus='<span class="badge badge-warning">Pending</span>';
+            }else{
+                if($status=="Lunas"){
+                    $LabelStatus='<span class="badge badge-success">Lunas</span>';
+                }else{
+                   $LabelStatus='<span class="badge badge-danger">None</span>';
+                }
             }
-?>
-            <div class="row mb-3">
-                <div class="col col-md-4">Tanggal</div>
-                <div class="col col-md-8">
-                    <code class="text text-grayish"><?php echo $TanggalFormat; ?></code>
+
+            //Tampilkan Data
+            echo '
+                <div class="row mb-2">
+                    <div class="col-5"><small>Nama Anggota</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$nama.'</code></small></div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">No.Induk</div>
-                <div class="col col-md-8">
-                    <code class="text text-grayish"><?php echo $nip; ?></code>
+                <div class="row mb-2">
+                    <div class="col-5"><small>No.Identitas</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$nip.'</code></small></div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Nama</div>
-                <div class="col col-md-8">
-                    <code class="text text-grayish"><?php echo $nama; ?></code>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Kategori</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$kategori.' Bulan</code></small></div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Jenis Simpanan</div>
-                <div class="col col-md-8">
-                    <code class="text text-grayish"><?php echo $LabelKategori; ?></code>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Tanggal Simpanan</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$tanggal_simpanan_format.'</code></small></div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Keterangan</div>
-                <div class="col col-md-8">
-                    <code class="text text-grayish"><?php echo $keterangan; ?></code>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Tanggal Bayar</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$tanggal_bayar_format.'</code></small></div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col col-md-4">Nominal</div>
-                <div class="col col-md-8">
-                    <code class="text text-grayish"><?php echo $jumlah_format; ?></code>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Jumlah Simpanan</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$jumlah_format.'</code></small></div>
                 </div>
-            </div>
-<?php
+                <div class="row mb-2">
+                    <div class="col-5"><small>Metode Pembayaran</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$metode_pembayaran.'</code></small></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Status</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6">'.$LabelStatus.'</div>
+                </div>
+            ';
         }
     }
 ?>
