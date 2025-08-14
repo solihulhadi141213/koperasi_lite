@@ -79,7 +79,61 @@
                     ';
                 }
             }else{
-                $table_name="pinjaman_angsuran";
+                if($mode_pembayaran=="pinjaman_angsuran "){
+                    
+                    //Buka Data Pembayaran Angsuran
+                    $Qry = $Conn->prepare("SELECT * FROM pinjaman_angsuran WHERE kode_pembayaran = ?");
+                    if ($Qry === false) {
+                        die("Query preparation failed: " . $Conn->error);
+                    }
+
+                    // Bind parameter dan eksekusi
+                    $Qry->bind_param("s", $kode_pembayaran);
+                    if (!$Qry->execute()) {
+                        die("Query execution failed: " . $Qry->error);
+                    }
+
+                    $Result = $Qry->get_result();
+                    $Data = $Result->fetch_assoc();
+                    
+                    if ($Result->num_rows > 0) {
+                        //Menampilkan Informasi Simpanan
+                        $id_pinjaman_angsuran = $Data['id_pinjaman_angsuran'];
+                        $status = $Data['status'];
+
+                        if($status=="Lunas"){
+                            echo '
+                                <div class="alert alert-danger">
+                                    Kode Pembayaran Tersebut Sudah Lunas! Anda tidak bisa mengulang pemmbayaran tersebut!
+                                </div>
+                            ';
+                        }else{
+                            //Update Angsuran
+                            $UpdateAngsuran = mysqli_query($Conn,"UPDATE pinjaman_angsuran SET 
+                                status='Lunas'
+                            WHERE kode_pembayaran='$kode_pembayaran'") or die(mysqli_error($Conn)); 
+                            if($UpdateAngsuran){
+                                echo '
+                                    <div class="text-success" id="NotifikasiPembayaranBerhasil">Success</div>
+                                ';
+                            }else{
+                                echo '
+                                    <div class="alert alert-danger">
+                                        Terjadi Kesalahan Pada Saat Update Simpanan!
+                                    </div>
+                                ';
+                            }
+                        }
+                    }else{
+                        echo '
+                            <div class="alert alert-danger">
+                                Kode Pembayaran Tidak Ditemukan!
+                            </div>
+                        ';
+                    }
+                }else{
+                    echo "Mode Pembayaran Tidak Diketahui";
+                }
             }
 
             //Buka Data\

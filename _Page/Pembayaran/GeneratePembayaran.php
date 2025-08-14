@@ -79,11 +79,75 @@
                     ';
                 }
             }else{
-                $table_name="pinjaman_angsuran";
+                if($mode_pembayaran=="pinjaman_angsuran "){
+
+                    //Buka Data Pinjaman Angsuran
+                    $Qry = $Conn->prepare("SELECT * FROM pinjaman_angsuran WHERE kode_pembayaran = ?");
+                    if ($Qry === false) {
+                        die("Query preparation failed: " . $Conn->error);
+                    }
+
+                    // Bind parameter dan eksekusi
+                    $Qry->bind_param("s", $kode_pembayaran);
+                    if (!$Qry->execute()) {
+                        die("Query execution failed: " . $Qry->error);
+                    }
+
+                    $Result = $Qry->get_result();
+                    $Data = $Result->fetch_assoc();
+                    
+                    if ($Result->num_rows > 0) {
+                        //Menampilkan Informasi
+                        $id_pinjaman_angsuran = $Data['id_pinjaman_angsuran'];
+                        $id_anggota = $Data['id_anggota'];
+                        $tanggal_angsuran = $Data['tanggal_angsuran'];
+                        $jumlah = $Data['jumlah'];
+                        $metode_pembayaran = $Data['metode_pembayaran'];
+                        $status = $Data['status'];
+                        $jumlah_format = "Rp " . number_format($jumlah,0,',','.');
+
+                        //Buka nama anggota
+                        $nama_anggota=GetDetailData($Conn, 'anggota', 'id_anggota', $id_anggota, 'nama');
+
+                        if($status=="Lunas"){
+                            echo '
+                                <div class="alert alert-danger">
+                                    Kode Pembayaran Tersebut Sudah Lunas!
+                                </div>
+                            ';
+                        }else{
+                            echo '
+                                <div class="row mb-2">
+                                    <div class="col-6"><small>Nama Anggota</small></div>
+                                    <div class="col-6 text-end"><small class="text text-grayish">'.$nama_anggota.'</small></div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-6"><small>Tanggal Angsuran</small></div>
+                                    <div class="col-6 text-end"><small class="text text-grayish">'.$tanggal_angsuran.'</small></div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-6"><small>Metode Pembayaran</small></div>
+                                    <div class="col-6 text-end"><small class="text text-grayish">'.$metode_pembayaran.'</small></div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-6"><small>Nominal</small></div>
+                                    <div class="col-6 text-end"><small class="text text-grayish">'.$jumlah_format.'</small></div>
+                                </div>
+                                <input type="hidden" id="InformasiPembayaranBerhasil" value="Success">
+                            ';
+                        }
+                    }else{
+                        echo '
+                            <div class="alert alert-danger">
+                                Kode Pembayaran Tidak Ditemukan!
+                            </div>
+                        ';
+                    }
+
+                }else{
+                    echo "Mode Pembayaran: <b>$mode_pembayaran</b> Tidak Diketahui";
+                }
             }
-
-            //Buka Data\
-
         }
     }
 ?>

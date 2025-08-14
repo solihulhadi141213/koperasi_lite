@@ -47,6 +47,7 @@
                     //Cari Data Pinjaman Yang Lunas
                     $query_pinjaman = mysqli_query($Conn, "SELECT*FROM pinjaman WHERE id_anggota='$SessionIdAkses' AND status='Berjalan' LIMIT 1");
                     while ($data_pinjaman = mysqli_fetch_array($query_pinjaman)) {
+                        $id_pinjaman=$data_pinjaman['id_pinjaman'];
                         $id_pinjaman_jenis=$data_pinjaman['id_pinjaman_jenis'];
                         $id_anggota=$data_pinjaman['id_anggota'];
                         $tanggal_pengajuan=$data_pinjaman['tanggal_pengajuan'];
@@ -95,8 +96,9 @@
                         ';
                     }
                     echo '
+                        <input type="hidden" id="get_id_pinjaman" value="'.$id_pinjaman.'">
                         <div class="table table-responsive">
-                            <table class="table table-hover table-striped">
+                            <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th><b>No</b></th>
@@ -119,39 +121,6 @@
                     ';
                 }
             ?>
-        </div>
-    </div>
-    
-    <div class="card">
-        <div class="card-header">
-            <div class="row">
-                <div class="col-12">
-                    <b class="card-title"># Riwayat Pinjaman Lainnya</b>
-                </div>
-            </div>
-        </div>
-        <div class="card-body">
-            <div class="table table-responsive">
-                <table class="table table-hover table-striped">
-                    <thead>
-                        <tr>
-                            <th><b>No</b></th>
-                            <th><b>Nama Pinjaman</b></th>
-                            <th><b>Tanggal</b></th>
-                            <th><b>Jumlah</b></th>
-                            <th><b>Status</b></th>
-                            <th><b>Opsi</b></th>
-                        </tr>
-                    </thead>
-                    <tbody id="TabelPinjamanAnggota">
-                        <tr>
-                            <td colspan="6" class="text-center">
-                                <small class="text-danger">Belum Ada Data Pinjaman Yang Ditampilkan</small>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 </section>
