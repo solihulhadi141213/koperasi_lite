@@ -79,5 +79,19 @@ $(document).ready(function() {
             }
         });
     });
+
+    //Modal Detail Penarikan Dana
+    $('#ModalDetailPenarikan').on('show.bs.modal', function (e) {
+        var id_simpanan_penarikan = $(e.relatedTarget).data('id');
+        $('#FormDetailPenarikan').html("Loading...");
+        $.ajax({
+            type 	    : 'POST',
+            url 	    : '_Page/PenarikanAnggota/FormDetailPenarikan.php',
+            data        : {id_simpanan_penarikan: id_simpanan_penarikan},
+            success     : function(data){
+                $('#FormDetailPenarikan').html(data);
+            }
+        });
+    });
 });
 

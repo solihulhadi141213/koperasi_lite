@@ -121,6 +121,42 @@
                     <div class="col-6">'.$LabelStatus.'</div>
                 </div>
             ';
+            if($status=="Pending"){
+                echo '
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="alert alert-warning">
+                                Pengajuan penarikan dana simpanan anda masih dalam proses verifikasi pengurus. 
+                                Jika data permohonan sudah valid, kami akan mengirimkan dana tersebut sesuai informasi rekening yang anda berikan.
+                            </div>
+                        </div>
+                    </div>
+                ';
+            }else{
+                if($status=="Lunas"){
+                    echo '
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <div class="alert alert-success">
+                                    Pengajuan penarikan dana simpanan anda sudah melalui proses verifikasi. 
+                                    Dana penarikan simpanan sudah dikirimkan ke rekening anda.
+                                </div>
+                            </div>
+                        </div>
+                    ';
+                }else{
+                    echo '
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <div class="alert alert-danger">
+                                    Pengajuan penarikan dana simpanan anda ditolak. 
+                                    Periksa kembali nominal penarikan dan informasi rekening anda.
+                                </div>
+                            </div>
+                        </div>
+                    ';
+                }
+            }
         }
     }
 ?>
