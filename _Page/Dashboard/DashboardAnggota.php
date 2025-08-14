@@ -1,7 +1,7 @@
 <?php
     
     //Jumlah Angsuran Yang Belum Dibayar
-    $SumAngsuran = mysqli_fetch_array(mysqli_query($Conn, "SELECT SUM(jumlah) AS jumlah FROM pinjaman_angsuran WHERE id_anggota='$SessionIdAkses' AND status='Pending'"));
+    $SumAngsuran = mysqli_fetch_array(mysqli_query($Conn, "SELECT SUM(jumlah) AS jumlah FROM pinjaman_angsuran WHERE id_anggota='$SessionIdAkses' AND status='None'"));
     $JumlahAngsuran = $SumAngsuran['jumlah'];
     if(empty($JumlahAngsuran)){
         $JumlahAngsuran=0;
@@ -300,6 +300,40 @@
                                                 <li>
                                                     <b>Pinjaman Lunak</b><br>
                                                     Program khusus (contoh: pinjaman darurat atau subsidi pemerintah).
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="heading4">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                            Penarikan Dana Simpanan
+                                        </button>
+                                    </h2>
+                                    <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            Selama anda menjadi anggota koperasi, anda hanya bisa menarik dana simpanan sukarela. 
+                                            Simpanan pokok dan simpanan wajib hanya bisa ditarik pada saat anda keluar dari keanggotaan. 
+                                            Berikut ini adalah tahapan penarikan dana simpanan tersebut :
+                                            <ul class="mt-2">
+                                                <li>
+                                                    Pilih menu <b>Penarikan</b> dan anda akan diarahkan ke halaman penarikan dana simpanan.
+                                                </li>
+                                                <li>
+                                                    Pada bagian baris tabel simpanan sukarela, pilih salah satu jenis simpanan kemudian <i>click</i> pada tombol <b>Tarik</b>
+                                                </li>
+                                                <li>
+                                                    Pastikan saldo dana simpanan anda memenuhi dengan status lunas.
+                                                </li>
+                                                <li>
+                                                    Sistem akan menampilkan formulir isian, diantaranya adalah form nominal penarikan, nama bank tujuan penarikan, dan nomor rekening.
+                                                </li>
+                                                <li>
+                                                    Setelah mengisi form tersebut, kemudian <i>click</i> tombol kirim.
+                                                </li>
+                                                <li>
+                                                   Pengurus koperasi akan melakukan verifikasi data permohonan penarikan dana tersebut.
                                                 </li>
                                             </ul>
                                         </div>
