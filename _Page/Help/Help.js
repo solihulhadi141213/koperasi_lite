@@ -1,7 +1,7 @@
 //Load Element Halaman
 $(document).ready(function() {
     // Load README.md content
-    $.get('README.md?v=5', function(data) {
+    $.get('README.md?v=6', function(data) {
         const htmlContent = marked.parse(data);
         $('#show_hide_readme').html(htmlContent).slideDown();
     }).fail(function() {

@@ -104,8 +104,8 @@ $html = '
 
 // Query data pinjaman
 $query = mysqli_query($Conn, "SELECT * FROM pinjaman 
-        WHERE tanggal >= '$periode_1' AND tanggal <= '$periode_2' 
-        ORDER BY tanggal ASC");
+        WHERE tanggal_pengajuan >= '$periode_1' AND tanggal_pengajuan <= '$periode_2' 
+        ORDER BY tanggal_pengajuan ASC");
 
 if (mysqli_num_rows($query) == 0) {
     $html .= '
@@ -122,14 +122,12 @@ if (mysqli_num_rows($query) == 0) {
     
     while ($data = mysqli_fetch_array($query)) {
         $id_pinjaman = $data['id_pinjaman'];
-        $tanggal = date('d/m/Y', strtotime($data['tanggal']));
-        $nama = $data['nama'];
-        $nip = $data['nip'];
+        $tanggal = date('d/m/Y', strtotime($data['tangtanggal_pengajuangal']));
         $jumlah_pinjaman = $data['jumlah_pinjaman'];
         $status = $data['status'];
         
         // Hitung total angsuran
-        $query_angsuran = mysqli_query($Conn, "SELECT SUM(jumlah) as total FROM pinjaman_angsuran WHERE id_pinjaman='$id_pinjaman'");
+        $query_angsuran = mysqli_query($Conn, "SELECT SUM(jumlah) as total FROM pinjaman_angsuran WHERE id_pinjaman='$id_pinjaman' AND status='Lunas'");
         $data_angsuran = mysqli_fetch_array($query_angsuran);
         $total_angsuran = $data_angsuran['total'] ? $data_angsuran['total'] : 0;
         $sisa_pinjaman = $jumlah_pinjaman - $total_angsuran;
@@ -147,6 +145,9 @@ if (mysqli_num_rows($query) == 0) {
             $status_class = 'bg-warning';
         }
         
+        //Buka Anggota
+        $nama=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'nama');
+        $nip=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'nip');
         $html .= '
         <tr>
             <td class="text-center">'.$no.'</td>

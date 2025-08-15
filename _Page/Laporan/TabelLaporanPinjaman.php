@@ -41,8 +41,8 @@
 
             //Hitung Data
             $query = "SELECT * FROM pinjaman 
-                    WHERE tanggal >= '$periode_1' 
-                    AND tanggal <= '$periode_2'";
+                    WHERE tanggal_pengajuan >= '$periode_1' 
+                    AND tanggal_pengajuan <= '$periode_2'";
             $jml_data = mysqli_num_rows(mysqli_query($Conn, $query));
 
             //Apabila Ada atau Tidak
@@ -59,13 +59,11 @@
             }else{
                 $no = 1;
                 //Tampilkan Data
-                $query = mysqli_query($Conn, "SELECT*FROM pinjaman WHERE tanggal >= '$periode_1' AND tanggal <= '$periode_2' ORDER BY tanggal ASC");
+                $query = mysqli_query($Conn, "SELECT*FROM pinjaman WHERE tanggal_pengajuan >= '$periode_1' AND tanggal_pengajuan <= '$periode_2' ORDER BY tanggal_pengajuan ASC");
                 while ($data = mysqli_fetch_array($query)) {
                     $id_pinjaman= $data['id_pinjaman'];
                     $id_anggota= $data['id_anggota'];
-                    $nip= $data['nip'];
-                    $nama= $data['nama'];
-                    $tanggal= $data['tanggal'];
+                    $tanggal= $data['tanggal_pengajuan'];
                     $jumlah_pinjaman= $data['jumlah_pinjaman'];
                     $status= $data['status'];
 
@@ -79,11 +77,15 @@
                     //Hitung angsuran masuk
                     $angsuran_masuk=0;
                     $angsuran_masuk_format = "" . number_format($angsuran_masuk,0,',','.');
+
+                    //Buka Nama Anggota
+                    $nama_anggota=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'nama');
+                    $nip=GetDetailData($Conn,'anggota','id_anggota',$id_anggota,'nip');
                     echo '
                         <tr>
                             <td align="center">'.$no.'</td>
                             <td align="left">'.$TanggalFormat.'</td>
-                            <td align="left">'.$nama.'</td>
+                            <td align="left">'.$nama_anggota.'</td>
                             <td align="left">'.$nip.'</td>
                             <td align="left">'.$jumlah_pinjaman_format.'</td>
                             <td align="left">'.$angsuran_masuk_format.'</td>

@@ -1,13 +1,20 @@
-# Aplikasi (Lite)
-Aplikasi Koperasi (Versi Lita) adalah aplikasi koperasi simpan pinjam yang dikembangkan berdasarkan versi 3.0.0 yang sebelumnya memiliki fitur pengelolaan transaksi lengkap. 
-Aplikasi koperasi pada versi ini sengaja dikembangkan lebih sederhana dan hanya menyediakan fitur khusus untuk koperasi simpan pinjam saja. 
-Hal tersebut bertujuan agar proses pengelolaan simpan pinjam dapat dilakukan lebih mudah dan efektif. 
-Dengan fitur yang lebih ringkas, diharapkan mempermudah pengurus koperasi mengelola data menjadi lebih cepat dan akurat. 
-Pada versi ini, entitas pengguna dirancang lebih interaktif dan terhubung dengan alur bisnis secara langsung seperti pengajuan anggota, pembayaran simpanan secara mandiri dan memungkinkan anggota koperasi mengajukan pinjaman.
+# Koperasi Simpan-Pinjam (Lite)
+Aplikasi Koperasi (Versi Lita) merupakan sebuah sistem manajemen koperasi simpan pinjam yang dirancang khusus untuk mendukung proses bisnis terkait simpanan dan pinjaman anggota. Dibangun dengan pendekatan yang sederhana dan fokus, aplikasi ini menyediakan fitur-fitur inti yang dibutuhkan oleh koperasi simpan pinjam, tanpa kompleksitas yang tidak diperlukan.
 
-## Gambaran Umum
-Secara umum, aplikasi Koperasi (Versi Lita) ini memiliki 4 (empat) entitas akses dengan tugas dan hak yang berbeda-beda. 
-Entitas akses tersebut terdiri dari anggota, sekretaris, bendahara dan ketua. Khusus untuk anggota, entitas tersebut memiliki kelompok data yang berbeda dengan entitas lainnya. 
+Tujuan pengembangan aplikasi ini adalah untuk mempermudah pengelolaan simpanan dan pinjaman, sehingga pengurus koperasi dapat bekerja lebih efisien. Dengan antarmuka yang ringkas dan fungsionalitas yang terarah, proses pencatatan data menjadi lebih cepat, akurat, dan minim kesalahan.
+
+Pada versi ini, aplikasi juga meningkatkan interaksi antara anggota dan koperasi melalui fitur-fitur digital, seperti:
+  - Pendaftaran anggota secara mandiri
+  - Pembayaran simpanan yang dapat dilakukan langsung oleh anggota
+  - Pengajuan pinjaman online
+  - Penarikan dana simpanan secara fleksibel
+
+## Entitas Akses
+Secara umum, aplikasi Koperasi (Versi Lita) ini memiliki 4 (empat) entitas akses yang terdiri dari sekretaris, bendahara, ketua dan anggota. Khusus untuk anggota, entitas tersebut memiliki kelompok data yang berbeda dengan entitas lainnya. 
+  - Sekretaris
+  - Bendahara
+  - Ketua Koperasi
+  - Anggota
 
 <img src="./assets/img/screenshot/dashboard-2.png" width="100%">
 

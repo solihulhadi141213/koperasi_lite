@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 23, 2025 at 10:13 PM
+-- Generation Time: Aug 14, 2025 at 08:55 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.0.30
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `akses` (
   `datetime_daftar` datetime NOT NULL,
   `datetime_update` datetime NOT NULL,
   PRIMARY KEY (`id_akses`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `akses`
@@ -48,7 +48,8 @@ CREATE TABLE IF NOT EXISTS `akses` (
 INSERT INTO `akses` (`id_akses`, `nama_akses`, `kontak_akses`, `email_akses`, `password`, `image_akses`, `akses`, `datetime_daftar`, `datetime_update`) VALUES
 (1, 'Solihul Hadi', '6289601154723', 'dhiforester@gmail.com', 'f4a3229c9c5f1bdd9c6a6791080791b7', '9bf5b8e474a5927eb87d5084a85b5a.jpg', 'Admin', '2022-08-29 11:10:06', '2025-06-23 17:59:41'),
 (4, 'Anita', '6289601154724', 'animaryani@gmail.com', '1ebc7a02439687420f4f18ebe6bd03ac', '1396353a04e0e796b253d64a58dbb4.png', 'Sekretaris', '2024-07-12 01:23:54', '2025-06-23 17:19:17'),
-(5, 'solihul Hadi', '0218374847', 'solihulhadi141213@gmail.com', 'a2cc01a152da09c1ad15b345e430ed7d', '', 'Admin', '2025-02-22 17:32:35', '2025-02-22 17:32:35');
+(5, 'solihul Hadi', '0218374847', 'solihulhadi141213@gmail.com', 'a2cc01a152da09c1ad15b345e430ed7d', '', 'Admin', '2025-02-22 17:32:35', '2025-02-22 17:32:35'),
+(8, 'Javier Rivaldy', '089612341234', 'javierrivaldy12@gmail.com', 'ed3583432a0990acffde32d5ef3479eb', '', 'Admin', '2025-07-30 18:17:05', '2025-07-30 18:17:05');
 
 -- --------------------------------------------------------
 
@@ -71,10 +72,12 @@ CREATE TABLE IF NOT EXISTS `akses_login` (
 --
 
 INSERT INTO `akses_login` (`id_akses`, `kategori`, `token`, `date_creat`, `date_expired`) VALUES
-(5, 'Pengurus', '6be034775796342467670d3eaf8351f2', '2025-02-25 06:14:01', '2025-02-25 08:13:08'),
 (24, 'Anggota', 'b9ce962c31280745ded0ee9230fd0131', '2025-06-13 21:02:38', '2025-06-13 22:02:38'),
 (6, 'Pengurus', 'b75ddeece5abe9587a92af7fbf42b7fb', '2025-06-21 17:56:47', '2025-06-21 19:03:50'),
-(1, 'Pengurus', '8bf7c558b861d1942a3b6a5b0d2a8046', '2025-06-24 04:20:49', '2025-06-24 06:13:07');
+(4, 'Pengurus', '6b26fff7453d97831cda43b82ce9a5d2', '2025-07-30 21:07:13', '2025-07-30 23:52:51'),
+(5, 'Pengurus', '2a3b9da101945363c37ccc0cc75562ae', '2025-08-13 17:42:51', '2025-08-13 21:00:10'),
+(1, 'Pengurus', '882baf79fe8a0196cfde35640678cde0', '2025-08-15 02:36:51', '2025-08-15 03:37:38'),
+(32, 'Anggota', 'fceede55aab00e629f90b1ccc0b4f142', '2025-08-15 03:54:14', '2025-08-15 04:54:27');
 
 -- --------------------------------------------------------
 
@@ -91,39 +94,44 @@ CREATE TABLE IF NOT EXISTS `anggota` (
   `nama` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `kontak` varchar(20) DEFAULT NULL,
-  `status` varchar(10) NOT NULL COMMENT 'Aktif, Keluar',
+  `password` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `foto` varchar(40) DEFAULT NULL,
+  `status` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT 'Aktif, Keluar, Pending',
   `alasan_keluar` text COMMENT 'Diisi Hanya Apabila Keluar',
   PRIMARY KEY (`id_anggota`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `anggota`
 --
 
-INSERT INTO `anggota` (`id_anggota`, `tanggal_masuk`, `tanggal_keluar`, `nip`, `nama`, `email`, `kontak`, `status`, `alasan_keluar`) VALUES
-(1, '2024-01-13', '2024-07-14', '2024/07/Contoh-01', 'Adam Saputra', 'adamsaputra@example.com', '890000001', 'Aktif', ''),
-(2, '2024-01-14', '2024-07-14', '2024/07/Contoh-02', 'Budi Santoso', 'budi.santoso@example.com', '890000002', 'Aktif', ''),
-(3, '2024-01-15', '2024-07-14', '2024/07/Contoh-111', 'Citra Dewi', 'citra.dewi@example.com', '890000003', 'Aktif', ''),
-(4, '2024-01-16', '2024-06-14', '2024/07/Contoh-04', 'Dian Rahmawati', 'dian.rahmawati@example.com', '890000004', 'Keluar', 'Tidak betah'),
-(5, '2024-01-17', '2024-07-14', '2024/07/Contoh-05', 'Eka Prasetyo', 'eka.prasetyo@example.com', '890000005', 'Aktif', ''),
-(6, '2024-01-18', '2024-07-14', '2024/07/Contoh-06', 'Farah Amalia', 'farah.amalia@example.com', '890000006', 'Aktif', ''),
-(7, '2024-01-19', '2024-07-14', '2024/07/Contoh-07', 'Guntur Wibowo', 'guntur.wibowo@example.com', '890000007', 'Aktif', ''),
-(8, '2024-01-20', '2024-06-14', '2024/07/Contoh-08', 'Hendra Wijaya', 'hendra.wijaya@example.com', '890000008', 'Keluar', ''),
-(9, '2024-01-21', '2024-07-14', '2024/07/Contoh-09', 'Indah Permatasari', 'indah.permatasari@example.com', '890000009', 'Aktif', ''),
-(10, '2024-01-22', '2024-07-14', '2024/07/Contoh-10', 'Joko Susanto', 'joko.susanto@example.com', '890000010', 'Aktif', ''),
-(11, '2024-01-23', '2024-07-14', '2024/07/Contoh-11', 'Karina Putri', 'karina.putri@example.com', '890000011', 'Aktif', ''),
-(12, '2024-01-24', '2024-07-14', '2024/07/Contoh-12', 'Leo Pradipta', 'leo.pradipta@example.com', '890000012', 'Aktif', ''),
-(13, '2024-01-25', '2024-07-14', '2024/07/Contoh-13', 'Maya Sari', 'maya.sari@example.com', '890000013', 'Aktif', ''),
-(14, '2024-01-26', '2024-07-14', '2024/07/Contoh-14', 'Nanda Kusuma', 'nanda.kusuma@example.com', '890000014', 'Aktif', ''),
-(15, '2024-01-27', '2024-07-14', '2024/07/Contoh-15', 'Oki Pratama', 'oki.pratama@example.com', '890000015', 'Aktif', ''),
-(16, '2024-01-28', '2024-07-14', '2024/07/Contoh-16', 'Putri Ayu', 'putri.ayu@example.com', '890000016', 'Aktif', ''),
-(17, '2024-01-29', '2024-06-14', '2024/07/Contoh-17', 'Rizki Setiawan', 'rizki.setiawan@example.com', '890000017', 'Keluar', 'Tidak betah'),
-(18, '2024-01-30', '2024-07-14', '2024/07/Contoh-18', 'Sinta Maharani', 'sinta.maharani@example.com', '890000018', 'Aktif', ''),
-(19, '2024-01-31', '2024-07-14', '2024/07/Contoh-19', 'Tio Nugroho', 'tio.nugroho@example.com', '890000019', 'Aktif', ''),
-(22, '2024-09-21', '2024-09-21', '123122221', 'Aruna Parasilva', 'windy1234@gmail.com', '08961767868', 'Aktif', ''),
-(23, '2025-02-01', '2025-02-22', '1111111111111', 'Tri Heru', 'triheruafsheen@gmail.com', '085217731586', 'Aktif', ''),
-(24, '2025-01-01', '2025-02-23', '2222222222', 'Sugito', 'gito@gmail.com', '0852323242421', 'Aktif', ''),
-(25, '2024-02-01', '2025-02-23', '2024/07/Contoh-20', 'Ulya Handayani', 'ulya.handayani@example.com', '890000020', 'Aktif', '');
+INSERT INTO `anggota` (`id_anggota`, `tanggal_masuk`, `tanggal_keluar`, `nip`, `nama`, `email`, `kontak`, `password`, `foto`, `status`, `alasan_keluar`) VALUES
+(1, '2024-01-13', '2024-07-14', '2024/07/Contoh-01', 'Adam Saputra', 'adamsaputra@example.com', '890000001', '', NULL, 'Aktif', ''),
+(2, '2024-01-14', '2024-07-14', '2024/07/Contoh-02', 'Budi Santoso', 'budi.santoso@example.com', '890000002', '', NULL, 'Aktif', ''),
+(3, '2024-01-15', '2024-07-14', '2024/07/Contoh-111', 'Citra Dewi', 'citra.dewi@example.com', '890000003', '', NULL, 'Aktif', ''),
+(4, '2024-01-16', '2024-06-14', '2024/07/Contoh-04', 'Dian Rahmawati', 'dian.rahmawati@example.com', '890000004', '', NULL, 'Keluar', 'Tidak betah'),
+(5, '2024-01-17', '2024-07-14', '2024/07/Contoh-05', 'Eka Prasetyo', 'eka.prasetyo@example.com', '890000005', '', NULL, 'Aktif', ''),
+(6, '2024-01-18', '2024-07-14', '2024/07/Contoh-06', 'Farah Amalia', 'farah.amalia@example.com', '890000006', '', NULL, 'Aktif', ''),
+(7, '2024-01-19', '2024-07-14', '2024/07/Contoh-07', 'Guntur Wibowo', 'guntur.wibowo@example.com', '890000007', '', NULL, 'Aktif', ''),
+(8, '2024-01-20', '2024-06-14', '2024/07/Contoh-08', 'Hendra Wijaya', 'hendra.wijaya@example.com', '890000008', '', NULL, 'Keluar', ''),
+(9, '2024-01-21', '2024-07-14', '2024/07/Contoh-09', 'Indah Permatasari', 'indah.permatasari@example.com', '890000009', '', NULL, 'Aktif', ''),
+(10, '2024-01-22', '2024-07-14', '2024/07/Contoh-10', 'Joko Susanto', 'joko.susanto@example.com', '890000010', '', NULL, 'Aktif', ''),
+(11, '2024-01-23', '2024-07-14', '2024/07/Contoh-11', 'Karina Putri', 'karina.putri@example.com', '890000011', '', NULL, 'Aktif', ''),
+(12, '2024-01-24', '2024-07-14', '2024/07/Contoh-12', 'Leo Pradipta', 'leo.pradipta@example.com', '890000012', '', NULL, 'Aktif', ''),
+(13, '2024-01-25', '2024-07-14', '2024/07/Contoh-13', 'Maya Sari', 'maya.sari@example.com', '890000013', '', NULL, 'Aktif', ''),
+(14, '2024-01-26', '2024-07-14', '2024/07/Contoh-14', 'Nanda Kusuma', 'nanda.kusuma@example.com', '890000014', '', NULL, 'Aktif', ''),
+(15, '2024-01-27', '2024-07-14', '2024/07/Contoh-15', 'Oki Pratama', 'oki.pratama@example.com', '890000015', '', NULL, 'Aktif', ''),
+(16, '2024-01-28', '2024-07-14', '2024/07/Contoh-16', 'Putri Ayu', 'putri.ayu@example.com', '890000016', '', NULL, 'Aktif', ''),
+(17, '2024-01-29', '2024-06-14', '2024/07/Contoh-17', 'Rizki Setiawan', 'rizki.setiawan@example.com', '890000017', '', NULL, 'Keluar', 'Tidak betah'),
+(18, '2024-01-30', '2024-07-14', '2024/07/Contoh-18', 'Sinta Maharani', 'sinta.maharani@example.com', '890000018', '', NULL, 'Aktif', ''),
+(19, '2024-01-31', '2024-07-14', '2024/07/Contoh-19', 'Tio Nugroho', 'tio.nugroho@example.com', '890000019', '', NULL, 'Aktif', ''),
+(22, '2024-09-21', '2024-09-21', '123122221', 'Aruna Parasilva', 'windy1234@gmail.com', '08961767868', '', NULL, 'Aktif', ''),
+(23, '2025-02-01', '2025-02-22', '1111111111111', 'Tri Heru', 'triheruafsheen@gmail.com', '085217731586', '', NULL, 'Aktif', ''),
+(24, '2025-01-01', '2025-02-23', '2222222222', 'Sugito', 'gito@gmail.com', '0852323242421', '', NULL, 'Aktif', ''),
+(25, '2024-02-01', '2025-02-23', '2024/07/Contoh-20', 'Ulya Handayani', 'ulya.handayani@example.com', '890000020', '', NULL, 'Aktif', ''),
+(27, '2025-08-07', '2025-08-07', '320993839384', 'Dewi Widiastuti', 'dewiwidiastuti@gmail.com', '0897869868', '35bbd42323b0a6f4693aadf671260ef5', NULL, 'Pending', ''),
+(32, '2025-06-01', '2025-08-07', '32080921048800053', 'Solihul Hadi', 'dhiforester@gmail.com', '089373847412', 'f4a3229c9c5f1bdd9c6a6791080791b7', '4d497672c9f7d1ca2e6f9edb18a2db.png', 'Aktif', ''),
+(33, '2025-08-07', '2025-08-07', '32080921048800055', 'Dewi Widiastuti', 'dewiwidiastuti123@gmail.com', '08937384747', '507c20d8a5f0a5b220967d852b64e87d', NULL, 'Aktif', '');
 
 -- --------------------------------------------------------
 
@@ -198,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `deskripsi_log` text NOT NULL,
   PRIMARY KEY (`id_log`),
   KEY `id_akses` (`id_akses`)
-) ENGINE=InnoDB AUTO_INCREMENT=629 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=631 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `log`
@@ -823,7 +831,9 @@ INSERT INTO `log` (`id_log`, `id_akses`, `datetime_log`, `kategori_log`, `deskri
 (625, 1, '2025-06-24 01:38:57', 'Log Simpanan', 'Tambah Simpanan'),
 (626, 1, '2025-06-24 01:40:22', 'Log Simpanan', 'Tambah Simpanan'),
 (627, 1, '2025-06-24 01:40:32', 'Log Simpanan', 'Tambah Simpanan'),
-(628, 1, '2025-06-24 02:04:31', 'Jenis Pinjaman', 'Tambah Jenis Pinjaman');
+(628, 1, '2025-06-24 02:04:31', 'Jenis Pinjaman', 'Tambah Jenis Pinjaman'),
+(629, 1, '2025-08-12 18:47:05', 'Jenis Pinjaman', 'Edit Jenis Pinjaman'),
+(630, 1, '2025-08-12 18:47:14', 'Jenis Pinjaman', 'Edit Jenis Pinjaman');
 
 -- --------------------------------------------------------
 
@@ -851,34 +861,27 @@ DROP TABLE IF EXISTS `pinjaman`;
 CREATE TABLE IF NOT EXISTS `pinjaman` (
   `id_pinjaman` int NOT NULL AUTO_INCREMENT,
   `id_pinjaman_jenis` int DEFAULT NULL,
-  `uuid_pinjaman` char(36) NOT NULL,
   `id_anggota` int NOT NULL,
-  `nama` varchar(255) NOT NULL,
-  `nip` varchar(32) NOT NULL,
+  `tanggal_pengajuan` datetime NOT NULL,
+  `tanggal_pencairan` datetime DEFAULT NULL,
   `tanggal` date NOT NULL COMMENT 'tanggal perriode mulainya pinjaman',
-  `jatuh_tempo` smallint NOT NULL COMMENT 'tanggal jatuh tempo 1-31',
-  `denda` int DEFAULT NULL COMMENT 'Rp denda keterlambatan',
-  `sistem_denda` varchar(10) DEFAULT NULL COMMENT 'Harian, Bulanan',
   `jumlah_pinjaman` int NOT NULL,
-  `persen_jasa` decimal(12,2) DEFAULT NULL COMMENT 'persen/bulan',
   `rp_jasa` int DEFAULT NULL COMMENT 'nominal jasa=pinjaman x bunga',
   `angsuran_pokok` int NOT NULL COMMENT 'angsuran tanpa bunga',
   `angsuran_total` int NOT NULL COMMENT 'angsuran plus bunga',
   `periode_angsuran` int NOT NULL COMMENT 'frekuensi angsuran',
-  `status` varchar(10) NOT NULL COMMENT 'Berjalan, Lunas, Macet',
+  `status` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT 'Pending, Ditolak, Berjalan, Lunas, Macet',
   PRIMARY KEY (`id_pinjaman`),
   KEY `id_anggota` (`id_anggota`),
   KEY `id_pinjaman_jenis` (`id_pinjaman_jenis`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pinjaman`
 --
 
-INSERT INTO `pinjaman` (`id_pinjaman`, `id_pinjaman_jenis`, `uuid_pinjaman`, `id_anggota`, `nama`, `nip`, `tanggal`, `jatuh_tempo`, `denda`, `sistem_denda`, `jumlah_pinjaman`, `persen_jasa`, `rp_jasa`, `angsuran_pokok`, `angsuran_total`, `periode_angsuran`, `status`) VALUES
-(26, 1, '1UYjtSkUTWu1lBLEdM2w9fGVrgTkX1soIz7S', 1, 'Adam Saputra', '2024/07/Contoh-01', '2025-04-02', 1, 0, 'Harian', 10000000, 1.00, 100000, 1000000, 1100000, 10, 'Berjalan'),
-(28, 2, 'YgAW3sAW3Hld7xg2oGFS8AvG3PsuauerIRwe', 1, 'Adam Saputra', '2024/07/Contoh-01', '2025-06-24', 1, 1000, 'Harian', 10000000, 0.42, 42000, 833333, 875333, 12, 'Berjalan'),
-(29, 1, 'RPzUDfGIC879shqGT981BPhRIA4WqqGZxi0a', 2, 'Budi Santoso', '2024/07/Contoh-02', '2025-01-01', 1, 20000, 'Harian', 12000000, 0.83, 99600, 1000000, 1099600, 12, 'Berjalan');
+INSERT INTO `pinjaman` (`id_pinjaman`, `id_pinjaman_jenis`, `id_anggota`, `tanggal_pengajuan`, `tanggal_pencairan`, `tanggal`, `jumlah_pinjaman`, `rp_jasa`, `angsuran_pokok`, `angsuran_total`, `periode_angsuran`, `status`) VALUES
+(31, 1, 32, '2025-08-12 01:39:33', '2025-08-12 01:39:33', '2025-08-12', 1200000, 120000, 100000, 220000, 12, 'Berjalan');
 
 -- --------------------------------------------------------
 
@@ -889,37 +892,40 @@ INSERT INTO `pinjaman` (`id_pinjaman`, `id_pinjaman_jenis`, `uuid_pinjaman`, `id
 DROP TABLE IF EXISTS `pinjaman_angsuran`;
 CREATE TABLE IF NOT EXISTS `pinjaman_angsuran` (
   `id_pinjaman_angsuran` int NOT NULL AUTO_INCREMENT,
-  `uuid_angsuran` char(36) NOT NULL,
   `id_pinjaman` int NOT NULL,
   `id_anggota` int NOT NULL,
+  `kode_pembayaran` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `metode_pembayaran` varchar(255) DEFAULT NULL,
   `tanggal_angsuran` date NOT NULL,
-  `tanggal_bayar` date NOT NULL COMMENT 'tanggal angsuran',
+  `tanggal_bayar` date DEFAULT NULL COMMENT 'tanggal angsuran',
   `keterlambatan` int DEFAULT NULL COMMENT 'hari',
   `pokok` int DEFAULT NULL,
   `jasa` int DEFAULT NULL,
   `denda` int DEFAULT NULL,
   `jumlah` int DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT 'None, Pending, Lunas',
   PRIMARY KEY (`id_pinjaman_angsuran`),
   KEY `id_pinjaman` (`id_pinjaman`),
   KEY `id_anggota` (`id_anggota`)
-) ENGINE=InnoDB AUTO_INCREMENT=644 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pinjaman_angsuran`
 --
 
-INSERT INTO `pinjaman_angsuran` (`id_pinjaman_angsuran`, `uuid_angsuran`, `id_pinjaman`, `id_anggota`, `tanggal_angsuran`, `tanggal_bayar`, `keterlambatan`, `pokok`, `jasa`, `denda`, `jumlah`) VALUES
-(630, 'VjhcEj0lx8g9JV4X3CRbfbAQRGbhWGvJUD5a', 26, 1, '2025-05-01', '2025-04-02', 0, 1000000, 100000, 0, 1100000),
-(631, 'C34JffjFNbXrFOZioIXO4GA97aQUuINJHF09', 26, 1, '2025-06-01', '2025-04-02', 0, 1000000, 100000, 0, 1100000),
-(633, 'khfYbUTgCXA7miVBirG9LlZG3aaUPE9JF7ed', 26, 1, '2025-07-01', '2025-04-13', 0, 1000000, 100000, 0, 1100000),
-(634, 'up3JkY9GM35dojC3fvSIWWKGHWB0uh886O4j', 26, 1, '2025-05-02', '2025-05-04', 0, 1000000, 100000, 0, 1100000),
-(635, 'x4VKfPzp7igALikAZPLJuNSw2XictRkqIvya', 26, 1, '2025-06-02', '2025-06-07', 0, 1000000, 100000, 0, 1100000),
-(638, 'tq3pkNYyZ0CaVmj1Hlbzmp3J5BYXbCT451Mg', 28, 1, '2025-07-01', '2025-06-24', 0, 833333, 42000, 0, 875333),
-(639, '3CAlakc9QpyUhZxAsOj8xmmwzwMxd0aVuyAS', 29, 2, '2025-02-01', '2025-06-24', 0, 1000000, 99600, 0, 1099600),
-(640, 'wmyTe2aHl2fFlDCVy5WzHjyEvRBPOatUXdLG', 29, 2, '2025-03-01', '2025-06-24', 0, 1000000, 99600, 0, 1099600),
-(641, 'X6fh6lfYqGf8bsFcYmDeMVYkG3YIdY8aheKD', 29, 2, '2025-04-01', '2025-06-24', 0, 1000000, 99600, 0, 1099600),
-(642, 'hSESX2AI5g3GeDBi51RxmHx8VPHXIuoua80U', 29, 2, '2025-05-01', '2025-06-24', 0, 1000000, 99600, 0, 1099600),
-(643, 'tSzJ0dQ34rhKyGrVh7dmGVFeLSWuqn3oi7Kh', 29, 2, '2025-06-01', '2025-06-24', 0, 1000000, 99600, 0, 1099600);
+INSERT INTO `pinjaman_angsuran` (`id_pinjaman_angsuran`, `id_pinjaman`, `id_anggota`, `kode_pembayaran`, `metode_pembayaran`, `tanggal_angsuran`, `tanggal_bayar`, `keterlambatan`, `pokok`, `jasa`, `denda`, `jumlah`, `status`) VALUES
+(1, 31, 32, '757312486416', 'BRI-Virtual Account', '2025-08-01', '2025-08-15', 0, 100000, 120000, 0, 220000, 'Lunas'),
+(2, 31, 32, '196840491846', 'BRI-Virtual Account', '2025-10-12', '2025-08-15', 0, 100000, 120000, 0, 220000, 'Pending'),
+(3, 31, 32, '758046698431', 'BRI-Virtual Account', '2025-11-12', '2025-08-15', 0, 100000, 120000, 0, 220000, 'Pending'),
+(4, 31, 32, '707832393091', 'BRI-Virtual Account', '2025-12-12', '2025-08-15', 0, 100000, 120000, 0, 220000, 'Pending'),
+(5, 31, 32, '777396428726', 'BRI-Virtual Account', '2026-01-12', '2025-08-15', 0, 100000, 120000, 0, 220000, 'Pending'),
+(6, 31, 32, '472148752834', 'BRI-Virtual Account', '2026-02-12', '2025-08-15', 0, 100000, 120000, 0, 220000, 'Pending'),
+(7, 31, 32, '', '', '2026-03-12', '2025-08-15', 0, 100000, 120000, 0, 220000, 'None'),
+(8, 31, 32, '', '', '2026-04-12', '2025-08-15', 0, 100000, 120000, 0, 220000, 'None'),
+(9, 31, 32, '', '', '2026-05-12', '2025-08-15', 0, 100000, 120000, 0, 220000, 'None'),
+(10, 31, 32, '', NULL, '2026-06-12', '0000-00-00', 0, 100000, 120000, 0, 220000, 'None'),
+(11, 31, 32, '', NULL, '2026-07-12', '0000-00-00', 0, 100000, 120000, 0, 220000, 'None'),
+(12, 31, 32, '', NULL, '2026-08-12', '0000-00-00', 0, 100000, 120000, 0, 220000, 'None');
 
 -- --------------------------------------------------------
 
@@ -941,8 +947,8 @@ CREATE TABLE IF NOT EXISTS `pinjaman_jenis` (
 --
 
 INSERT INTO `pinjaman_jenis` (`id_pinjaman_jenis`, `nama_pinjaman`, `periode_angsuran`, `persen_jasa`) VALUES
-(1, 'Pinjaman Konsumtif', 12, 10.00),
-(2, 'Pinjaman KTR', 12, 5.00);
+(1, 'Pinjaman Konsumtif', 12, 2.00),
+(2, 'Pinjaman KTR', 12, 1.00);
 
 -- --------------------------------------------------------
 
@@ -971,7 +977,7 @@ CREATE TABLE IF NOT EXISTS `setting_general` (
 --
 
 INSERT INTO `setting_general` (`id_setting_general`, `title_page`, `kata_kunci`, `deskripsi`, `alamat_bisnis`, `email_bisnis`, `telepon_bisnis`, `favicon`, `logo`, `base_url`, `author`) VALUES
-(1, 'Koperasi Sejahtera', 'Koperasi', 'Aplikasi POS Koperasi', 'PT.Gunze Indonesia, Ejip Industrial Park Plot 7 H-1 ,Cikarang Selatan,Bekasi 17550 Indonesia', 'dhiforester@gmail.com', '0232876240', '283a3fda7225285273601d32a6a1a1.png', '0e7432c17ed9874e0b1c2090dde1cc.png', 'http://localhost:81/koperasi_lite', 'Solihul Hadi');
+(1, 'KOKASERA', 'Koperasi', 'Aplikasi POS Koperasi', 'PT.Gunze Indonesia, Ejip Industrial Park Plot 7 H-1 ,Cikarang Selatan,Bekasi 17550 Indonesia', 'dhiforester@gmail.com', '0232876240', '0b220009fe0804017d92affed115aa.png', 'a2ed89a7ededc78abae5fc426ab14a.png', 'http://localhost/koperasi_lite', 'Javier Rivaldy Cahyo Pratama');
 
 -- --------------------------------------------------------
 
@@ -984,28 +990,36 @@ CREATE TABLE IF NOT EXISTS `simpanan` (
   `id_simpanan` int NOT NULL AUTO_INCREMENT,
   `uuid_simpanan` char(36) NOT NULL,
   `id_anggota` int NOT NULL,
-  `id_akses` int NOT NULL,
   `id_simpanan_jenis` int DEFAULT NULL,
-  `rutin` int DEFAULT NULL COMMENT 'true/false',
   `nip` varchar(32) NOT NULL COMMENT 'nip anggota',
   `nama` text NOT NULL COMMENT 'nama anggota',
-  `tanggal` date NOT NULL COMMENT 'tanggal simpanan',
-  `kategori` varchar(30) NOT NULL COMMENT 'Simpanan Pokok\r\nSimpanan Wajib\r\nSimpanan Sukarela\r\nPenarikan',
-  `keterangan` text,
+  `tanggal_simpanan` date NOT NULL COMMENT 'tanggal simpanan',
+  `tanggal_bayar` datetime NOT NULL,
+  `kategori` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT 'Simpanan Pokok\r\nSimpanan Wajib\r\nSimpanan Sukarela\r\nPenarikan',
   `jumlah` int NOT NULL,
+  `metode_pembayaran` varchar(255) DEFAULT NULL,
+  `status` varchar(30) NOT NULL COMMENT 'Lunas, Pending',
   PRIMARY KEY (`id_simpanan`),
   KEY `id_anggota` (`id_anggota`),
   KEY `simpanan_to_jenis` (`id_simpanan_jenis`)
-) ENGINE=InnoDB AUTO_INCREMENT=477 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=498 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `simpanan`
 --
 
-INSERT INTO `simpanan` (`id_simpanan`, `uuid_simpanan`, `id_anggota`, `id_akses`, `id_simpanan_jenis`, `rutin`, `nip`, `nama`, `tanggal`, `kategori`, `keterangan`, `jumlah`) VALUES
-(474, '4KhpCl3MjLKjsVf6HfioczeNR2HHMGLMaT9R', 1, 1, 1, NULL, '2024/07/Contoh-01', 'Adam Saputra', '2025-01-01', 'Simpanan Wajib', '', 300000),
-(475, 'YmdZtmYAT9D14YsKuXh5cSvgPYai1eLnslxk', 2, 1, 1, NULL, '2024/07/Contoh-02', 'Budi Santoso', '2025-06-01', 'Simpanan Wajib', '', 300000),
-(476, 'XxTPHzKEBaDP5fkAhDhREFWyotQQx3jFMSFD', 3, 1, 1, NULL, '2024/07/Contoh-111', 'Citra Dewi', '2025-06-01', 'Simpanan Wajib', '', 300000);
+INSERT INTO `simpanan` (`id_simpanan`, `uuid_simpanan`, `id_anggota`, `id_simpanan_jenis`, `nip`, `nama`, `tanggal_simpanan`, `tanggal_bayar`, `kategori`, `jumlah`, `metode_pembayaran`, `status`) VALUES
+(485, '909895513', 32, 4, '32080921048800053', 'Solihul Hadi', '2025-08-07', '2025-08-10 10:25:05', 'Simpanan Pokok', 100000, 'Retail-Indomart/Alfamart', 'Lunas'),
+(486, '911748573', 32, 9, '32080921048800053', 'Solihul Hadi', '0000-00-00', '2025-08-10 16:02:17', 'Simpanan Wajib', 100000, 'BRI-Virtual Account', 'Pending'),
+(489, '734364067', 32, 9, '32080921048800053', 'Solihul Hadi', '2025-07-01', '2025-08-10 16:05:48', 'Simpanan Wajib', 100000, 'BRI-Virtual Account', 'Lunas'),
+(490, '942695239', 33, 3, '32080921048800055', 'Dewi Widiastuti', '2025-08-11', '2025-08-11 01:35:58', 'Simpanan Sukarela', 200000, 'BRI-Virtual Account', 'Lunas'),
+(491, '621085366', 33, 7, '32080921048800055', 'Dewi Widiastuti', '2025-08-11', '2025-08-11 01:38:01', 'Simpanan Sukarela', 500000, 'Mandiri-Virtual Account', 'Lunas'),
+(492, '104797219', 33, 4, '32080921048800055', 'Dewi Widiastuti', '2025-08-07', '2025-08-10 19:19:30', 'Simpanan Pokok', 100000, 'BRI-Virtual Account', 'Lunas'),
+(493, '105909834', 33, 9, '32080921048800055', 'Dewi Widiastuti', '2025-08-01', '2025-08-10 20:28:35', 'Simpanan Wajib', 100000, 'BRI-Virtual Account', 'Lunas'),
+(494, '540878734', 27, 4, '320993839384', 'Dewi Widiastuti', '2025-08-07', '2025-08-13 20:42:12', 'Simpanan Pokok', 100000, 'BRI-Virtual Account', 'Lunas'),
+(495, '503336315', 27, 9, '320993839384', 'Dewi Widiastuti', '2025-08-01', '2025-08-13 20:43:32', 'Simpanan Wajib', 100000, 'BRI-Virtual Account', 'Lunas'),
+(496, '993238550', 32, 9, '32080921048800053', 'Solihul Hadi', '2025-06-01', '2025-08-13 21:28:27', 'Simpanan Wajib', 100000, 'BRI-Virtual Account', 'Lunas'),
+(497, '342785363', 32, 7, '32080921048800053', 'Solihul Hadi', '2025-08-14', '2025-08-14 17:23:01', 'Simpanan Sukarela', 10000000, 'BRI-Virtual Account', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -1016,22 +1030,57 @@ INSERT INTO `simpanan` (`id_simpanan`, `uuid_simpanan`, `id_anggota`, `id_akses`
 DROP TABLE IF EXISTS `simpanan_jenis`;
 CREATE TABLE IF NOT EXISTS `simpanan_jenis` (
   `id_simpanan_jenis` int NOT NULL AUTO_INCREMENT,
-  `nama_simpanan` varchar(30) NOT NULL,
+  `nama_simpanan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `keterangan` text,
-  `rutin` tinyint(1) NOT NULL COMMENT 'True/False',
+  `kategori` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT 'Wajib, Pokok, Sukarela',
   `nominal` int DEFAULT NULL,
   PRIMARY KEY (`id_simpanan_jenis`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `simpanan_jenis`
 --
 
-INSERT INTO `simpanan_jenis` (`id_simpanan_jenis`, `nama_simpanan`, `keterangan`, `rutin`, `nominal`) VALUES
-(1, 'Simpanan Wajib', '', 1, 300000),
-(3, 'Simpanan Suka Rela', 'Simpanan anggota atas dasar suka rela', 0, 0),
-(4, 'Simpanan Pokok', 'Simpanan yang wajib masuk pada saat pertama kali menjadi anggota', 1, 100000),
-(7, 'Simpanan Penghasilan', 'Simpanan yang berasal dari jumlah penghasilan', 0, 0);
+INSERT INTO `simpanan_jenis` (`id_simpanan_jenis`, `nama_simpanan`, `keterangan`, `kategori`, `nominal`) VALUES
+(3, 'Simpanan Suka Rela', 'Simpanan anggota atas dasar suka rela', 'Simpanan Sukarela', 200000),
+(4, 'Simpanan Pokok', 'Simpanan yang wajib masuk pada saat pertama kali menjadi anggota', 'Simpanan Pokok', 100000),
+(7, 'Simpanan Penghasilan', 'Simpanan yang berasal dari jumlah penghasilan', 'Simpanan Sukarela', 0),
+(9, 'SW', 'Simpanan yang wajib dibayarkan tiap bulan', 'Simpanan Wajib', 100000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `simpanan_penarikan`
+--
+
+DROP TABLE IF EXISTS `simpanan_penarikan`;
+CREATE TABLE IF NOT EXISTS `simpanan_penarikan` (
+  `id_simpanan_penarikan` int NOT NULL AUTO_INCREMENT,
+  `id_simpanan_jenis` int NOT NULL,
+  `id_anggota` int NOT NULL,
+  `tanggal` date NOT NULL,
+  `bank` varchar(255) NOT NULL,
+  `rekening` varchar(255) NOT NULL,
+  `nominal` int NOT NULL,
+  `status` varchar(30) NOT NULL COMMENT 'Lunas, Pending',
+  PRIMARY KEY (`id_simpanan_penarikan`),
+  KEY `id_simpanan_jenis` (`id_simpanan_jenis`),
+  KEY `id_anggota` (`id_anggota`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `simpanan_penarikan`
+--
+
+INSERT INTO `simpanan_penarikan` (`id_simpanan_penarikan`, `id_simpanan_jenis`, `id_anggota`, `tanggal`, `bank`, `rekening`, `nominal`, `status`) VALUES
+(1, 7, 33, '2025-08-11', 'BRi', '34234234234', 100000, 'Lunas'),
+(2, 7, 33, '2025-08-11', 'BRi', '34234234234', 200000, 'Lunas'),
+(4, 9, 27, '2025-08-14', 'BRI', '123123', 30000, 'Pending'),
+(5, 9, 27, '2025-08-14', 'BRI', '123123', 10000, 'Pending'),
+(6, 9, 27, '2025-08-14', 'BRI', '123123', 10000, 'Pending'),
+(7, 9, 32, '2025-08-14', 'BRI', '123123', 100000, 'Pending'),
+(8, 9, 32, '2025-08-14', 'BRI', '123123', 100000, 'Pending'),
+(9, 9, 32, '2025-08-14', 'BRI', '123123', 10000, 'Pending');
 
 --
 -- Constraints for dumped tables
@@ -1063,6 +1112,13 @@ ALTER TABLE `pinjaman_angsuran`
 ALTER TABLE `simpanan`
   ADD CONSTRAINT `simpanan_to_anggota` FOREIGN KEY (`id_anggota`) REFERENCES `anggota` (`id_anggota`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `simpanan_to_jenis` FOREIGN KEY (`id_simpanan_jenis`) REFERENCES `simpanan_jenis` (`id_simpanan_jenis`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `simpanan_penarikan`
+--
+ALTER TABLE `simpanan_penarikan`
+  ADD CONSTRAINT `penarikan_simpanan_jenis` FOREIGN KEY (`id_simpanan_jenis`) REFERENCES `simpanan_jenis` (`id_simpanan_jenis`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `penarikan_to_anggota` FOREIGN KEY (`id_anggota`) REFERENCES `anggota` (`id_anggota`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

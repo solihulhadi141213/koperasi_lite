@@ -90,7 +90,7 @@ $html = '
             <th width="5%">No</th>
             <th width="10%">Tanggal</th>
             <th width="20%">Nama</th>
-            <th width="15%">NIP</th>
+            <th width="15%">No.Identitas</th>
             <th width="15%">Kategori</th>
             <th width="20%">Jenis</th>
             <th width="15%">Jumlah</th>
@@ -99,7 +99,7 @@ $html = '
     <tbody>';
 
 // Query data
-$query = mysqli_query($Conn, "SELECT * FROM simpanan WHERE tanggal >= '$periode_1' AND tanggal <= '$periode_2' ORDER BY tanggal ASC");
+$query = mysqli_query($Conn, "SELECT * FROM simpanan WHERE tanggal_simpanan >= '$periode_1' AND tanggal_simpanan <= '$periode_2' ORDER BY tanggal_simpanan ASC");
 if (mysqli_num_rows($query) == 0) {
     $html .= '
         <tr>
@@ -111,13 +111,12 @@ if (mysqli_num_rows($query) == 0) {
 } else {
     $no = 1;
     while ($data = mysqli_fetch_array($query)) {
-        $tanggal = date('d/m/Y', strtotime($data['tanggal']));
+        $tanggal = date('d/m/Y', strtotime($data['tanggal_simpanan']));
         $nama = $data['nama'];
         $nip = $data['nip'];
         $kategori = $data['kategori'] == "Penarikan" ? "Penarikan" : "Simpanan";
         $jenis = GetDetailData($Conn, 'simpanan_jenis', 'id_simpanan_jenis', $data['id_simpanan_jenis'], 'nama_simpanan');
         $jumlah_format = number_format($data['jumlah'], 0, ',', '.');
-        $jumlah_label = $kategori == "Penarikan" ? "- $jumlah_format" : $jumlah_format;
 
         $html .= '
         <tr>
@@ -127,7 +126,7 @@ if (mysqli_num_rows($query) == 0) {
             <td class="text-left">'.$nip.'</td>
             <td class="text-left">'.$kategori.'</td>
             <td class="text-left">'.$jenis.'</td>
-            <td class="text-left">'.$jumlah_label.'</td>
+            <td class="text-left">'.$jumlah_format.'</td>
         </tr>';
         $no++;
     }

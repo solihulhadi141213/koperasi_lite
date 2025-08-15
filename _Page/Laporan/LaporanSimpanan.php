@@ -52,7 +52,7 @@
                                     <td align="center"><b>No</b></td>
                                      <td align="left"><b>Tanggal</b></td>
                                     <td align="left"><b>Nama Anggota</b></td>
-                                    <td align="left"><b>No.Induk</b></td>
+                                    <td align="left"><b>No.Identitas</b></td>
                                     <td align="left"><b>Kategori</b></td>
                                     <td align="left"><b>Jenis Simpanan</b></td>
                                     <td align="center"><b>Nominal</b></td>
