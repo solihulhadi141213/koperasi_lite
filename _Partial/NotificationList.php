@@ -46,6 +46,12 @@
         if(!empty($JumlahAnggotaPendding)){
             $JumlahNotifikasi=$JumlahNotifikasi+1;
         }
+
+        //Hitung Pengajuan Penarikan Dana
+        $JumlahPermohonanPenarikan = mysqli_num_rows(mysqli_query($Conn, "SELECT id_simpanan_penarikan FROM simpanan_penarikan WHERE status='Pending'"));
+        if(!empty($JumlahPermohonanPenarikan)){
+            $JumlahNotifikasi=$JumlahNotifikasi+1;
+        }
         
         //Apabila Tidak ada notifgikasi
         if(empty($JumlahNotifikasi)){
@@ -67,6 +73,8 @@
                 echo '  </div>';
                 echo '</li>';
             }
+
+            //Notifikasi Permohonana Pengajuan Anggota
             if(!empty($JumlahAnggotaPendding)){
                 echo '<li><hr class="dropdown-divider"></li>';
                 echo '<li class="notification-item">';
@@ -74,6 +82,18 @@
                 echo '  <div>';
                 echo '      <h4><a href="index.php?Page=Anggota">Pengajuan Anggota</a></h4>';
                 echo '      <p>Ada '.$JumlahAnggotaPendding.' pengajuan anggota perlu verifikasi</p>';
+                echo '  </div>';
+                echo '</li>';
+            }
+
+            //Notifikasi Pengajuan Penarikan Dana
+            if(!empty($JumlahPermohonanPenarikan)){
+                echo '<li><hr class="dropdown-divider"></li>';
+                echo '<li class="notification-item">';
+                echo '  <i class="bi bi-exclamation-circle text-danger"></i>';
+                echo '  <div>';
+                echo '      <h4><a href="index.php?Page=PenarikanSimpanan">Pengajuan Penarikan Simpanan</a></h4>';
+                echo '      <p>Ada '.$JumlahPermohonanPenarikan.' pengajuan penarikan dana simpanan</p>';
                 echo '  </div>';
                 echo '</li>';
             }

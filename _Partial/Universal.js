@@ -25,3 +25,5 @@ $('#MenampilkanBelNotifikasiPesan').click(function(){
     $('#MenampilkanListNotifikasiPesan').html('<li class="dropdown-header">Loading...</li>');
     $('#MenampilkanListNotifikasiPesan').load('_Partial/NotificationListPesan.php');
 });
+
+

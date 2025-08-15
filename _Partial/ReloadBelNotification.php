@@ -44,6 +44,12 @@
         if(!empty($JumlahAnggotaPendding)){
             $JumlahNotifikasi=$JumlahNotifikasi+1;
         }
+
+        //Hitung Pengajuan Penarikan Dana
+        $JumlahPermohonanPenarikan = mysqli_num_rows(mysqli_query($Conn, "SELECT id_simpanan_penarikan FROM simpanan_penarikan WHERE status='Pending'"));
+        if(!empty($JumlahPermohonanPenarikan)){
+            $JumlahNotifikasi=$JumlahNotifikasi+1;
+        }
         //Apabila ada notifgikasi
         if(!empty($JumlahNotifikasi)){
             echo '<i class="bi bi-bell"></i>';

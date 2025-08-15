@@ -20,6 +20,49 @@
 
 <!-- Template Main JS File -->
 <script src="assets/js/main.js"></script>
+<script>
+   (function () {
+    const BREAKPOINT_MOBILE = '(max-width: 991.98px)';
+
+    function updateIcon() {
+        const btn = document.querySelector('.toggle-sidebar-btn');
+        if (!btn) return;
+        const isClosed = document.body.classList.contains('toggle-sidebar');
+        btn.classList.remove('bi-list', 'bi-x', 'bi-xtoggle-sidebar-btn');
+        btn.classList.add(isClosed ? 'bi-list' : 'bi-x');
+    }
+
+    function setInitialState() {
+        const isMobile = window.matchMedia(BREAKPOINT_MOBILE).matches;
+        if (isMobile) {
+            document.body.classList.add('toggle-sidebar');   // Mobile → tutup
+        } else {
+            document.body.classList.remove('toggle-sidebar'); // Desktop → buka
+        }
+        updateIcon();
+    }
+
+    function observeBodyClass() {
+        const obs = new MutationObserver((mutations) => {
+            for (const m of mutations) {
+                if (m.type === 'attributes' && m.attributeName === 'class') {
+                    updateIcon();
+                }
+            }
+        });
+        obs.observe(document.body, { attributes: true });
+    }
+
+    // Pastikan script jalan setelah semua JS bawaan selesai
+    window.addEventListener('load', function () {
+        setTimeout(() => {
+            setInitialState();
+            observeBodyClass();
+        }, 10); // delay sedikit biar benar-benar nyalip NiceAdmin
+    });
+})();
+</script>
+
 <script type="text/javascript">
     $(document).ready(function(){
         // Format mata uang.

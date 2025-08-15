@@ -98,16 +98,16 @@
             </a>
         </li>
         <li class="nav-heading">Fitur Lainnya</li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link <?php if($PageMenu!=="Aktivitas"){echo "collapsed";} ?>" href="index.php?Page=Aktivitas&Sub=AktivitasUmum">
                 <i class="bi bi-circle"></i>
                 <span>Log Aktivitas</span>
             </a>
-        </li>
+        </li> -->
         <li class="nav-item">
             <a class="nav-link <?php if($PageMenu!=="Help"){echo "collapsed";} ?>" href="index.php?Page=Help&Sub=HelpData">
                 <i class="bi bi-question"></i>
-                <span>Bantuan</span>
+                <span>Tentang Aplikasi</span>
             </a>
         </li>
         <li class="nav-item">
