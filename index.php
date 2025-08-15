@@ -28,7 +28,7 @@
                         <?php
                             include "_Partial/IconSearch.php";
                             include "_Partial/Notifikasi.php";
-                            include "_Partial/NotifikasiPesan.php";
+                            // include "_Partial/NotifikasiPesan.php";
                             include "_Partial/Profile.php";
                         ?>
                     </ul>
