@@ -122,7 +122,8 @@ if (mysqli_num_rows($query) == 0) {
     
     while ($data = mysqli_fetch_array($query)) {
         $id_pinjaman = $data['id_pinjaman'];
-        $tanggal = date('d/m/Y', strtotime($data['tangtanggal_pengajuangal']));
+        $id_anggota = $data['id_anggota'];
+        $tanggal = date('d/m/Y', strtotime($data['tanggal_pengajuan']));
         $jumlah_pinjaman = $data['jumlah_pinjaman'];
         $status = $data['status'];
         

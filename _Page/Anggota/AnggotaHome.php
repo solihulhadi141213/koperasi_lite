@@ -34,7 +34,7 @@
                         <div class="row">
                             <div class="col-md-8 mb-3"></div>
                             <div class="col-md-4 mb-3 text-end">
-                                <a class="btn btn-md btn-outline-dark btn-floating" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
+                                <!-- <a class="btn btn-md btn-outline-dark btn-floating" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="bi bi-three-dots-vertical"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" style="">
@@ -51,7 +51,7 @@
                                             <i class="bi bi-download"></i> Import
                                         </a>
                                     </li>
-                                </ul>
+                                </ul> -->
                                 <button type="button" class="btn btn-md btn-info btn-floating" data-bs-toggle="modal" data-bs-target="#ModalFilter" title="Filter Data Anggota">
                                     <i class="bi bi-search"></i>
                                 </button>

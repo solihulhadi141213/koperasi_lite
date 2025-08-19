@@ -1429,3 +1429,16 @@ body .title_page_app {
 .table_custome td {
   color: #000000;
 }
+
+/* Nivebar */
+/* Hover effect dengan spesifisitas cukup tinggi agar tidak ketimpa */
+header .toggle-sidebar-btn {
+  cursor: pointer;
+  transition: transform .2s ease, color .2s ease, opacity .2s ease;
+  will-change: transform;
+}
+header .toggle-sidebar-btn:hover {
+  transform: scale(1.15);
+  color: var(--bs-primary) !important; /* aman terhadap tema */
+  opacity: .95;
+}

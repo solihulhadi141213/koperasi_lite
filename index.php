@@ -17,7 +17,7 @@
                 include "_Partial/Head.php";
             ?>
         </head>
-        <body class="toggle-sidebar">
+        <body class="">
             <header id="header" class="header fixed-top d-flex align-items-center nav_background">
                 <?php
                     include "_Partial/DashboardLogo.php";
@@ -34,6 +34,7 @@
                     </ul>
                 </nav>
             </header>
+            
             <?php
                 include "_Partial/Menu.php";
             ?>

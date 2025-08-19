@@ -20,9 +20,9 @@
             $kontak=GetDetailData($Conn,'anggota','id_anggota',$SessionIdAkses,'kontak');
             $email=GetDetailData($Conn,'anggota','id_anggota',$SessionIdAkses,'email');
         }else{
-            $nama_akses=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'nama_akses');
-            $kontak_akses=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'kontak_akses');
-            $email_akses=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'email_akses');
+            $nama=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'nama_akses');
+            $kontak=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'kontak_akses');
+            $email=GetDetailData($Conn,'akses','id_akses',$SessionIdAkses,'email_akses');
         }
 ?>
         <div class="row mb-3">
