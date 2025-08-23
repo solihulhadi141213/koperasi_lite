@@ -54,7 +54,7 @@
             if(!empty($_POST['OrderBy'])){
                 $OrderBy=$_POST['OrderBy'];
             }else{
-                $OrderBy="tanggal";
+                $OrderBy="tanggal_simpanan";
             }
             //Atur Page
             if(!empty($_POST['page'])){
@@ -68,7 +68,7 @@
                 if(empty($keyword)){
                     $jml_data = mysqli_num_rows(mysqli_query($Conn, "SELECT id_simpanan FROM simpanan WHERE id_anggota='$id_anggota'"));
                 }else{
-                    $jml_data = mysqli_num_rows(mysqli_query($Conn, "SELECT id_simpanan FROM simpanan WHERE (id_anggota='$id_anggota') AND (tanggal like '%$keyword%' OR kategori like '%$keyword%' OR jumlah like '%$keyword%')"));
+                    $jml_data = mysqli_num_rows(mysqli_query($Conn, "SELECT id_simpanan FROM simpanan WHERE (id_anggota='$id_anggota') AND (tanggal_simpanan like '%$keyword%' OR kategori like '%$keyword%' OR jumlah like '%$keyword%')"));
                 }
             }else{
                 if(empty($keyword)){
@@ -104,11 +104,9 @@
                 while ($data = mysqli_fetch_array($query)) {
                     $id_simpanan= $data['id_simpanan'];
                     $id_simpanan_jenis= $data['id_simpanan_jenis'];
-                    $tanggal= $data['tanggal'];
+                    $tanggal= $data['tanggal_simpanan'];
                     $kategori= $data['kategori'];
                     $jumlah= $data['jumlah'];
-                    $keterangan= $data['keterangan'];
-                    $rutin= $data['rutin'];
                     
                     //Format Data
                     $jumlah_rp = "Rp " . number_format($jumlah,0,',','.');
