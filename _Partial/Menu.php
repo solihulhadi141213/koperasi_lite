@@ -23,7 +23,11 @@
                 if($SessionModeAkses=="Sekretaris"){
                     include "_Partial/MenuSekretaris.php";
                 }else{
-                    include "_Partial/MenuKetua.php";
+                     if($SessionModeAkses=="Ketua"){
+                        include "_Partial/MenuKetua.php";
+                    }else{
+                        include "_Partial/MenuPengurus.php";
+                    }
                 }
             }
         }
