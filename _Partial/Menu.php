@@ -14,16 +14,16 @@
     if($SessionModeAkses=="Anggota"){
         include "_Partial/MenuAnggota.php";
     }else{
-        if($SessionModeAkses=="Admin"){
+        if($SessionLevelAkses=="Admin"){
             include "_Partial/MenuPengurus.php";
         }else{
-            if($SessionModeAkses=="Bendahara"){
+            if($SessionLevelAkses=="Bendahara"){
                 include "_Partial/MenuBendahara.php";
             }else{
-                if($SessionModeAkses=="Sekretaris"){
+                if($SessionLevelAkses=="Sekretaris"){
                     include "_Partial/MenuSekretaris.php";
                 }else{
-                     if($SessionModeAkses=="Ketua"){
+                     if($SessionLevelAkses=="Ketua"){
                         include "_Partial/MenuKetua.php";
                     }else{
                         include "_Partial/MenuPengurus.php";

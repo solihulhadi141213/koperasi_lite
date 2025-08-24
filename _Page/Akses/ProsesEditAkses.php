@@ -42,38 +42,46 @@
                             if(empty($_POST['email_akses'])){
                                 echo '<small class="text-danger">Email tidak boleh kosong</small>';
                             }else{
-                                //Validasi email duplikat
-                                $email_akses=$_POST['email_akses'];
-                                $email_akses=validateAndSanitizeInput($email_akses);
-                                $email_akses_lama=GetDetailData($Conn,'akses','id_akses',$id_akses,'email_akses');
-                                if($email_akses_lama==$email_akses){
-                                    $ValidasiEmailDuplikat=0;
+                                //Validasi Akses tidak boleh kosong
+                                if(empty($_POST['akses'])){
+                                    echo '<small class="text-danger">Akses tidak boleh kosong</small>';
                                 }else{
-                                    $ValidasiEmailDuplikat=mysqli_num_rows(mysqli_query($Conn, "SELECT*FROM akses WHERE email_akses='$email_akses'"));
-                                }
-                                if(!empty($ValidasiEmailDuplikat)){
-                                    echo '<small class="text-danger">Email yang anda gunakan sudah terdaftar</small>';
-                                }else{
-                                    //Variabel Lainnya
-                                    $id_akses=$_POST['id_akses'];
-                                    $nama_akses=$_POST['nama_akses'];
-                                    $kontak_akses=$_POST['kontak_akses'];
+                                    //Validasi email duplikat
                                     $email_akses=$_POST['email_akses'];
-                                    //Membersihkan Variabel
-                                    $id_akses=validateAndSanitizeInput($id_akses);
-                                    $nama_akses=validateAndSanitizeInput($nama_akses);
-                                    $kontak_akses=validateAndSanitizeInput($kontak_akses);
                                     $email_akses=validateAndSanitizeInput($email_akses);
-                                    $UpdateAkses = mysqli_query($Conn,"UPDATE akses SET 
-                                        nama_akses='$nama_akses',
-                                        kontak_akses='$kontak_akses',
-                                        email_akses='$email_akses',
-                                        datetime_update='$now'
-                                    WHERE id_akses='$id_akses'") or die(mysqli_error($Conn)); 
-                                    if($UpdateAkses){
-                                        echo '<small class="text-success" id="NotifikasiEditAksesBerhasil">Success</small>';
+                                    $email_akses_lama=GetDetailData($Conn,'akses','id_akses',$id_akses,'email_akses');
+                                    if($email_akses_lama==$email_akses){
+                                        $ValidasiEmailDuplikat=0;
                                     }else{
-                                        echo '<small class="text-danger">Terjadi kesalahan pada saat menyimpan data</small>';
+                                        $ValidasiEmailDuplikat=mysqli_num_rows(mysqli_query($Conn, "SELECT*FROM akses WHERE email_akses='$email_akses'"));
+                                    }
+                                    if(!empty($ValidasiEmailDuplikat)){
+                                        echo '<small class="text-danger">Email yang anda gunakan sudah terdaftar</small>';
+                                    }else{
+                                        //Variabel Lainnya
+                                        $id_akses=$_POST['id_akses'];
+                                        $nama_akses=$_POST['nama_akses'];
+                                        $kontak_akses=$_POST['kontak_akses'];
+                                        $email_akses=$_POST['email_akses'];
+                                        $akses=$_POST['akses'];
+                                        //Membersihkan Variabel
+                                        $id_akses=validateAndSanitizeInput($id_akses);
+                                        $nama_akses=validateAndSanitizeInput($nama_akses);
+                                        $kontak_akses=validateAndSanitizeInput($kontak_akses);
+                                        $email_akses=validateAndSanitizeInput($email_akses);
+                                        $akses=validateAndSanitizeInput($akses);
+                                        $UpdateAkses = mysqli_query($Conn,"UPDATE akses SET 
+                                            nama_akses='$nama_akses',
+                                            kontak_akses='$kontak_akses',
+                                            email_akses='$email_akses',
+                                            akses='$akses',
+                                            datetime_update='$now'
+                                        WHERE id_akses='$id_akses'") or die(mysqli_error($Conn)); 
+                                        if($UpdateAkses){
+                                            echo '<small class="text-success" id="NotifikasiEditAksesBerhasil">Success</small>';
+                                        }else{
+                                            echo '<small class="text-danger">Terjadi kesalahan pada saat menyimpan data</small>';
+                                        }
                                     }
                                 }
                             }

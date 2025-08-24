@@ -69,6 +69,21 @@
                 <input type="email" name="email_akses" id="email_akses_edit" class="form-control" value="<?php echo "$email_akses"; ?>">
             </div>
         </div>
+        <div class="row mb-3">
+            <div class="col col-md-4">
+                <label for="akses_edit">Akses</label>
+            </div>
+            <div class="col col-md-8">
+                <select name="akses" id="akses_edit" class="form-control">
+                    <option value="">Pilih</option>
+                    <option <?php if($akses=="Admin"){echo "selected";} ?> value="Admin">Admin</option>
+                    <option <?php if($akses=="Ketua"){echo "selected";} ?> value="Ketua">Ketua</option>
+                    <option <?php if($akses=="Sekretaris"){echo "selected";} ?> value="Sekretaris">Sekretaris</option>
+                    <option <?php if($akses=="Bendahara"){echo "selected";} ?> value="Bendahara">Bendahara</option>
+
+                </select>
+            </div>
+        </div>
 <?php 
         } 
     } 

@@ -166,6 +166,21 @@
                             //Menampilkan Tanggal
                             $DateDaftar=date('d/m/Y H:i:s T', $strtotime1);
                             $DateUpdate=date('d/m/Y H:i:s T', $strtotime2);
+
+                            //Routing Label Akses
+                            if($akses=="Admin"){
+                                $LabelAkses='<span class="badge badge-danger">Admin</span>';
+                            }else{
+                                if($akses=="Ketua"){
+                                    $LabelAkses='<span class="badge badge-warning">Ketua</span>';
+                                }else{
+                                    if($akses=="Sekretaris"){
+                                        $LabelAkses='<span class="badge badge-success">Sekretaris</span>';
+                                    }else{
+                                        $LabelAkses='<span class="badge badge-primary">Bendahara</span>';
+                                    }
+                                }
+                            }
                 ?>
                             <tr>
                                 <td align="center"><?php echo $no; ?></td>
@@ -187,7 +202,7 @@
                                     <small class="credit"><?php echo $email_akses; ?></small>
                                 </td>
                                 <td align="left">
-                                    <small class="credit"><?php echo $akses; ?></small>
+                                    <small class="credit"><?php echo $LabelAkses; ?></small>
                                 </td>
                                 <td align="center">
                                     <a class="btn btn-sm btn-outline-dark btn-floating" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
