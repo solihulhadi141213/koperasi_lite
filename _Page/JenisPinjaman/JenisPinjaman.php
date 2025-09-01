@@ -51,7 +51,8 @@
                                     <th><b>No</b></th>
                                     <th><b>Nama Pinjaman</b></th>
                                     <th><b>Periode Angsuran</b></th>
-                                    <th><b>Nilai Jasa</b></th>
+                                    <th><b>% Jasa</b></th>
+                                    <th><b>% Denda</b></th>
                                     <th><b>Sesi Pinjaman</b></th>
                                     <th><b>Opsi</b></th>
                                 </tr>
@@ -59,7 +60,7 @@
                             <tbody  id="TabelJenisPinjaman">
                                 <!-- Data Jenis Pinjaman Akan Ditampilkan Disini -->
                                 <tr>
-                                    <td colspan="6" class="text-center">
+                                    <td colspan="7" class="text-center">
                                         <small class="text-danger">Tidak Ada Jenis Pinjaman Yang Ditampilkan</small>
                                     </td>
                                 </tr>

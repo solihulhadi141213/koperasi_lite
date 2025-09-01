@@ -51,6 +51,7 @@
                 }else{
                     $periode_angsuran=GetDetailData($Conn,'pinjaman_jenis','id_pinjaman_jenis',$id_pinjaman_jenis,'periode_angsuran');
                     $persen_jasa=GetDetailData($Conn,'pinjaman_jenis','id_pinjaman_jenis',$id_pinjaman_jenis,'persen_jasa');
+                    $persen_denda=GetDetailData($Conn,'pinjaman_jenis','id_pinjaman_jenis',$id_pinjaman_jenis,'persen_denda');
 
                     //Hitung Angsuran Pokok
                     $angsuran_pokok=$jumlah_pinjaman/$periode_angsuran;
@@ -62,6 +63,11 @@
                     $jasa=round($jasa);
                     $jasa_format = "Rp " . number_format($jasa,0,',',',');
 
+                    //Hitung Denda
+                    $denda=$angsuran_pokok*($persen_denda/100);
+                    $denda=round($denda);
+                    $denda_format = "Rp " . number_format($denda,0,',',',');
+
                     //Angsuran Total
                     $angsuran_total=$angsuran_pokok+$jasa;
                     $angsuran_total_format = "Rp " . number_format($angsuran_total,0,',',',');
@@ -70,6 +76,7 @@
                         <input type="hidden" name="id_pinjaman_jenis" value="'.$id_pinjaman_jenis.'">
                         <input type="hidden" name="jumlah_pinjaman" value="'.$jumlah_pinjaman.'">
                         <input type="hidden" name="rp_jasa" value="'.$jasa.'">
+                        <input type="hidden" name="rp_denda" value="'.$denda.'">
                         <input type="hidden" name="angsuran_pokok" value="'.$angsuran_pokok.'">
                         <input type="hidden" name="angsuran_total" value="'.$angsuran_total.'">
                         <input type="hidden" name="periode_angsuran" value="'.$periode_angsuran.'">
@@ -102,6 +109,11 @@
                             <div class="col-5"><small>Nominal Jasa</small></div>
                             <div class="col-1"><small>:</small></div>
                             <div class="col-6"><code class="text text-grayish">'.$jasa_format.'</code></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-5"><small>Nominal Denda</small></div>
+                            <div class="col-1"><small>:</small></div>
+                            <div class="col-6"><code class="text text-grayish">'.$denda_format.' /Hari</code></div>
                         </div>
                         <div class="row mb-2">
                             <div class="col-5"><small>Nominal Angsuran</small></div>

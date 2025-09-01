@@ -31,6 +31,7 @@
             }else{
                 $periode_angsuran=GetDetailData($Conn,'pinjaman_jenis','id_pinjaman_jenis',$id_pinjaman_jenis,'periode_angsuran');
                 $persen_jasa=GetDetailData($Conn,'pinjaman_jenis','id_pinjaman_jenis',$id_pinjaman_jenis,'persen_jasa');
+                $persen_denda=GetDetailData($Conn,'pinjaman_jenis','id_pinjaman_jenis',$id_pinjaman_jenis,'persen_denda');
                 echo '
                     <div class="row mb-2">
                         <div class="col-5"><small>Jumlah Pinjaman</small></div>
@@ -46,6 +47,11 @@
                         <div class="col-5"><small>Persen Jasa</small></div>
                         <div class="col-1"><small>:</small></div>
                         <div class="col-6"><code class="text text-grayish">'.$persen_jasa.' %</code></div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-5"><small>Persen Denda</small></div>
+                        <div class="col-1"><small>:</small></div>
+                        <div class="col-6"><code class="text text-grayish">'.$persen_denda.' % / Hari</code></div>
                     </div>
                 ';
             }

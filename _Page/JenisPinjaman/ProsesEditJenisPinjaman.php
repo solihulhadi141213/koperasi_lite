@@ -46,6 +46,7 @@
         $nama_pinjaman = trim($_POST['nama_pinjaman']);
         $periode_angsuran = trim($_POST['periode_angsuran']);
         $persen_jasa = isset($_POST['persen_jasa']) ? trim($_POST['persen_jasa']) : 0;
+        $persen_denda = isset($_POST['persen_denda']) ? trim($_POST['persen_denda']) : 0;
 
         // Validasi id_pinjaman_jenis harus angka
         if (!ctype_digit($id_pinjaman_jenis)) {
@@ -88,12 +89,23 @@
             exit;
         }
 
+        // Validasi persen_denda antara 0 hingga 100
+        if (!is_numeric($persen_denda) || $persen_denda < 0 || $persen_denda > 100) {
+            $response = [
+                "status" => "Error",
+                "message" => "Persen Jasa harus berupa angka antara 0 hingga 100!"
+            ];
+            echo json_encode($response);
+            exit;
+        }
+
         // Konversi tipe data
         $periode_angsuran = intval($periode_angsuran);
         $persen_jasa = floatval($persen_jasa);
+        $persen_denda = floatval($persen_denda);
 
         // Persiapan Prepared Statement
-        $stmt = mysqli_prepare($Conn, "UPDATE pinjaman_jenis SET nama_pinjaman=?, periode_angsuran=?, persen_jasa=? WHERE id_pinjaman_jenis=?");
+        $stmt = mysqli_prepare($Conn, "UPDATE pinjaman_jenis SET nama_pinjaman=?, periode_angsuran=?, persen_jasa=?, persen_denda=? WHERE id_pinjaman_jenis=?");
         if (!$stmt) {
             $response = [
                 "status" => "Error",
@@ -104,7 +116,7 @@
         }
 
         // Bind Parameter
-        mysqli_stmt_bind_param($stmt, "sidi", $nama_pinjaman, $periode_angsuran, $persen_jasa, $id_pinjaman_jenis);
+        mysqli_stmt_bind_param($stmt, "siddi", $nama_pinjaman, $periode_angsuran, $persen_jasa, $persen_denda, $id_pinjaman_jenis);
         $update_result = mysqli_stmt_execute($stmt);
 
         if ($update_result) {

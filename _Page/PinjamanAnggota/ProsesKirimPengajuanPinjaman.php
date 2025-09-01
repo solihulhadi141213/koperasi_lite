@@ -43,6 +43,7 @@
 
                     //Buat Variabel Yang Tidak Wajib
                     $rp_jasa = !empty($_POST['rp_jasa']) ? $_POST['rp_jasa'] : 0;
+                    $rp_denda = !empty($_POST['rp_denda']) ? $_POST['rp_denda'] : 0;
                     $angsuran_pokok = !empty($_POST['angsuran_pokok']) ? $_POST['angsuran_pokok'] : 0;
                     $angsuran_total = !empty($_POST['angsuran_total']) ? $_POST['angsuran_total'] : 0;
                     $periode_angsuran = !empty($_POST['periode_angsuran']) ? $_POST['periode_angsuran'] : 0;
@@ -79,6 +80,7 @@
                                 tanggal,
                                 jumlah_pinjaman,
                                 rp_jasa,
+                                rp_denda,
                                 angsuran_pokok,
                                 angsuran_total,
                                 periode_angsuran,
@@ -91,6 +93,7 @@
                                 '$tanggal',
                                 '$jumlah_pinjaman',
                                 '$rp_jasa',
+                                '$rp_denda',
                                 '$angsuran_pokok',
                                 '$angsuran_total',
                                 '$periode_angsuran',

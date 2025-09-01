@@ -57,6 +57,7 @@
             $nama_pinjaman=$Data['nama_pinjaman'];
             $periode_angsuran=$Data['periode_angsuran'];
             $persen_jasa=$Data['persen_jasa'];
+            $persen_denda=$Data['persen_denda'];
 
             //Hitung Jumlah Sesi Pinjaman
             $jumlah_sesi_pinjaman = mysqli_num_rows(mysqli_query($Conn, "SELECT id_pinjaman FROM pinjaman WHERE id_pinjaman_jenis='$id_pinjaman_jenis'"));
@@ -65,6 +66,7 @@
                 "nama_pinjaman" => $nama_pinjaman,
                 "periode_angsuran" => $periode_angsuran,
                 "persen_jasa" => $persen_jasa,
+                "persen_denda" => $persen_denda,
                 "jumlah_sesi_pinjaman" => $jumlah_sesi_pinjaman
             ];
 

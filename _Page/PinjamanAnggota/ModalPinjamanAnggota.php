@@ -127,6 +127,9 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <a href="index.php?Page=AngsuranAnggota" class="btn btn-info btn-rounded">
+                    <i class="bi bi-three-dots"></i> Lihat Angsuran
+                </a>
                 <button type="button" class="btn btn-dark btn-rounded" data-bs-dismiss="modal">
                     <i class="bi bi-x-circle"></i> Tutup
                 </button>

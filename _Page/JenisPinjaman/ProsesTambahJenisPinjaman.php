@@ -44,6 +44,7 @@
         $nama_pinjaman = trim($_POST['nama_pinjaman']);
         $periode_angsuran = trim($_POST['periode_angsuran']);
         $persen_jasa = isset($_POST['persen_jasa']) ? trim($_POST['persen_jasa']) : 0;
+        $persen_denda = isset($_POST['persen_denda']) ? trim($_POST['persen_denda']) : 0;
 
         // Validasi Panjang nama_pinjaman
         if (strlen($nama_pinjaman) > 250) {
@@ -75,13 +76,24 @@
             exit;
         }
 
+        // Validasi persen_denda antara 0 hingga 100
+        if (!is_numeric($persen_denda) || $persen_denda < 0 || $persen_denda > 100) {
+            $response = [
+                "status" => "Error",
+                "message" => "Persen Denda harus berupa angka antara 0 hingga 100!"
+            ];
+            echo json_encode($response);
+            exit;
+        }
+
         // Konversi tipe data
         $periode_angsuran = intval($periode_angsuran);
         $persen_jasa = floatval($persen_jasa);
+        $persen_denda = floatval($persen_denda);
 
         // Query Insert Data dengan Prepared Statement
-        $stmt = $Conn->prepare("INSERT INTO pinjaman_jenis (nama_pinjaman, periode_angsuran, persen_jasa) VALUES (?, ?, ?)");
-        $stmt->bind_param("sid", $nama_pinjaman, $periode_angsuran, $persen_jasa);
+        $stmt = $Conn->prepare("INSERT INTO pinjaman_jenis (nama_pinjaman, periode_angsuran, persen_jasa, persen_denda) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("sidd", $nama_pinjaman, $periode_angsuran, $persen_jasa, $persen_denda);
 
         if ($stmt->execute()) {
             $kategori_log = "Jenis Pinjaman";

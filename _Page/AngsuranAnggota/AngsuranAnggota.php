@@ -55,6 +55,7 @@
                         $tanggal=$data_pinjaman['tanggal'];
                         $jumlah_pinjaman=$data_pinjaman['jumlah_pinjaman'];
                         $rp_jasa=$data_pinjaman['rp_jasa'];
+                        $rp_denda=$data_pinjaman['rp_denda'];
                         $angsuran_pokok=$data_pinjaman['angsuran_pokok'];
                         $angsuran_total=$data_pinjaman['angsuran_total'];
                         $periode_angsuran=$data_pinjaman['periode_angsuran'];
@@ -66,6 +67,7 @@
                         //Buka Data Jenis Pinjaman
                         $nama_pinjaman=GetDetailData($Conn,'pinjaman_jenis','id_pinjaman_jenis',$id_pinjaman_jenis,'nama_pinjaman');
                         $persen_jasa=GetDetailData($Conn,'pinjaman_jenis','id_pinjaman_jenis',$id_pinjaman_jenis,'persen_jasa');
+                        $persen_denda=GetDetailData($Conn,'pinjaman_jenis','id_pinjaman_jenis',$id_pinjaman_jenis,'persen_denda');
                         echo '
                             <div class="row mb-3 border-1 border-bottom">
                                 <div class="col-md-6 mb-3">
@@ -79,17 +81,22 @@
                                         <div class="col-1"><small>:</small></div>
                                         <div class="col-7"><small><code class="text text-grayish">'.$tanggal.'</code></small></div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
                                     <div class="row mb-2">
                                         <div class="col-4"><small>Jumlah Pinjaman</small></div>
                                         <div class="col-1"><small>:</small></div>
                                         <div class="col-7"><small><code class="text text-grayish">'.$jumlah_pinjaman_format.'</code></small></div>
                                     </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
                                     <div class="row mb-2">
                                         <div class="col-4"><small>Jasa Pinjaman</small></div>
                                         <div class="col-1"><small>:</small></div>
                                         <div class="col-7"><small><code class="text text-grayish">'.$persen_jasa.' %</code></small></div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-4"><small>Denda</small></div>
+                                        <div class="col-1"><small>:</small></div>
+                                        <div class="col-7"><small><code class="text text-grayish">'.$persen_denda.' % / Hari</code></small></div>
                                     </div>
                                 </div>
                             </div>
@@ -103,15 +110,19 @@
                                     <tr>
                                         <th><b>No</b></th>
                                         <th><b>Periode</b></th>
-                                        <th><b>Tanggal Bayar</b></th>
-                                        <th><b>Nominal</b></th>
+                                        <th><b>Tgl.Bayar</b></th>
+                                        <th><b>Terlambat</b></th>
+                                        <th><b>Pokok</b></th>
+                                        <th><b>Jasa</b></th>
+                                        <th><b>Denda</b></th>
+                                        <th><b>Angsuran</b></th>
                                         <th><b>Status</b></th>
                                         <th><b>Opsi</b></th>
                                     </tr>
                                 </thead>
                                 <tbody id="TabelPinjamanAnggota">
                                     <tr>
-                                        <td colspan="6" class="text-center">
+                                        <td colspan="10" class="text-center">
                                             <small class="text-danger">Belum Ada Data Pinjaman Yang Ditampilkan</small>
                                         </td>
                                     </tr>

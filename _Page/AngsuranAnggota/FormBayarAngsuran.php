@@ -21,6 +21,35 @@
         $jasa=GetDetailData($Conn,'pinjaman_angsuran','id_pinjaman_angsuran',$id_pinjaman_angsuran,'jasa');
         $jumlah=GetDetailData($Conn,'pinjaman_angsuran','id_pinjaman_angsuran',$id_pinjaman_angsuran,'jumlah');
 
+        //Buka Nominal Denda
+        $rp_denda=GetDetailData($Conn,'pinjaman','id_pinjaman',$id_pinjaman,'rp_denda');
+
+        //Tanggal Bayar
+        $tanggal_bayar=date('Y-m-d');
+
+        //Hitung Keterlambatan
+        $date1 = new DateTime($tanggal_angsuran);
+        $date2 = new DateTime($tanggal_bayar);
+
+        // Hitung selisih
+        $diff = $date1->diff($date2);
+
+        // Ambil jumlah hari
+        $hari_keterlambatan = $diff->days;
+
+        // Jika tanggal bayar lebih awal atau sama dengan angsuran, anggap tidak telat
+        if ($date2 <= $date1) {
+            $hari_keterlambatan = 0;
+            $denda = 0;
+        }else{
+            //Buka Nominal Denda
+            $rp_denda=GetDetailData($Conn,'pinjaman','id_pinjaman',$id_pinjaman,'rp_denda');
+            
+        }
+
+        //Hitung Denda
+        $denda =$rp_denda*$hari_keterlambatan;
+
         //Detail Pinjaman
         $jumlah_pinjaman=GetDetailData($Conn,'pinjaman','id_pinjaman',$id_pinjaman,'jumlah_pinjaman');
         $id_pinjaman_jenis=GetDetailData($Conn,'pinjaman','id_pinjaman',$id_pinjaman,'id_pinjaman_jenis');
@@ -28,17 +57,26 @@
         //Nama Jenis Pinjaman
         $nama_pinjaman=GetDetailData($Conn,'pinjaman_jenis','id_pinjaman_jenis',$id_pinjaman_jenis,'nama_pinjaman');
 
+        //Menghitung Jumlah Angsuran
+        $jumlah_angsuran=$pokok+$jasa+$denda;
+
         //Format Rupiah
         $jumlah_pinjaman_format = "Rp " . number_format($jumlah_pinjaman,0,',','.');
         $pokok_Format = "Rp " . number_format($pokok,0,',','.');
         $jasa_Format = "Rp " . number_format($jasa,0,',','.');
-        $jumlah_Format = "Rp " . number_format($jumlah,0,',','.');
+        $denda_format = "Rp " . number_format($denda,0,',','.');
+        $jumlah_Format = "Rp " . number_format($jumlah_angsuran,0,',','.');
 
         //Format Tanggal
         $tanggal_angsuran_format=date('d/m/Y', strtotime($tanggal_angsuran));
         $tanggal_bayar_format=date('d/m/Y', strtotime($tanggal_bayar));
 
         echo '<input type="hidden" name="id_pinjaman_angsuran" value="'.$id_pinjaman_angsuran.'">';
+        echo '<input type="hidden" name="keterlambatan" value="'.$hari_keterlambatan.'">';
+        echo '<input type="hidden" name="pokok" value="'.$pokok.'">';
+        echo '<input type="hidden" name="jasa" value="'.$jasa.'">';
+        echo '<input type="hidden" name="denda" value="'.$denda.'">';
+        echo '<input type="hidden" name="jumlah" value="'.$jumlah_angsuran.'">';
         echo '
             <div class="row mb-2">
                 <div class="col-5"><small>Nama Pinjaman</small></div>
@@ -56,6 +94,16 @@
                 <div class="col-6"><small><code class="text text-grayish">'.$tanggal_angsuran_format.'</code></small></div>
             </div>
             <div class="row mb-2">
+                <div class="col-5"><small>Tgl.Bayar</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-6"><small><code class="text text-grayish">'.$tanggal_bayar.'</code></small></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-5"><small>Keterlambatan</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-6"><small><code class="text text-grayish">'.$hari_keterlambatan.' Hari</code></small></div>
+            </div>
+            <div class="row mb-2">
                 <div class="col-5"><small>Angsuran Pokok</small></div>
                 <div class="col-1"><small>:</small></div>
                 <div class="col-6"><small><code class="text text-grayish">'.$pokok_Format.'</code></small></div>
@@ -64,6 +112,11 @@
                 <div class="col-5"><small>Jasa Pinjaman</small></div>
                 <div class="col-1"><small>:</small></div>
                 <div class="col-6"><small><code class="text text-grayish">'.$jasa_Format.'</code></small></div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-5"><small>Denda</small></div>
+                <div class="col-1"><small>:</small></div>
+                <div class="col-6"><small><code class="text text-grayish">'.$denda_format.'</code></small></div>
             </div>
             <div class="row mb-2">
                 <div class="col-5"><small>Jumlah Angsuran</small></div>

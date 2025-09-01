@@ -29,6 +29,12 @@
             $id_pinjaman_angsuran=$_POST['id_pinjaman_angsuran'];
             $metode_pembayaran=$_POST['metode_pembayaran'];
 
+            $keterlambatan = isset($_POST['keterlambatan']) ? trim($_POST['keterlambatan']) : 0;
+            $pokok = isset($_POST['pokok']) ? trim($_POST['pokok']) : 0;
+            $jasa = isset($_POST['jasa']) ? trim($_POST['jasa']) : 0;
+            $denda = isset($_POST['denda']) ? trim($_POST['denda']) : 0;
+            $jumlah = isset($_POST['jumlah']) ? trim($_POST['jumlah']) : 0;
+
             //Buat kode pembayaran
             $kode_pembayaran=GenerateKodeBarang(12);
 
@@ -36,6 +42,11 @@
             $UpdateStatusAngsuran = mysqli_query($Conn,"UPDATE pinjaman_angsuran SET 
                 kode_pembayaran='$kode_pembayaran',
                 metode_pembayaran='$metode_pembayaran',
+                keterlambatan='$keterlambatan',
+                pokok='$pokok',
+                jasa='$jasa',
+                denda='$denda',
+                jumlah='$jumlah',
                 tanggal_bayar='$now',
                 status='Pending'
             WHERE id_pinjaman_angsuran='$id_pinjaman_angsuran'") or die(mysqli_error($Conn)); 

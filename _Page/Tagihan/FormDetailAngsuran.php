@@ -113,6 +113,11 @@
                     <div class="col-6"><small><code class="text text-grayish">'.$jasa_format.'</code></small></div>
                 </div>
                 <div class="row mb-2">
+                    <div class="col-5"><small>Denda</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><small><code class="text text-grayish">'.$denda_format.'</code></small></div>
+                </div>
+                <div class="row mb-2">
                     <div class="col-5"><small>Jumlah Angsuran</small></div>
                     <div class="col-1"><small>:</small></div>
                     <div class="col-6"><small><code class="text text-grayish">'.$jumlah_format.'</code></small></div>

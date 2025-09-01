@@ -169,6 +169,7 @@
                                             <th><b>Periode</b></th>
                                             <th><b>Pokok</b></th>
                                             <th><b>Jasa</b></th>
+                                            <th><b>Denda</b></th>
                                             <th><b>Jumlah</b></th>
                                             <th><b>Status</b></th>
                                         </tr>
@@ -183,12 +184,14 @@
                     $tanggal_angsuran= $data['tanggal_angsuran'];
                     $pokok= $data['pokok'];
                     $jasa= $data['jasa'];
+                    $denda= $data['denda'];
                     $jumlah= $data['jumlah'];
                     $status_angsuran= $data['status'];
 
                     //Format RP
                     $pokok_format = "Rp " . number_format($pokok,0,',','.');
                     $jasa_format = "Rp " . number_format($jasa,0,',','.');
+                    $denda_format = "Rp " . number_format($denda,0,',','.');
                     $jumlah_format = "Rp " . number_format($jumlah,0,',','.');
 
                     //Format status
@@ -211,6 +214,7 @@
                                             <td class="text-center"><small>'.$tanggal_angsuran.'</b></td>
                                             <td class="text-center"><small>'.$pokok_format.'</b></td>
                                             <td class="text-center"><small>'.$jasa_format.'</b></td>
+                                            <td class="text-center"><small>'.$denda_format.'</b></td>
                                             <td class="text-center"><small>'.$jumlah_format.'</b></td>
                                             <td class="text-center"><small>'.$label_status_angsuran.'</b></td>
                                         </tr>

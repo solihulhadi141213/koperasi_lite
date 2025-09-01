@@ -37,6 +37,11 @@ function ShowDetailPinjaman(id_pinjaman_jenis) {
                         <div class="col-7"><small class="text-muted">${response.dataset.persen_jasa} %</small></div>
                     </div>
                     <div class="row mb-2">
+                        <div class="col-4"><small>Persen Denda</small></div>
+                        <div class="col-1"><small>:</small></div>
+                        <div class="col-7"><small class="text-muted">${response.dataset.persen_denda} %</small></div>
+                    </div>
+                    <div class="row mb-2">
                         <div class="col-4"><small>Sesi Pinjaman</small></div>
                         <div class="col-1"><small>:</small></div>
                         <div class="col-7"><small class="text-muted">${response.dataset.jumlah_sesi_pinjaman}</small></div>
@@ -97,11 +102,48 @@ $(document).ready(function() {
 
     // Fungsi untuk membatasi input hanya angka 0-100
     document.getElementById('persen_jasa').addEventListener('input', function (e) {
-        this.value = this.value.replace(/[^0-9]/g, '');
+        // Hanya izinkan angka dan titik (.)
+        this.value = this.value.replace(/[^0-9.]/g, '');
+
+        // Pastikan hanya ada satu titik desimal
+        if ((this.value.match(/\./g) || []).length > 1) {
+            this.value = this.value.slice(0, -1); // hapus titik tambahan
+        }
+
+        // Batasi hanya 2 digit di belakang koma
+        if (this.value.indexOf('.') !== -1) {
+            let parts = this.value.split('.');
+            if (parts[1].length > 2) {
+                this.value = parts[0] + '.' + parts[1].slice(0, 2);
+            }
+        }
 
         // Validasi agar nilai tidak lebih dari 100
-        if (this.value !== '' && parseInt(this.value) > 100) {
-            this.value = 100;
+        if (this.value !== '' && parseFloat(this.value) > 100) {
+            this.value = '100.00';
+        }
+    });
+    // Fungsi untuk membatasi input hanya angka 0-100
+    document.getElementById('persen_denda').addEventListener('input', function (e) {
+        // Hanya izinkan angka dan titik (.)
+        this.value = this.value.replace(/[^0-9.]/g, '');
+
+        // Pastikan hanya ada satu titik desimal
+        if ((this.value.match(/\./g) || []).length > 1) {
+            this.value = this.value.slice(0, -1); // hapus titik tambahan
+        }
+
+        // Batasi hanya 2 digit di belakang koma
+        if (this.value.indexOf('.') !== -1) {
+            let parts = this.value.split('.');
+            if (parts[1].length > 2) {
+                this.value = parts[0] + '.' + parts[1].slice(0, 2);
+            }
+        }
+
+        // Validasi agar nilai tidak lebih dari 100
+        if (this.value !== '' && parseFloat(this.value) > 100) {
+            this.value = '100.00';
         }
     });
 
@@ -237,6 +279,15 @@ $(document).ready(function() {
                                 <input type="text" name="persen_jasa" id="persen_jasa_edit" class="form-control" value="${response.dataset.persen_jasa}">
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="persen_denda_edit"><small>Denda (%)</small></label>
+                            </div>
+                            <div class="col-1"><small>:</small></div>
+                            <div class="col-7">
+                                <input type="text" name="persen_denda" id="persen_denda_edit" class="form-control" value="${response.dataset.persen_denda}">
+                            </div>
+                        </div>
                     `);
 
                     //Enable Button
@@ -254,6 +305,51 @@ $(document).ready(function() {
                         // Validasi agar nilai tidak lebih dari 100
                         if (this.value !== '' && parseInt(this.value) > 100) {
                             this.value = 100;
+                        }
+                    });
+                    // Fungsi untuk membatasi input hanya angka 0-100
+                    document.getElementById('persen_jasa_edit').addEventListener('input', function (e) {
+                        // Hanya izinkan angka dan titik (.)
+                        this.value = this.value.replace(/[^0-9.]/g, '');
+
+                        // Pastikan hanya ada satu titik desimal
+                        if ((this.value.match(/\./g) || []).length > 1) {
+                            this.value = this.value.slice(0, -1); // hapus titik tambahan
+                        }
+
+                        // Batasi hanya 2 digit di belakang koma
+                        if (this.value.indexOf('.') !== -1) {
+                            let parts = this.value.split('.');
+                            if (parts[1].length > 2) {
+                                this.value = parts[0] + '.' + parts[1].slice(0, 2);
+                            }
+                        }
+
+                        // Validasi agar nilai tidak lebih dari 100
+                        if (this.value !== '' && parseFloat(this.value) > 100) {
+                            this.value = '100.00';
+                        }
+                    });
+                    document.getElementById('persen_denda_edit').addEventListener('input', function (e) {
+                        // Hanya izinkan angka dan titik (.)
+                        this.value = this.value.replace(/[^0-9.]/g, '');
+
+                        // Pastikan hanya ada satu titik desimal
+                        if ((this.value.match(/\./g) || []).length > 1) {
+                            this.value = this.value.slice(0, -1); // hapus titik tambahan
+                        }
+
+                        // Batasi hanya 2 digit di belakang koma
+                        if (this.value.indexOf('.') !== -1) {
+                            let parts = this.value.split('.');
+                            if (parts[1].length > 2) {
+                                this.value = parts[0] + '.' + parts[1].slice(0, 2);
+                            }
+                        }
+
+                        // Validasi agar nilai tidak lebih dari 100
+                        if (this.value !== '' && parseFloat(this.value) > 100) {
+                            this.value = '100.00';
                         }
                     });
                 }else{

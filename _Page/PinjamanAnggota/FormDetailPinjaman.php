@@ -40,6 +40,7 @@
             $tanggal=$Data['tanggal'];
             $jumlah_pinjaman=$Data['jumlah_pinjaman'];
             $rp_jasa=$Data['rp_jasa'];
+            $rp_denda=$Data['rp_denda'];
             $angsuran_pokok=$Data['angsuran_pokok'];
             $angsuran_total=$Data['angsuran_total'];
             $periode_angsuran=$Data['periode_angsuran'];
@@ -51,6 +52,7 @@
             //Format Rupiah
             $jumlah_pinjaman_format = "Rp " . number_format($jumlah_pinjaman,0,',',',');
             $rp_jasa_format = "Rp " . number_format($rp_jasa,0,',',',');
+            $rp_denda_format = "Rp " . number_format($rp_denda,0,',',',');
             $angsuran_pokok_format = "Rp " . number_format($angsuran_pokok,0,',',',');
             $angsuran_total_format = "Rp " . number_format($angsuran_total,0,',',',');
             
@@ -103,6 +105,11 @@
                     <div class="col-5"><small>Rp Jasa</small></div>
                     <div class="col-1"><small>:</small></div>
                     <div class="col-6"><code class="text text-grayish">'.$rp_jasa_format.'</code></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5"><small>Rp Denda</small></div>
+                    <div class="col-1"><small>:</small></div>
+                    <div class="col-6"><code class="text text-grayish">'.$rp_denda_format.'/Hari</code></div>
                 </div>
                 <div class="row mb-2">
                     <div class="col-5"><small>Angsuran Total</small></div>

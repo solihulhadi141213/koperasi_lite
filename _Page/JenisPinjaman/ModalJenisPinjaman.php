@@ -121,7 +121,22 @@
                         </div>
                         <div class="col-1"><small>:</small></div>
                         <div class="col-7">
-                            <input type="text" name="persen_jasa" id="persen_jasa" class="form-control">
+                            <input type="text" name="persen_jasa" id="persen_jasa" class="form-control" placeholder="0.00">
+                            <small>
+                                <code class="text text-muted">Dihitung dari persentase jumlah pinjaman</code>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-4">
+                            <label for="persen_denda"><small>Denda (%)</small></label>
+                        </div>
+                        <div class="col-1"><small>:</small></div>
+                        <div class="col-7">
+                            <input type="text" name="persen_denda" id="persen_denda" class="form-control" placeholder="0.00">
+                            <small>
+                                <code class="text text-muted">Dihitung dari persentase jumlah angsuran</code>
+                            </small>
                         </div>
                     </div>
                     <div class="row mb-2">
